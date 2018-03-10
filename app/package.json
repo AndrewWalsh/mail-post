@@ -1,0 +1,22 @@
+{
+  "name": "mail-post",
+  "productName": "MailPost",
+  "version": "0.0.0",
+  "description": "Send bulk email campaigns easily using Electron & Serverless",
+  "main": "./main/main.prod.js",
+  "author": {
+    "name": "Andrew",
+    "email": "andrew.ghc101@gmail.com",
+    "url": "https://github.com/andrewghc"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r babel-register ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "npm run electron-rebuild"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "sequelize": "^4.35.5",
+    "sqlite3": "^3.1.13",
+    "electron-debug": "^1.5.0"
+  }
+}

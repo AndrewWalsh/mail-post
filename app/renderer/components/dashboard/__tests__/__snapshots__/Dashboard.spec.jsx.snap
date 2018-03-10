@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard renders elements 1`] = `
+<React.Fragment>
+  Dashboard
+</React.Fragment>
+`;

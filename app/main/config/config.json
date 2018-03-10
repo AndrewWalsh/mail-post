@@ -1,0 +1,23 @@
+{
+  "development": {
+    "database": "development",
+    "username": "default",
+    "password": null,
+    "dialect": "sqlite",
+    "storage": "../dev-db.sqlite3"
+  },
+  "test": {
+    "database": "test",
+    "username": "default",
+    "password": null,
+    "dialect": "sqlite",
+    "storage": "../test-db.sqlite3"
+  },
+  "production": {
+    "database": "production",
+    "username": "default",
+    "password": null,
+    "dialect": "sqlite",
+    "storage": "../prod-db.sqlite3"
+  }
+}

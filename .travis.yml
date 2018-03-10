@@ -1,0 +1,48 @@
+sudo: true
+
+language: node_js
+
+matrix:
+  include:
+    - os: osx
+    - os: linux
+
+node_js:
+  - 8
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - app/node_modules
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
+      - icnsutils
+      - graphicsmagick
+      - xz-utils
+      - xorriso
+      - xvfb
+      - libgnome-keyring-dev
+
+install:
+  - export CXX="g++-5"
+  - yarn
+  - "Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &"
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start &
+  - sleep 3
+
+script:
+  - node --version
+  - yarn lint
+  - yarn package
+  - yarn test
+  - yarn test-e2e
+  - yarn release

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders elements 1`] = `
+<Layout__Wrapper>
+  <Layout__Header>
+    <Layout__HeaderTitle>
+      <h1>
+        MailPost
+      </h1>
+    </Layout__HeaderTitle>
+  </Layout__Header>
+  <Layout__Nav>
+    <Navbar />
+  </Layout__Nav>
+  <Layout__Main />
+</Layout__Wrapper>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewCampaign renders elements 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+  >
+    Import CSV
+  </button>
+</div>
+`;
