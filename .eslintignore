@@ -49,3 +49,8 @@ main.js.map
 .idea
 npm-debug.log.*
 __snapshots__
+
+# Migrations, seeds and models (autogenerate with sequelize-cli)
+app/main/migrations
+app/main/seeders
+app/main/models

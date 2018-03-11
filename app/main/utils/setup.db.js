@@ -13,7 +13,7 @@ export default async () => {
   if (!existsSync(dbPath)) {
     try {
       await new Promise((resolve, reject) => {
-        new sqlite.Database(dbPath, (err) => {
+        new sqlite.Database(dbPath, (err) => { // eslint-disable-line no-new
           if (err) reject();
           resolve();
         });
@@ -28,7 +28,7 @@ export default async () => {
   const umzug = new Umzug({
     storage: 'sequelize',
     storageOptions: {
-        sequelize: db.sequelize // here should be a sequelize instance, not the Sequelize module
+      sequelize: db.sequelize, // here should be a sequelize instance, not the Sequelize module
     },
     logging: process.env.NODE_ENV === 'production'
       ? false
@@ -48,6 +48,4 @@ export default async () => {
     console.log(e);
     throw new Error('Failed to run migrations');
   }
-
-  return;
 };

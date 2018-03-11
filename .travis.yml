@@ -1,5 +1,7 @@
 sudo: true
 
+osx_image: xcode8.3
+
 language: node_js
 
 matrix:
@@ -21,7 +23,6 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-5
       - icnsutils
       - graphicsmagick
       - xz-utils
@@ -30,8 +31,8 @@ addons:
       - libgnome-keyring-dev
 
 install:
-  - export CXX="g++-5"
   - yarn
+  - gd app && yarn && cd ..
   - "Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &"
 
 before_script:
