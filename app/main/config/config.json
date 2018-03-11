@@ -4,7 +4,7 @@
     "username": "default",
     "password": null,
     "dialect": "sqlite",
-    "storage": "../dev-db.sqlite3"
+    "storage": "../development-db.sqlite3"
   },
   "test": {
     "database": "test",
@@ -18,6 +18,6 @@
     "username": "default",
     "password": null,
     "dialect": "sqlite",
-    "storage": "../prod-db.sqlite3"
+    "storage": "../production-db.sqlite3"
   }
 }

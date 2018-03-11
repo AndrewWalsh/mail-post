@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron';
 
 import MenuBuilder from './menu';
 import eventListeners from './events';
+import { setupDb } from './utils';
 
 let mainWindow = null;
 
@@ -54,15 +55,17 @@ app.on('ready', async () => {
 
   mainWindow.loadURL(`file://${__dirname}/../renderer/app.html`);
 
-  mainWindow.webContents.on('did-finish-load', () => {
+  mainWindow.webContents.on('did-finish-load', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    mainWindow.show();
-    mainWindow.focus();
-
+    // Run migrations
+    await setupDb();
     // Load event listeners
     eventListeners();
+    // Show app
+    mainWindow.show();
+    mainWindow.focus();
   });
 
   mainWindow.on('closed', () => {
