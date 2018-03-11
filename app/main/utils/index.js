@@ -1,1 +1,2 @@
-export { default as setupDb } from './setup.db'; // eslint-disable-line
+export { default as setupDb } from './setup.db';
+export { default as getCurrentUser } from './get-current-user';

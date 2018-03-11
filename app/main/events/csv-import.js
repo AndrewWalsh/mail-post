@@ -1,7 +1,7 @@
+// @flow
 import { ipcMain, dialog } from 'electron';
-import {
-  CSV_IMPORT,
-} from '../../ipcChannels';
+import { CSV_IMPORT } from '../../ipcChannels';
+import { importCsv } from '../controllers';
 
 const options = {
   title: 'Import CSV',
@@ -16,6 +16,7 @@ export default () => {
   ipcMain.on(CSV_IMPORT, () => {
     dialog.showOpenDialog(options, (filePaths) => {
       const csvFile = filePaths[0]; // eslint-disable-line
+      importCsv(csvFile);
     });
   });
 };

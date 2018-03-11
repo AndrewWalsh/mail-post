@@ -1,4 +1,4 @@
-import csvImport from './csvImport';
+import csvImport from './csv-import';
 
 export default () => {
   csvImport();

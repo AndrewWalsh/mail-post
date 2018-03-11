@@ -4,7 +4,7 @@
  * It is also necessary to have a user to specify foreign keys for.
  */
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.findOrCreate({
+  up: (queryInterface, Sequelize) => queryInterface.User.findOrCreate({
     where: {
       username: 'root',
     },
