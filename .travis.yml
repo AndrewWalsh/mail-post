@@ -32,7 +32,7 @@ addons:
 
 install:
   - yarn
-  - gd app && yarn && cd ..
+  - cd app && yarn && cd ..
   - "Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &"
 
 before_script:

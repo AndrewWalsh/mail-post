@@ -24,11 +24,11 @@ export default async () => {
     }
   }
 
-  // Run migrations
-  const umzug = new Umzug({
+  // Run migrations & seeders
+  const getUmzugConfig = pathToDirectory => ({
     storage: 'sequelize',
     storageOptions: {
-      sequelize: db.sequelize, // here should be a sequelize instance, not the Sequelize module
+      sequelize: db.sequelize,
     },
     logging: process.env.NODE_ENV === 'production'
       ? false
@@ -38,14 +38,21 @@ export default async () => {
         db.sequelize.getQueryInterface(), // queryInterface
         db.Sequelize, // DataTypes
       ],
-      path: path.resolve(__dirname, '../migrations'),
+      path: path.resolve(__dirname, pathToDirectory),
     },
   });
 
   try {
-    await umzug.up();
+    await new Umzug(getUmzugConfig('../migrations')).up();
   } catch (e) {
     console.log(e);
     throw new Error('Failed to run migrations');
+  }
+
+  try {
+    await new Umzug(getUmzugConfig('../seeders')).up();
+  } catch (e) {
+    console.log(e);
+    throw new Error('Failed to seed the database');
   }
 };

@@ -136,6 +136,7 @@
     "flow-bin": "^0.64.0",
     "flow-runtime": "^0.16.0",
     "flow-typed": "^2.3.0",
+    "husky": "^0.15.0-rc.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.4",
     "jest-styled-components": "^5.0.0",
@@ -184,5 +185,10 @@
     "node": ">=8",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build && npm run test-all"
+    }
   }
 }
