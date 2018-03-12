@@ -20,7 +20,7 @@ export default merge.smart(baseConfig, {
 
   output: {
     path: __dirname,
-    filename: './app/main/main.prod.js',
+    filename: './app/main/dist/main.prod.js',
   },
 
   plugins: [
@@ -45,7 +45,7 @@ export default merge.smart(baseConfig, {
      */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
-      DEBUG_PROD: 'false',
+      DEBUG_PROD: 'true',
     }),
   ],
 

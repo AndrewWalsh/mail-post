@@ -3,6 +3,7 @@
 exports[`NewCampaign renders elements 1`] = `
 <div>
   <button
+    data-test="import-csv"
     onClick={[Function]}
   >
     Import CSV

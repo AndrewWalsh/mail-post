@@ -9,7 +9,8 @@
   ],
   "plugins": [
     "add-module-exports",
-    "styled-components"
+    "styled-components",
+    "transform-object-rest-spread"
   ],
   "env": {
     "production": {

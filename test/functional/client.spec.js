@@ -1,6 +1,4 @@
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
-
-describe('main window', function spec() {
+describe('after opening the application', function spec() {
   beforeAll(() => {
     this.app = process.app;
     return process.app.start();

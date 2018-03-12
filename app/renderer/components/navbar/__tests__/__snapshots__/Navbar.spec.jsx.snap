@@ -254,6 +254,7 @@ exports[`Navbar renders elements 1`] = `
 >
   <MenuList>
     <Link
+      data-test="nav-dashboard"
       to="/dashboard"
     >
       <WithStyles(MenuItem)>
@@ -261,6 +262,7 @@ exports[`Navbar renders elements 1`] = `
       </WithStyles(MenuItem)>
     </Link>
     <Link
+      data-test="nav-campaigns"
       to="/campaigns"
     >
       <WithStyles(MenuItem)>
@@ -268,6 +270,7 @@ exports[`Navbar renders elements 1`] = `
       </WithStyles(MenuItem)>
     </Link>
     <Link
+      data-test="nav-settings"
       to="/settings"
     >
       <WithStyles(MenuItem)>

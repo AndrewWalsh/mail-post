@@ -28,13 +28,13 @@
     "package-linux": "npm run build && build --linux",
     "package-win": "npm run build && build --win --x64",
     "postinstall": "node -r babel-register internals/scripts/CheckNativeDep.js && npm run flow-typed && npm run build-dll && electron-builder install-app-deps && node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
-    "prestart": "npm run build",
-    "start": "cross-env NODE_ENV=production electron ./app/renderer/app.html",
+    "start": "cross-env NODE_ENV=production electron ./app/",
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r babel-register ./app/main/main.dev",
     "start-renderer-dev": "cross-env NODE_ENV=development node --trace-warnings -r babel-register ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.renderer.dev.js",
     "test": "cross-env NODE_ENV=test jest app --config ./test/jest.config.unit.js --coverage",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./internals/scripts/RunElectronTests.js . --config ./test/jest.config.electron.js",
     "test-all": "npm-run-all lint flow test test-e2e",
+    "create-db": "rimraf ./app/main/production-db.sqlite3 && cross-env NODE_ENV=production node -r babel-register ./internals/scripts/CreateDb.js",
     "release": "build --publish always"
   },
   "browserslist": "electron 1.6",
@@ -47,6 +47,7 @@
       "renderer/app.html",
       "main/main.prod.js",
       "main/main.prod.js.map",
+      "main/production-db.sqlite3",
       "package.json"
     ],
     "dmg": {
@@ -90,6 +91,7 @@
     "serverless"
   ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.4.1",
@@ -100,6 +102,7 @@
     "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
@@ -113,6 +116,7 @@
     "detect-port": "^1.2.2",
     "electron": "^1.7.11",
     "electron-builder": "^20",
+    "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.3",
     "electron-rebuild": "^1.7.3",
     "enzyme": "^3.3.0",

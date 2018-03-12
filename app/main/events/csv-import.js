@@ -15,7 +15,7 @@ const options = {
 export default () => {
   ipcMain.on(CSV_IMPORT, () => {
     dialog.showOpenDialog(options, (filePaths) => {
-      if (filePaths && typeof filePaths[0] === 'string') {
+      if (Array.isArray(filePaths) && typeof filePaths[0] === 'string') {
         importCsv(filePaths[0]);
       }
     });

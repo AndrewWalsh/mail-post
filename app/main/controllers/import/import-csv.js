@@ -5,7 +5,5 @@
 import { getCurrentUser } from '../../utils';
 
 export default async (csvPath: string) => { // eslint-disable-line
-  const user = await getCurrentUser(); // eslint-disable-line
-  console.log(user);
-  
+  const { username } = await getCurrentUser(); // eslint-disable-line
 };

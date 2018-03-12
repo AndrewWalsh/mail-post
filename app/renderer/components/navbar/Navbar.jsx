@@ -19,13 +19,13 @@ const theme = createMuiTheme({
 const Navbar = () => (
   <MuiThemeProvider theme={theme}>
     <MenuList>
-      <Link to={ROUTE_DASHBOARD}>
+      <Link to={ROUTE_DASHBOARD} data-test="nav-dashboard">
         <MenuItem>Dashboard</MenuItem>
       </Link>
-      <Link to={ROUTE_CAMPAIGNS}>
+      <Link to={ROUTE_CAMPAIGNS} data-test="nav-campaigns">
         <MenuItem>Campaigns</MenuItem>
       </Link>
-      <Link to={ROUTE_SETTINGS}>
+      <Link to={ROUTE_SETTINGS} data-test="nav-settings">
         <MenuItem>Settings</MenuItem>
       </Link>
     </MenuList>
