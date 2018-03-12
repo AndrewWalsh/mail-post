@@ -15,8 +15,9 @@ const options = {
 export default () => {
   ipcMain.on(CSV_IMPORT, () => {
     dialog.showOpenDialog(options, (filePaths) => {
-      const csvFile = filePaths[0]; // eslint-disable-line
-      importCsv(csvFile);
+      if (filePaths && typeof filePaths[0] === 'string') {
+        importCsv(filePaths[0]);
+      }
     });
   });
 };

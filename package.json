@@ -33,7 +33,7 @@
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r babel-register ./app/main/main.dev",
     "start-renderer-dev": "cross-env NODE_ENV=development node --trace-warnings -r babel-register ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.renderer.dev.js",
     "test": "cross-env NODE_ENV=test jest app --config ./test/jest.config.unit.js --coverage",
-    "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./internals/scripts/RunElectronTests.js e2e --config ./test/jest.config.electron.js",
+    "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r babel-register ./internals/scripts/RunElectronTests.js . --config ./test/jest.config.electron.js",
     "test-all": "npm-run-all lint flow test test-e2e",
     "release": "build --publish always"
   },
