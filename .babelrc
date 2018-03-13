@@ -10,7 +10,8 @@
   "plugins": [
     "add-module-exports",
     "styled-components",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "dynamic-import-webpack"
   ],
   "env": {
     "production": {

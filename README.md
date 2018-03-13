@@ -16,3 +16,23 @@ Send bulk email campaigns easily using Electron & Serverless.
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/github/AndrewGHC/mail-post?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/AndrewGHC/mail-post/branch/master
+
+### Development
+
+```
+git clone https://github.com/AndrewGHC/mail-post.git
+cd mail-post
+yarn
+```
+
+Following this, you will have the ability to run key scripts:
+
+`npm run package`: Package the application to ./release (os specific).
+
+`npm run dev`: Run the application in dev mode.
+
+`npm run start`: Run the application in production mode, without packaging.
+
+Helper scripts:
+
+`npm run create-db`: Create local sqlite dbs (only the production db is used in the package).

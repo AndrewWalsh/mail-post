@@ -1,4 +1,3 @@
-// @flow
 // This is a dummy function to make it easier to add authentication in the future, if required.
 import db from '../models';
 

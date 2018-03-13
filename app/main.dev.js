@@ -2,27 +2,38 @@
 // @flow
 import { app, BrowserWindow } from 'electron';
 
-import MenuBuilder from './menu';
-import eventListeners from './events';
-import { setupDb } from './utils';
+import MenuBuilder from './main/menu';
+import eventListeners from './main/events';
+import { setupDb, getAppPath } from './main/utils';
+import {
+  NODE_ENV,
+  DEBUG_PROD,
+  UPGRADE_EXTENSIONS,
+} from './main/config/env';
+import {
+  logAppStart,
+  logSetupDbFailed,
+} from './main/logging';
+
+logAppStart();
 
 let mainWindow = null;
 
-if (process.env.NODE_ENV === 'production') {
+if (NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
-if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+if (NODE_ENV === 'development' || DEBUG_PROD === 'true') {
   require('electron-debug')();
   const path = require('path');
-  const p = path.join(__dirname, '..', 'app', 'node_modules');
+  const p = path.join(getAppPath(), 'node_modules');
   require('module').globalPaths.push(p);
 }
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const forceDownload = !!UPGRADE_EXTENSIONS;
   const extensions = [
     'REACT_DEVELOPER_TOOLS',
     'REDUX_DEVTOOLS',
@@ -34,16 +45,16 @@ const installExtensions = async () => {
 };
 
 app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
+  // OSX usually stays open after closing, investigate in future
+  // if (process.platform !== 'darwin') {
+  //   app.quit();
+  // }
 });
 
 
 app.on('ready', async () => {
-  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
+  if (NODE_ENV === 'development' || DEBUG_PROD === 'true') {
     await installExtensions();
   }
 
@@ -53,14 +64,18 @@ app.on('ready', async () => {
     height: 728,
   });
 
-  mainWindow.loadURL(`file://${__dirname}/../renderer/app.html`);
+  mainWindow.loadURL(`file://${getAppPath()}/renderer/app.html`);
 
   mainWindow.webContents.on('did-finish-load', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    // Run migrations
-    await setupDb();
+    // // Run migrations
+    try {
+      await setupDb();
+    } catch (e) {
+      logSetupDbFailed(e);
+    }
     // Load event listeners
     eventListeners();
     // Show app

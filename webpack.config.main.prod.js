@@ -16,11 +16,11 @@ export default merge.smart(baseConfig, {
 
   target: 'electron-main',
 
-  entry: './app/main/main.dev',
+  entry: './app/main.dev',
 
   output: {
     path: __dirname,
-    filename: './app/main/dist/main.prod.js',
+    filename: './app/main.prod.js',
   },
 
   plugins: [
@@ -45,7 +45,7 @@ export default merge.smart(baseConfig, {
      */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
-      DEBUG_PROD: 'true',
+      DEBUG_PROD: 'false',
     }),
   ],
 
@@ -55,7 +55,7 @@ export default merge.smart(baseConfig, {
    * https://github.com/webpack/webpack/issues/2010
    */
   node: {
-    __dirname: false,
-    __filename: false,
+    __dirname: true,
+    __filename: true,
   },
 });

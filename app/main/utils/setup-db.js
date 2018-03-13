@@ -1,38 +1,42 @@
-// Creates & configures db
+// @flow
 import Umzug from 'umzug';
 import path from 'path';
 import db from '../models';
-import createDb from './create.db';
+import seed from '../seeders';
+import { NODE_ENV } from '../config/env';
+import { getAppPath } from './';
 
 export default async () => {
-  if (process.env.NODE_ENV && process.env.NODE_ENV !== 'production') await createDb();
   // Run migrations & seeders
   const getUmzugConfig = pathToDirectory => ({
     storage: 'sequelize',
     storageOptions: {
       sequelize: db.sequelize,
     },
-    logging: process.env.NODE_ENV === 'production'
+    logging: NODE_ENV === 'production'
       ? false
       : (...args) => console.log(...args),
     migrations: {
       params: [
-        db.sequelize.getQueryInterface(), // queryInterface
+        db.sequelize.getQueryInterface(),
         db.Sequelize, // DataTypes
       ],
-      path: path.resolve(__dirname, pathToDirectory),
+      path: path.resolve(getAppPath(), pathToDirectory),
+      pattern: /\.js$/,
     },
   });
 
   try {
-    await new Umzug(getUmzugConfig('../migrations')).up();
+    await new Umzug(getUmzugConfig('./main/migrations')).up();
   } catch (e) {
     console.log(e);
     throw new Error('Failed to run migrations');
   }
 
+  // Seed is currently just a dummy user, this process
+  // May be updated in the future
   try {
-    await new Umzug(getUmzugConfig('../seeders')).up();
+    await seed.up(db);
   } catch (e) {
     console.log(e);
     throw new Error('Failed to seed the database');
