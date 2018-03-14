@@ -27,6 +27,19 @@ describe('csv-is-valid', () => {
     mockFs.restore();
   });
 
+  it('resolves if csv header length matches all row lengths', () => {
+    const csv = mockCsv(['email', 'test', 'another test']);
+    mockFs({ '/test/dir': { 'test-csv.csv': csv } });
+    return expect(csvIsValid(fakeFilePath)).resolves.toBe();
+  });
+
+  it('rejects if csv header length does not match all row lengths', () => {
+    let csv = mockCsv(['email', 'test', 'another test']);
+    csv = `${csv}bad`;
+    mockFs({ '/test/dir': { 'test-csv.csv': csv } });
+    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('The following row has greater or fewer columns than the header: bad');
+  });
+
   it('resolves if csv is valid and first header is "email" or "Email"', () => {
     const csv = mockCsv(['email']);
     mockFs({ '/test/dir': { 'test-csv.csv': csv } });
