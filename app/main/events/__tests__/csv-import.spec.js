@@ -17,7 +17,7 @@ let csvImport;
 let ipcMain;
 let dialog;
 let importCsv;
-describe('csvImport', () => {
+describe('csv-import', () => {
   beforeEach(() => {
     const electron = td.replace('electron', {
       ipcMain: { on: td.function() },
