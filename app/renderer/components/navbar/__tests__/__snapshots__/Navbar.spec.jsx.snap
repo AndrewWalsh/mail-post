@@ -270,6 +270,14 @@ exports[`Navbar renders elements 1`] = `
       </WithStyles(MenuItem)>
     </Link>
     <Link
+      data-test="nav-lists"
+      to="/lists"
+    >
+      <WithStyles(MenuItem)>
+        Lists
+      </WithStyles(MenuItem)>
+    </Link>
+    <Link
       data-test="nav-settings"
       to="/settings"
     >

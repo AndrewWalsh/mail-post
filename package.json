@@ -14,7 +14,7 @@
   },
   "scripts": {
     "postinstall": "node -r babel-register internals/scripts/CheckNativeDep.js && npm run flow-typed && npm run build-dll && electron-builder install-app-deps && node node_modules/fbjs-scripts/node/check-dev-engines.js package.json && npm run npm-rebuild && npm run create-db",
-    "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
+    "build": "npm-run-all --parallel build-main build-renderer",
     "build-dll": "cross-env NODE_ENV=development node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.renderer.dev.dll.js --colors",
     "build-main": "cross-env NODE_ENV=production node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.main.prod.js --colors",
     "build-renderer": "cross-env NODE_ENV=production node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.renderer.prod.js --colors",
@@ -68,7 +68,8 @@
           "type": "link",
           "path": "/Applications"
         }
-      ]
+      ],
+      "title": "MailPost"
     },
     "win": {
       "target": [
@@ -80,7 +81,7 @@
         "deb",
         "AppImage"
       ],
-      "category": "Development"
+      "category": "Office"
     },
     "directories": {
       "buildResources": "resources",
@@ -116,7 +117,6 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "chalk": "^2.3.0",
-    "concurrently": "^3.5.1",
     "cross-env": "^5.1.3",
     "cross-spawn": "^6.0.4",
     "css-loader": "^0.28.9",
@@ -154,6 +154,7 @@
     "mock-fs": "^4.4.2",
     "node-sass": "^4.7.2",
     "npm-logical-tree": "^1.2.1",
+    "npm-run-all": "^4.1.2",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.2",
@@ -205,7 +206,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint && npm run flow",
-      "pre-push": "npm run lint && npm run flow && npm run test && npm run test-e2e"
+      "pre-push": "npm run test-all"
     }
   }
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { csvImport } from '../../../utils';
 
-const NewCampaign = () => (
+const NewList = () => (
   <div>
     <button onClick={() => csvImport()} data-test="import-csv">
       Import CSV
@@ -10,4 +10,4 @@ const NewCampaign = () => (
   </div>
 );
 
-export default NewCampaign;
+export default NewList;

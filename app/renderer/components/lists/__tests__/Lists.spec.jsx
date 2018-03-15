@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import NewCampaign from '../NewCampaign';
+import Lists from '../Lists';
 
-describe('NewCampaign', () => {
+describe('Lists', () => {
   it('renders elements', async () => {
-    const wrapper = shallow(<NewCampaign />);
+    const wrapper = shallow(<Lists />);
     expect(wrapper).toMatchSnapshot();
   });
 });

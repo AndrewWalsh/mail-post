@@ -4,7 +4,7 @@ const app = require('electron').app;
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const configJson = require('../config/db-config.json');
+const configFile = require('../config/db-config');
 
 // __dirname does NOT equal the current directory when compiled with webpack (electron)
 const thisDirectory = process.env.NODE_ENV && process.env.NODE_ENV === 'production'
@@ -13,7 +13,7 @@ const thisDirectory = process.env.NODE_ENV && process.env.NODE_ENV === 'producti
 // __filename does not resolve correctly in electron, so basename is hardcoded
 const basename = 'index.js';
 const env = process.env.NODE_ENV || 'production';
-const config = configJson[env];
+const config = configFile[env];
 const db = {};
 
 const sequelize = config.use_env_variable
