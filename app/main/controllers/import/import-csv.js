@@ -9,5 +9,9 @@ import {
 
 export default async (csvPath: string) => { // eslint-disable-line
   const { username } = await getCurrentUser(); // eslint-disable-line
-  await csvIsValid(csvPath);
+  try {
+    await csvIsValid(csvPath);
+  } catch (e) {
+    return e;
+  }
 };

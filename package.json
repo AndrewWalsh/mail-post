@@ -181,6 +181,7 @@
     "electron-log": "^2.2.14",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
+    "isemail": "^3.1.1",
     "material-ui": "^1.0.0-beta.37",
     "normalize.css": "^8.0.0",
     "rambda": "^1.0.13",

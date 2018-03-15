@@ -27,8 +27,8 @@ describe('csv-is-valid', () => {
     mockFs.restore();
   });
 
-  it('resolves if csv header length matches all row lengths', () => {
-    const csv = mockCsv(['email', 'test', 'another test']);
+  it('resolves if csv is valid', () => {
+    const csv = mockCsv(['email']);
     mockFs({ '/test/dir': { 'test-csv.csv': csv } });
     return expect(csvIsValid(fakeFilePath)).resolves.toBe();
   });
@@ -37,18 +37,19 @@ describe('csv-is-valid', () => {
     let csv = mockCsv(['email', 'test', 'another test']);
     csv = `${csv}bad`;
     mockFs({ '/test/dir': { 'test-csv.csv': csv } });
-    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('The following row has greater or fewer columns than the header: bad');
-  });
-
-  it('resolves if csv is valid and first header is "email" or "Email"', () => {
-    const csv = mockCsv(['email']);
-    mockFs({ '/test/dir': { 'test-csv.csv': csv } });
-    return expect(csvIsValid(fakeFilePath)).resolves.toBe();
+    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('Row 102 has greater or fewer columns than the header: bad');
   });
 
   it('rejects if first header is not "email" or "Email"', () => {
     const csv = mockCsv(['notEmail']);
     mockFs({ '/test/dir': { 'test-csv.csv': csv } });
     return expect(csvIsValid(fakeFilePath)).rejects.toThrow('The first column must be "email" or "Email", it is currently notEmail');
+  });
+
+  it('rejects if an email is not valid', () => {
+    let csv = mockCsv(['email']);
+    csv = `${csv}email@email..com`;
+    mockFs({ '/test/dir': { 'test-csv.csv': csv } });
+    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('Row 102 contains an invalid email: email@email..com');
   });
 });
