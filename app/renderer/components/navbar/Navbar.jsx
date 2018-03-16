@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 
 const Navbar = () => (
   <MuiThemeProvider theme={theme}>
-    <MenuList>
+    <MenuList>y
       <Link to={ROUTE_DASHBOARD} data-test="nav-dashboard">
         <MenuItem>Dashboard</MenuItem>
       </Link>

@@ -3,7 +3,7 @@
 import { app, BrowserWindow } from 'electron';
 
 import MenuBuilder from './main/menu';
-import eventListeners from './main/events';
+import eventListeners from './main/ipc/receive';
 import { setupDb, getAppPath } from './main/utils';
 import {
   NODE_ENV,

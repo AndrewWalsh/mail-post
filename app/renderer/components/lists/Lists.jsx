@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
 
-import NewList from './new-list';
+import NewList from './list-toolbar';
 
 const Lists = () => (
   <Fragment>

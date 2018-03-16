@@ -1,7 +1,7 @@
 // @flow
 import { ipcMain, dialog } from 'electron';
-import { CSV_IMPORT } from '../../ipcChannels';
-import { importCsv } from '../controllers';
+import { CSV_IMPORT } from '../../../ipcChannels';
+import { importCsv } from '../../controllers';
 
 const options = {
   title: 'Import CSV',

@@ -253,6 +253,7 @@ exports[`Navbar renders elements 1`] = `
   }
 >
   <MenuList>
+    y
     <Link
       data-test="nav-dashboard"
       to="/dashboard"

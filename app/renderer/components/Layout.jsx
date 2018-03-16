@@ -17,7 +17,7 @@ const Wrapper = styled.section`
   width: 100vw;
   max-width: 100vw;
   display: grid;
-  grid-template: 
+  grid-template:
       "hd hd" minmax(min-content, ${HEADER_HEIGHT})
       "nv mn" 1fr / minmax(min-content, ${NAV_WIDTH}) 1fr;
 `;

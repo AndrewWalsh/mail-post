@@ -1,2 +1,1 @@
-export { default as injectGlobalStyles } from './injectGlobalStyles';
-export * from './electron';
+export { default as injectGlobalStyles } from './injectGlobalStyles'; // eslint-disable-line

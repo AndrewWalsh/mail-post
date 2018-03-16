@@ -1,6 +1,6 @@
 import td from 'testdouble';
 
-import { CSV_IMPORT } from '../../../ipcChannels';
+import { CSV_IMPORT } from '../../../../ipcChannels';
 
 require('testdouble-jest')(td, jest);
 
