@@ -37,7 +37,7 @@ describe('csv-is-valid', () => {
     let csv = mockCsv(['email', 'test', 'another test']);
     csv = `${csv}bad`;
     mockFs({ '/test/dir': { 'test-csv.csv': csv } });
-    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('Line 102 has greater or fewer columns than the header: bad');
+    return expect(csvIsValid(fakeFilePath)).rejects.toThrow('Line 102 has greater or fewer columns than the header');
   });
 
   it('rejects if first header is not "email" or "Email"', () => {
