@@ -10,10 +10,10 @@ const rowHasError = (line: string, lineNumber: number, headerLength: number) => 
   // If line has too many/few columns compared to header, reject
   const lineArr = split(line);
   if (lineArr.length !== headerLength) {
-    return `Row ${lineNumber} has greater or fewer columns than the header: ${line}`;
+    return `Line ${lineNumber} has greater or fewer columns than the header: ${line}`;
   }
   if (!isEmail.validate(lineArr[0])) {
-    return `Row ${lineNumber} contains an invalid email: ${lineArr[0]}`;
+    return `Line ${lineNumber} contains an invalid email: ${lineArr[0]}`;
   }
   return false;
 };
