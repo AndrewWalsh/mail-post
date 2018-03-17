@@ -89,7 +89,7 @@
       "output": "release"
     }
   },
-  "license": "BSD-3",
+  "license": "GPL-3.0",
   "keywords": [
     "mail",
     "bulk",
