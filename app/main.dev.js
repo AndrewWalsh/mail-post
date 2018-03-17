@@ -4,7 +4,7 @@ import { app, BrowserWindow } from 'electron';
 
 import MenuBuilder from './main/menu';
 import eventListeners from './main/ipc/receive';
-import { setupDb, getAppPath } from './main/utils';
+import { setupDb, cleanDb, getAppPath } from './main/utils';
 import {
   NODE_ENV,
   DEBUG_PROD,
@@ -13,6 +13,7 @@ import {
 import {
   logAppStart,
   logSetupDbFailed,
+  logCleanDbFailed,
 } from './main/logging';
 
 logAppStart();
@@ -70,11 +71,17 @@ app.on('ready', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    // // Run migrations
+    // Run migrations
     try {
       await setupDb();
     } catch (e) {
       logSetupDbFailed(e);
+    }
+    // Remove unfinished items from db
+    try {
+      await cleanDb();
+    } catch (e) {
+      logCleanDbFailed(e);
     }
     // Load event listeners
     eventListeners();
