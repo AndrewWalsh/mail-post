@@ -12,8 +12,6 @@ exports[`Layout matches snapshot 1`] = `
   <Layout__Nav>
     <Navbar />
   </Layout__Nav>
-  <Layout__Main>
-    <Connect(SnackbarContainer) />
-  </Layout__Main>
+  <Layout__Main />
 </Layout__Wrapper>
 `;

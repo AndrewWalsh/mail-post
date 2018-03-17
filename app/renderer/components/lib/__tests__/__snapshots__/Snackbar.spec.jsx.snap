@@ -20,7 +20,7 @@ exports[`Snackbar matches snapshot 1`] = `
   }
   anchorOrigin={
     Object {
-      "horizontal": "left",
+      "horizontal": "right",
       "vertical": "bottom",
     }
   }

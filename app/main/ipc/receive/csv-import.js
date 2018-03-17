@@ -26,7 +26,7 @@ export default () => {
         send(event.sender.send.bind(event.sender), ON_CSV_INVALID, e);
         return;
       }
-      importCsv(filePaths[0]);
+      importCsv(csvPath);
     });
   });
 };
