@@ -35,7 +35,7 @@ export default class Snackbar extends Component<Props, State> {
       <MaterialSnackbar
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
         open={open}
         autoHideDuration={6000}
