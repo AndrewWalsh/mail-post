@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Settings from '../Settings';
 
 describe('Settings', () => {
-  it('renders elements', async () => {
+  it('matches snapshot', async () => {
     const wrapper = shallow(<Settings />);
     expect(wrapper).toMatchSnapshot();
   });

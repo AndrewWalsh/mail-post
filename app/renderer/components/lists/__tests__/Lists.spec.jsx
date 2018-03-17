@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Lists from '../Lists';
 
 describe('Lists', () => {
-  it('renders elements', async () => {
+  it('matches snapshot', async () => {
     const wrapper = shallow(<Lists />);
     expect(wrapper).toMatchSnapshot();
   });

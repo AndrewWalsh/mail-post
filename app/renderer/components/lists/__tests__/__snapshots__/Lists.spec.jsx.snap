@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Lists renders elements 1`] = `
+exports[`Lists matches snapshot 1`] = `
 <React.Fragment>
   <NewList />
 </React.Fragment>

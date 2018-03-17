@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageHOC snapshot 1`] = `undefined`;
+exports[`PageHOC matches snapshot 1`] = `undefined`;

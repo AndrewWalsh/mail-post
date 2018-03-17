@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewList renders elements 1`] = `
+exports[`NewList matches snapshot 1`] = `
 <div>
   <WithStyles(Button)
     color="primary"

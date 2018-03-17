@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Campaigns from '../Campaigns';
 
 describe('Campaigns', () => {
-  it('renders elements', async () => {
+  it('matches snapshot', async () => {
     const wrapper = shallow(<Campaigns />);
     expect(wrapper).toMatchSnapshot();
   });

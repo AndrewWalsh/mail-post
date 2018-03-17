@@ -15,7 +15,7 @@ describe('Layout', () => {
     expect(wrapper.find('Layout__Main').contains(<TestComponent />)).toBe(true);
   });
 
-  it('renders elements', async () => {
+  it('matches snapshot', async () => {
     const wrapper = shallow(<Layout />);
     expect(wrapper).toMatchSnapshot();
   });
