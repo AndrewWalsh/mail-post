@@ -4,11 +4,12 @@ import { AppContainer } from 'react-hot-loader';
 import 'normalize.css';
 
 import App from './App';
-import { configureStore, history } from './store/configureStore';
+import { store, history } from './store';
 import { injectGlobalStyles } from './utils';
+import eventListeners from './ipc/receive';
 
+eventListeners();
 injectGlobalStyles();
-const store = configureStore();
 
 render(
   <AppContainer>

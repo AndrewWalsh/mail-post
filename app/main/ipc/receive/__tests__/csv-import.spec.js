@@ -24,7 +24,8 @@ describe('csv-import', () => {
       dialog: { showOpenDialog: td.function() },
     });
     ({ ipcMain, dialog } = electron);
-    importCsv = td.replace('../../controllers/import/import-csv');
+    importCsv = td.replace('../../../controllers/import/import-csv');
+    td.replace('../helpers/csv-is-valid');
     csvImport = require('../csv-import');
   });
 
@@ -43,14 +44,14 @@ describe('csv-import', () => {
   it('calls importCsv with the filePath when filePath is an array', async () => {
     td.when(ipcMain.on(CSV_IMPORT)).thenCallback();
     td.when(dialog.showOpenDialog(mockOpts)).thenCallback(mockPath);
-    csvImport();
+    await csvImport();
     td.verify(importCsv(mockPath[0]));
   });
 
   it('does NOT call importCsv when filePath is NOT an array', async () => {
     td.when(ipcMain.on(CSV_IMPORT)).thenCallback();
     td.when(dialog.showOpenDialog(mockOpts)).thenCallback('not an array');
-    csvImport();
+    await csvImport();
     td.verify(importCsv(td.matchers.anything()), { times: 0 });
   });
 });

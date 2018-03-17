@@ -15,6 +15,8 @@ module.exports = Object.assign(
     ],
     collectCoverageFrom: [
       'app/main/events/**/*.js',
+      'app/renderer/reducers/**/*.{js,jsx}',
+      'app/renderer/actions/**/*.{js,jsx}',
       'app/renderer/components/**/*.{js,jsx}',
       'app/renderer/utils/**/*.{js,jsx}',
       '!**/index.js',

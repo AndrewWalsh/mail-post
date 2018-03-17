@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
+
+import { SnackbarContainer } from '../containers/lib';
 import Navbar from './navbar';
 import {
   COLOUR_PRIMARY,
@@ -61,6 +63,7 @@ const Layout = ({ children }: Props) => (
     </Nav>
 
     <Main>
+      <SnackbarContainer />
       {children}
     </Main>
   </Wrapper>

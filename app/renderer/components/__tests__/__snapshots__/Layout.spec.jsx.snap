@@ -12,6 +12,8 @@ exports[`Layout renders elements 1`] = `
   <Layout__Nav>
     <Navbar />
   </Layout__Nav>
-  <Layout__Main />
+  <Layout__Main>
+    <Connect(SnackbarContainer) />
+  </Layout__Main>
 </Layout__Wrapper>
 `;

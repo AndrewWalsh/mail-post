@@ -29,7 +29,6 @@ export default async () => {
   try {
     await new Umzug(getUmzugConfig('./main/migrations')).up();
   } catch (e) {
-    console.log(e);
     throw new Error('Failed to run migrations');
   }
 
@@ -38,7 +37,6 @@ export default async () => {
   try {
     await seed.up(db);
   } catch (e) {
-    console.log(e);
     throw new Error('Failed to seed the database');
   }
 };

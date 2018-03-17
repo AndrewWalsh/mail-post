@@ -2,11 +2,14 @@
 
 exports[`NewList renders elements 1`] = `
 <div>
-  <button
+  <WithStyles(Button)
+    color="primary"
     data-test="import-csv"
     onClick={[Function]}
+    variant="raised"
   >
-    Import CSV
-  </button>
+    <pure(Add) />
+    New List
+  </WithStyles(Button)>
 </div>
 `;
