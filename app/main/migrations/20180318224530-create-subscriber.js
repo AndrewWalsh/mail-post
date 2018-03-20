@@ -1,24 +1,30 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Lists', {
+    return queryInterface.createTable('Subscribers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      name: {
+      email: {
         type: Sequelize.STRING,
+        validate: { isEmail: true },
         unique: true,
+      },
+      template_data: {
+        type: Sequelize.JSON,
+        defaultValue: null,
+        allowNull: true,
+      },
+      has_unsubscribed: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       finalised: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
-      },
-      total_users: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
@@ -30,7 +36,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Lists');
+  down: (queryInterface) => {
+    return queryInterface.dropTable('Subscribers');
   }
 };

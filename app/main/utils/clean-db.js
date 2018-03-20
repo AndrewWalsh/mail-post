@@ -8,10 +8,23 @@ async function deleteAllUnfinishedLists() {
       },
     });
   } catch (e) {
-    // Ignoring error - don't care if the Lists table doesn't exist
+    // Ignoring error (if the table doesn't exist)
+  }
+}
+
+async function deleteAllUnfinishedSubscribers() {
+  try {
+    await db.Subscriber.destroy({
+      where: {
+        finalised: false,
+      },
+    });
+  } catch (e) {
+    // Ignoring error (if the table doesn't exist)
   }
 }
 
 export default async () => {
   await deleteAllUnfinishedLists();
+  await deleteAllUnfinishedSubscribers();
 };

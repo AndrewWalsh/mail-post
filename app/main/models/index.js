@@ -14,7 +14,7 @@ const thisDirectory = process.env.NODE_ENV && process.env.NODE_ENV === 'producti
 const basename = 'index.js';
 const env = process.env.NODE_ENV || 'production';
 const config = configFile[env];
-const db = {};
+const db: any = {};
 
 const sequelize = config.use_env_variable
   ? new Sequelize(process.env[config.use_env_variable], config)
