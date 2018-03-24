@@ -7,7 +7,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: '../development-db.sqlite3',
+    storage: './app/main/development-db.sqlite3',
     operatorsAliases: Op,
   },
   test: {
@@ -15,7 +15,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: '../test-db.sqlite3',
+    storage: './app/main/test-db.sqlite3',
     operatorsAliases: Op,
   },
   production: {
@@ -23,7 +23,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: '../production-db.sqlite3',
+    storage: './app/main/production-db.sqlite3',
     operatorsAliases: Op,
   },
 };

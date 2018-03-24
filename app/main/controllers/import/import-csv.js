@@ -33,7 +33,7 @@ const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) =>
   return arr;
 };
 
-const getEmailBuffer = (maxSize = 10000) => {
+const getEmailBuffer = (maxSize = 5000) => {
   let arr = [];
   return (val, flush = false) => {
     if (arr.length >= maxSize) arr = [];

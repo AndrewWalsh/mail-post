@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     finalised: { type: DataTypes.BOOLEAN, defaultValue: false },
   }, {});
   Subscriber.associate = function(models) {
-    Subscriber.belongsToMany(models.List, { through: 'ListSubscriber' });
+    Subscriber.belongsToMany(models.List, { through: 'ListSubscribers' });
   };
   return Subscriber;
 };
