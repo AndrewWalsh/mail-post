@@ -8,26 +8,24 @@ import { compose, dissoc, keys } from 'ramda';
 
 import db from '../../models';
 import { initialiseList } from './helpers';
-import { getCurrentUser } from '../../utils';
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) => {
   if (Array.isArray(arr)) {
-    return sequelize.transaction(transaction =>
+    return sequelize.transaction(() =>
       Promise.all([
         ...arr.map(values =>
-          Model.findOrCreate({
+          Model.find({
             where: { email: values.email },
-            defaults: values,
-            transaction,
           })
-            .spread((instance, created) => {
-              instance.addList(belongsToInstance);
-              if (!created) {
-                // eslint-disable-next-line no-param-reassign
-                instance.template_data = values.template_data;
+            .then((instance) => {
+              if (!instance) {
+                return Model.create({ ...values });
               }
+              // eslint-disable-next-line no-param-reassign
+              instance.template_data = values.template_data;
               return instance.save();
-            })),
+            })
+            .then(instance => instance.addLists(belongsToInstance))),
       ]));
   }
   return arr;
@@ -55,8 +53,7 @@ const formatDataForUpsert = (data) => {
   return values;
 };
 
-export default async (csvPath: string) => { // eslint-disable-line
-  const { username } = await getCurrentUser(); // eslint-disable-line
+export default async (csvPath: string) => {
   const list = await initialiseList('list');
 
   const upsert = upsertUnderTransaction(db.Subscriber, db.sequelize, list);
@@ -78,7 +75,19 @@ export default async (csvPath: string) => { // eslint-disable-line
         readStream.resume();
       }
     })
-    .on('end', () => {
-      save(null, true);
+    .on('end', async () => {
+      // Flush remaining emails
+      await save(null, true);
+      // Mark all lists and list subscribers as 'finalised'
+      await db.sequelize.transaction(transaction =>
+        Promise.all([
+          list.update({ finalised: true }, { transaction }),
+          db.sequelize.query(
+            `UPDATE Subscribers SET finalised=1 WHERE EXISTS (SELECT * FROM ListSubscribers WHERE (ListSubscribers.subscriberId = Subscribers.id) AND (ListSubscribers.listId = ${list.get({ plain: true }).id}))`,
+            { transaction },
+          ),
+        ]));
+      process.exit();
+      console.log('done!');
     });
 };

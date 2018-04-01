@@ -177,6 +177,7 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "continuation-local-storage": "^3.2.1",
     "csv-parser": "^1.12.0",
     "devtron": "^1.4.0",
     "electron-debug": "1.4.0",

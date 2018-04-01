@@ -4,6 +4,7 @@ const app = require('electron').app;
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const cls = require('continuation-local-storage');
 const configFile = require('../config/db-config');
 
 // __dirname does NOT equal the current directory when compiled with webpack (electron)
@@ -15,6 +16,10 @@ const basename = 'index.js';
 const env = process.env.NODE_ENV || 'production';
 const config = configFile[env];
 const db: any = {};
+
+// Enable CLS
+const TRANSACTION_NAMESPACE = cls.createNamespace('TRANSACTION');
+Sequelize.useCLS(TRANSACTION_NAMESPACE);
 
 const sequelize = config.use_env_variable
   ? new Sequelize(process.env[config.use_env_variable], config)
