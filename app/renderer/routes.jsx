@@ -11,15 +11,15 @@ import Dashboard from './components/dashboard';
 import Campaigns from './components/campaigns';
 import Settings from './components/settings';
 import Lists from './components/lists';
-import { pageHoc } from './components/lib/hoc';
+import { PageHoc } from './components/lib/hoc';
 
 export default () => (
   <Switch>
-    <Route path={ROUTE_DASHBOARD} component={pageHoc(Dashboard)} />
-    <Route path={ROUTE_CAMPAIGNS} component={pageHoc(Campaigns)} />
-    <Route path={ROUTE_SETTINGS} component={pageHoc(Settings)} />
-    <Route path={ROUTE_LISTS} component={pageHoc(Lists)} />
+    <Route path={ROUTE_DASHBOARD} component={PageHoc(Dashboard)} />
+    <Route path={ROUTE_CAMPAIGNS} component={PageHoc(Campaigns)} />
+    <Route path={ROUTE_SETTINGS} component={PageHoc(Settings)} />
+    <Route path={ROUTE_LISTS} component={PageHoc(Lists)} />
     {/* Default route is the Dashboard */}
-    <Route component={pageHoc(Dashboard)} />
+    <Route component={PageHoc(Dashboard)} />
   </Switch>
 );

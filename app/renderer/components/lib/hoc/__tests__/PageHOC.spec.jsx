@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import pageHoc from '../pageHoc';
+import PageHoc from '../PageHoc';
 
 const TestComponent = () => <div>hello</div>;
-describe('pageHoc', () => {
+describe('PageHoc', () => {
   it('matches snapshot', async () => {
-    const Component = pageHoc(TestComponent);
+    const Component = PageHoc(TestComponent);
     const wrapper = shallow(<Component />);
     expect(wrapper).toMatchSnapshot();
   });
