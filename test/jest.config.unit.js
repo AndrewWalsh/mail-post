@@ -14,13 +14,17 @@ module.exports = Object.assign(
       'enzyme-to-json/serializer',
     ],
     collectCoverageFrom: [
-      // Renderer files
+      /* Renderer files */
       'app/renderer/**/*.js',
-      // Worker files
+      '!app/renderer/store/**/*.js', // Not worth covering
+      /* Worker files */
       'app/worker/**/*.js',
-      // Ignore
-      '!**/dist/**',
-      '!**/index.js',
+      '!app/worker/controllers/**/*.js', // Covered by integration tests
+      /* Common ignore */
+      '!**/utils/**/*', // Small helper files not worth covering
+      '!**/*.prod.js', // Production bundles
+      '!**/dist/**', // Dist files
+      '!**/index.js', // index.js files are primarily used to export files
     ],
   },
 );
