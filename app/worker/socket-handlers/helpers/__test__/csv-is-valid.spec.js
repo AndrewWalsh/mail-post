@@ -1,6 +1,10 @@
 import td from 'testdouble';
 import mockFs from 'mock-fs';
 import uuidv4 from 'uuid/v4';
+import EventEmitter from 'events';
+
+// Run in parallel, this test will create more listeners than the default limit of 11
+EventEmitter.defaultMaxListeners = 0;
 
 require('testdouble-jest')(td, jest);
 
