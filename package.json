@@ -40,7 +40,7 @@
     "create-db": "rimraf ./*.sqlite3 && cross-env node -r babel-register ./internals/scripts/CreateDb.js",
     "release": "build --publish always"
   },
-  "browserslist": "electron 1.6",
+  "browserslist": "electron 1.8",
   "build": {
     "productName": "MailPost",
     "appId": "org.andrewghc.MailPost",
@@ -160,7 +160,6 @@
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
-    "sinon": "^4.2.2",
     "spectron": "^3.8.0",
     "style-loader": "^0.20.1",
     "stylefmt": "^6.0.0",

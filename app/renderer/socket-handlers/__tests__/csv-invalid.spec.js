@@ -7,8 +7,6 @@ let csvInvalid;
 let store;
 describe('openDialog', () => {
   beforeEach(() => {
-    td.reset();
-
     store = td.replace('../../store', {
       store: {
         dispatch: td.function(),
@@ -16,6 +14,10 @@ describe('openDialog', () => {
     });
 
     csvInvalid = require('../csv-invalid');
+  });
+
+  afterEach(() => {
+    td.reset();
   });
 
   it('calls store.dispatch with an error message', async () => {

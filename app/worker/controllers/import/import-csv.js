@@ -53,7 +53,7 @@ const formatDataForUpsert = (data) => {
   return values;
 };
 
-export default async (csvPath: string) => new Promise(async (resolve) => {
+export default csvPath => new Promise(async (resolve) => {
   const list = await initialiseList('list');
 
   const upsert = upsertUnderTransaction(db.Subscriber, db.sequelize, list);

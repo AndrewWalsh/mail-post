@@ -9,7 +9,6 @@ let utils;
 let openDialog;
 describe('openDialog', () => {
   beforeEach(() => {
-    td.reset();
     electron = td.replace('electron', {
       remote: {
         dialog: {
@@ -26,6 +25,10 @@ describe('openDialog', () => {
     });
 
     openDialog = require('../open-dialog');
+  });
+
+  afterEach(() => {
+    td.reset();
   });
 
   it('calls io.emit with the channel name filePath as a string', async () => {
