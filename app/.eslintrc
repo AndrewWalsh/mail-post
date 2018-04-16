@@ -8,7 +8,6 @@
   "rules": {
     "flowtype/boolean-style": ["error", "boolean"],
     "flowtype/define-flow-type": "warn",
-    "flowtype/delimiter-dangle": ["error", "never"],
     "flowtype/generic-spacing": ["error", "never"],
     "flowtype/no-primitive-constructor-types": "error",
     "flowtype/no-weak-types": "off",
@@ -23,7 +22,7 @@
     "flowtype/union-intersection-spacing": ["error", "always"],
     "flowtype/use-flow-type": "error",
     "flowtype/valid-syntax": "error",
-    "jsx-a11y/anchor-is-valid": 0,
-    "global-require": 0
+    "jsx-a11y/anchor-is-valid": "off",
+    "global-require": "off"
   }
 }

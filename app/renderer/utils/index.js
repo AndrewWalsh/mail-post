@@ -1,2 +1,2 @@
 export { default as injectGlobalStyles } from './injectGlobalStyles';
-export * from './electron';
+export { default as io } from './io';

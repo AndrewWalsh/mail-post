@@ -29,8 +29,7 @@ export default async () => {
   try {
     await new Umzug(getUmzugConfig('./main/migrations')).up();
   } catch (e) {
-    console.log(e);
-    throw new Error('Failed to run migrations');
+    throw new Error(e);
   }
 
   // Seed is currently just a dummy user, this process
@@ -38,7 +37,6 @@ export default async () => {
   try {
     await seed.up(db);
   } catch (e) {
-    console.log(e);
-    throw new Error('Failed to seed the database');
+    throw new Error(e);
   }
 };

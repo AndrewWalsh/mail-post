@@ -8,6 +8,7 @@ import {
   ROUTE_DASHBOARD,
   ROUTE_CAMPAIGNS,
   ROUTE_SETTINGS,
+  ROUTE_LISTS,
 } from '../../constants';
 
 const theme = createMuiTheme({
@@ -18,12 +19,15 @@ const theme = createMuiTheme({
 
 const Navbar = () => (
   <MuiThemeProvider theme={theme}>
-    <MenuList>
+    <MenuList>y
       <Link to={ROUTE_DASHBOARD} data-test="nav-dashboard">
         <MenuItem>Dashboard</MenuItem>
       </Link>
       <Link to={ROUTE_CAMPAIGNS} data-test="nav-campaigns">
         <MenuItem>Campaigns</MenuItem>
+      </Link>
+      <Link to={ROUTE_LISTS} data-test="nav-lists">
+        <MenuItem>Lists</MenuItem>
       </Link>
       <Link to={ROUTE_SETTINGS} data-test="nav-settings">
         <MenuItem>Settings</MenuItem>
