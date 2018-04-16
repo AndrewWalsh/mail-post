@@ -4,7 +4,7 @@ module.exports = Object.assign(
   {},
   base,
   {
-    setupTestFrameworkScriptFile: './test/unit.setuptest.js',
+    setupTestFrameworkScriptFile: './test/unit.setupTestFrameworkScriptFile.js',
     rootDir: '../',
     transform: {
       '^.+\\.jsx$': 'babel-jest',
