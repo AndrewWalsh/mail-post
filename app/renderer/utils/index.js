@@ -1,1 +1,2 @@
-export { default as injectGlobalStyles } from './injectGlobalStyles'; // eslint-disable-line import/prefer-default-export
+export { default as injectGlobalStyles } from './injectGlobalStyles';
+export { default as io } from './io';

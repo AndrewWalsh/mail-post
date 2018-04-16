@@ -38,6 +38,7 @@ exports[`Navbar matches snapshot 1`] = `
           "minHeight": 56,
         },
       },
+      "overrides": Object {},
       "palette": Object {
         "action": Object {
           "active": "#fff",
@@ -101,6 +102,7 @@ exports[`Navbar matches snapshot 1`] = `
         "tonalOffset": 0.2,
         "type": "dark",
       },
+      "props": Object {},
       "shadows": Array [
         "none",
         "0px 1px 3px 0px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 2px 1px -1px rgba(0, 0, 0, 0.12)",
@@ -184,7 +186,6 @@ exports[`Navbar matches snapshot 1`] = `
           "fontSize": "2.125rem",
           "fontWeight": 400,
           "lineHeight": "1.20588em",
-          "marginLeft": "-.04em",
         },
         "display2": Object {
           "color": "rgba(255, 255, 255, 0.7)",
@@ -192,7 +193,7 @@ exports[`Navbar matches snapshot 1`] = `
           "fontSize": "2.8125rem",
           "fontWeight": 400,
           "lineHeight": "1.06667em",
-          "marginLeft": "-.04em",
+          "marginLeft": "-.02em",
         },
         "display3": Object {
           "color": "rgba(255, 255, 255, 0.7)",
@@ -201,7 +202,7 @@ exports[`Navbar matches snapshot 1`] = `
           "fontWeight": 400,
           "letterSpacing": "-.02em",
           "lineHeight": "1.30357em",
-          "marginLeft": "-.04em",
+          "marginLeft": "-.02em",
         },
         "display4": Object {
           "color": "rgba(255, 255, 255, 0.7)",
@@ -210,7 +211,7 @@ exports[`Navbar matches snapshot 1`] = `
           "fontWeight": 300,
           "letterSpacing": "-.04em",
           "lineHeight": "1.14286em",
-          "marginLeft": "-.06em",
+          "marginLeft": "-.04em",
         },
         "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
         "fontSize": 14,

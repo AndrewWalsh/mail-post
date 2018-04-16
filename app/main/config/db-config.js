@@ -1,5 +1,9 @@
 // @flow
 const { Op } = require('sequelize');
+const path = require('path');
+const app = process && process.type !== 'renderer'
+  ? require('electron').app
+  : require('electron').remote.app;
 
 module.exports = {
   development: {
@@ -7,7 +11,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: './app/main/development-db.sqlite3',
+    storage: path.resolve(app.getAppPath(), '../development-db.sqlite3'),
     operatorsAliases: Op,
   },
   test: {
@@ -15,7 +19,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: './app/main/test-db.sqlite3',
+    storage: path.resolve(app.getAppPath(), '../test-db.sqlite3'),
     operatorsAliases: Op,
   },
   production: {
@@ -23,7 +27,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: './app/main/production-db.sqlite3',
+    storage: path.resolve(app.getAppPath(), '../production-db.sqlite3'),
     operatorsAliases: Op,
   },
 };

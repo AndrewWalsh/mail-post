@@ -6,7 +6,7 @@ import csvParser from 'csv-parser';
 import fs from 'fs';
 import { compose, dissoc, keys } from 'ramda';
 
-import db from '../../models';
+import db from '../../../main/models';
 import { initialiseList } from './helpers';
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) => {
@@ -53,7 +53,7 @@ const formatDataForUpsert = (data) => {
   return values;
 };
 
-export default async (csvPath: string) => {
+export default async (csvPath: string) => new Promise(async (resolve) => {
   const list = await initialiseList('list');
 
   const upsert = upsertUnderTransaction(db.Subscriber, db.sequelize, list);
@@ -87,7 +87,6 @@ export default async (csvPath: string) => {
             { transaction },
           ),
         ]));
-      process.exit();
-      console.log('done!');
+      resolve();
     });
-};
+});

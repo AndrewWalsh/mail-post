@@ -20,7 +20,7 @@ const createDb = async (dbName: string, dbPath: string) => {
 
 {
   const getDbName = name => `${name}-db.sqlite3`;
-  const getDbPath = dbName => path.resolve(__dirname, '../../app/main/', dbName);
+  const getDbPath = dbName => path.resolve(__dirname, '../../', dbName);
   const getDbExists = dbPath => existsSync(dbPath);
   ['production', 'development', 'test'].forEach((name) => {
     const dbName = getDbName(name);

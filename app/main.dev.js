@@ -3,7 +3,6 @@
 import { app, BrowserWindow } from 'electron';
 
 import MenuBuilder from './main/menu';
-import eventListeners from './main/ipc/receive';
 import { setupDb, cleanDb, getAppPath } from './main/utils';
 import {
   NODE_ENV,
@@ -11,12 +10,11 @@ import {
   UPGRADE_EXTENSIONS,
 } from './main/config/env';
 import {
-  logAppStart,
   logSetupDbFailed,
   logCleanDbFailed,
 } from './main/logging';
 
-logAppStart();
+require('electron-unhandled')();
 
 let mainWindow = null;
 
@@ -46,11 +44,9 @@ const installExtensions = async () => {
 };
 
 app.on('window-all-closed', () => {
-  app.quit();
-  // OSX usually stays open after closing, investigate in future
-  // if (process.platform !== 'darwin') {
-  //   app.quit();
-  // }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 
@@ -65,12 +61,13 @@ app.on('ready', async () => {
     height: 728,
   });
 
-  mainWindow.loadURL(`file://${getAppPath()}/renderer/app.html`);
+  mainWindow.loadURL(`file://${getAppPath()}/renderer/renderer.html`);
 
   mainWindow.webContents.on('did-finish-load', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
+    require('./main/worker');
     // Run migrations
     try {
       await setupDb();
@@ -83,8 +80,6 @@ app.on('ready', async () => {
     } catch (e) {
       logCleanDbFailed(e);
     }
-    // Load event listeners
-    eventListeners();
     // Show app
     mainWindow.show();
     mainWindow.focus();

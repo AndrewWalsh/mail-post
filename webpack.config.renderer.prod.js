@@ -18,12 +18,15 @@ export default merge.smart(baseConfig, {
 
   target: 'electron-renderer',
 
-  entry: './app/renderer/index',
+  entry: {
+    renderer: './app/renderer/index',
+    worker: './app/worker/index',
+  },
 
   output: {
-    path: path.join(__dirname, 'app/renderer/dist'),
+    path: path.join(__dirname, './app'),
     publicPath: './dist/',
-    filename: 'renderer.prod.js',
+    filename: '[name]/dist/[name].prod.js',
   },
 
   module: {
@@ -169,7 +172,7 @@ export default merge.smart(baseConfig, {
       sourceMap: true,
     }),
 
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('renderer/dist/style.css'),
 
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',

@@ -6,9 +6,9 @@ import 'normalize.css';
 import App from './App';
 import { store, history } from './store';
 import { injectGlobalStyles } from './utils';
-import eventListeners from './ipc/receive';
 
-eventListeners();
+require('electron-unhandled')();
+
 injectGlobalStyles();
 
 render(
