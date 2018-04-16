@@ -2,6 +2,7 @@
 
 [![Build Status][travis-image]][travis-url]
 [![Appveyor Build Status][appveyor-image]][appveyor-url]
+[![Coverage Status][coverage-image]][coverage-url]
 
 Send bulk email campaigns easily using Electron & Serverless.
 
@@ -16,6 +17,9 @@ Send bulk email campaigns easily using Electron & Serverless.
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/github/AndrewGHC/mail-post?svg=true
 [appveyor-url]: https://ci.appveyor.com/project/AndrewGHC/mail-post/branch/master
+
+[coverage-image]: https://coveralls.io/repos/github/AndrewGHC/mail-post/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/AndrewGHC/mail-post?branch=master
 
 ### Development
 

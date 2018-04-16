@@ -46,5 +46,6 @@ script:
   - yarn lint
   - yarn package
   - yarn test
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then yarn coveralls; fi
   - yarn test-e2e
   - yarn release
