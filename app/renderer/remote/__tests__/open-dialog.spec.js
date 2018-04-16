@@ -25,7 +25,7 @@ describe('openDialog', () => {
       },
     });
 
-    openDialog = require('../openDialog');
+    openDialog = require('../open-dialog');
   });
 
   it('calls io.emit with the channel name filePath as a string', async () => {

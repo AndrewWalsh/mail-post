@@ -7,7 +7,7 @@ let injectGlobalStyles;
 describe('injectGlobalStyles', () => {
   beforeEach(() => {
     styled = td.replace('styled-components');
-    injectGlobalStyles = require('../injectGlobalStyles');
+    injectGlobalStyles = require('../inject-global-styles');
   });
 
   it('calls injectGlobal', async () => {
