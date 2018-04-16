@@ -1,5 +1,4 @@
-/* eslint global-require: 0, flowtype-errors/show-errors: 0 */
-// @flow
+/* eslint global-require: 0 */
 import { app, BrowserWindow } from 'electron';
 
 import MenuBuilder from './main/menu';

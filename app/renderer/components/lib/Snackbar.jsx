@@ -1,24 +1,15 @@
-// @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MaterialSnackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
-type Props = {
-  id: string,
-  message: string,
-};
-
-type State = {
-  open: boolean,
-};
-
-export default class Snackbar extends Component<Props, State> {
+export default class Snackbar extends Component {
   state = {
     open: false,
   };
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
     const { id } = this.props;
     const nextId = nextProps.id;
     if (id !== nextId) this.setState({ open: true });
@@ -58,3 +49,8 @@ export default class Snackbar extends Component<Props, State> {
     );
   }
 }
+
+Snackbar.propTypes = {
+  id: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+};

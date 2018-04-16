@@ -10,6 +10,7 @@ describe('SnackbarContainer', () => {
   it('renders a Snackbar and passes props', async () => {
     const props = {
       message: 'hello',
+      id: 'an id',
       anotherProp: 'there',
     };
     const wrapper = shallow(<WrappedSnackbarContainer {...props} />);

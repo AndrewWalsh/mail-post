@@ -1,5 +1,5 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Navbar from './navbar';
@@ -43,11 +43,7 @@ const Main = styled.main`
   grid-area: mn;
 `;
 
-type Props = {
-  children: React.Node
-};
-
-const Layout = ({ children }: Props) => (
+const Layout = ({ children }) => (
   <Wrapper>
     <Header>
       <HeaderTitle>
@@ -66,5 +62,9 @@ const Layout = ({ children }: Props) => (
     </Main>
   </Wrapper>
 );
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Layout;
