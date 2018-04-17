@@ -1,4 +1,3 @@
-// @flow
 import db from '../../../../main/models';
 
-export default (name: string) => db.List.create({ name });
+export default name => db.List.create({ name });

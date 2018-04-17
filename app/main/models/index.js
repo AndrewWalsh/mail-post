@@ -1,5 +1,4 @@
-// @flow
-// Note to self - readdirSync entails not parsing es6 imports
+// ReaddirSync entails not parsing es6 imports
 // App is unavailable in renderer processes
 const app = process && process.type !== 'renderer'
   ? require('electron').app
@@ -28,7 +27,7 @@ if ((!process || process.type === 'renderer') && (process.env.NODE_ENV && proces
 const basename = 'index.js';
 const env = process.env.NODE_ENV || 'production';
 const config = configFile[env];
-const db: any = {};
+const db = {};
 
 // Enable CLS
 const TRANSACTION_NAMESPACE = cls.createNamespace('TRANSACTION');

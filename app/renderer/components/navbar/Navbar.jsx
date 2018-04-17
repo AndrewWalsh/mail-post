@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { MenuItem, MenuList } from 'material-ui/Menu';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';

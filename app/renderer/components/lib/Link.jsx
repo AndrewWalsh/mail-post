@@ -1,5 +1,5 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -10,14 +10,14 @@ const StyledLink = styled(RouterLink)`
     }
 `;
 
-type Props = {
-  children: React.Node
-};
-
-const Link = ({ children, ...rest }: Props) => (
+const Link = ({ children, ...rest }) => (
   <StyledLink {...rest}>
     {children}
   </StyledLink>
 );
+
+Link.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Link;

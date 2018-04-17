@@ -1,10 +1,6 @@
-// @flow
 import { CSV_INVALID } from '../../lib/websocket';
-import { importCsv } from '../controllers';
-import { csvIsValid } from './helpers';
-import { debug } from '../utils';
 
-export default async (csvPath: string, socket: any) => {
+export default ({ debug, importCsv, csvIsValid }) => async (csvPath, socket) => {
   try {
     await csvIsValid(csvPath);
   } catch (e) {

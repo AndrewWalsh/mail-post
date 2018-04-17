@@ -1,11 +1,14 @@
-// @flow
 import td from 'testdouble';
 import mockFs from 'mock-fs';
 import uuidv4 from 'uuid/v4';
+import EventEmitter from 'events';
+
+// Run in parallel, this test will create more listeners than the default limit of 11
+EventEmitter.defaultMaxListeners = 0;
 
 require('testdouble-jest')(td, jest);
 
-const mockCsv = (headers: Array<string>, numRows: number = 100) => {
+const mockCsv = (headers, numRows = 100) => {
   const rows = [];
   rows.push(`${headers.join(',')}\n`);
   for (let i = 0; i < numRows; i += 1) {
@@ -16,7 +19,7 @@ const mockCsv = (headers: Array<string>, numRows: number = 100) => {
 
 const fakeFilePath = '/test/dir/test-csv.csv';
 
-let csvIsValid: any;
+let csvIsValid;
 describe('csv-is-valid', () => {
   beforeEach(() => {
     csvIsValid = require('../csv-is-valid');

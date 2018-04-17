@@ -28,7 +28,9 @@ exports[`Snackbar matches snapshot 1`] = `
   message={
     <span
       id="message-id"
-    />
+    >
+      hello
+    </span>
   }
   onClose={[Function]}
   open={false}

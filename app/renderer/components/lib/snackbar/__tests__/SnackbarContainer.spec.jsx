@@ -2,13 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SnackbarContainer from '../SnackbarContainer';
-import Snackbar from '../../../components/lib/Snackbar';
+import Snackbar from '../Snackbar';
 
 const WrappedSnackbarContainer = SnackbarContainer.WrappedComponent;
 
 describe('SnackbarContainer', () => {
   it('renders a Snackbar and passes props', async () => {
     const props = {
+      id: 'hello',
       message: 'hello',
       anotherProp: 'there',
     };

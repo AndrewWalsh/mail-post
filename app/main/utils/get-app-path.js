@@ -1,4 +1,3 @@
-// @flow
 // __dirname behaviour is different on electron
 // This module allows the root path to be set both in dev mode (node) & production (electron)
 import { app } from 'electron';

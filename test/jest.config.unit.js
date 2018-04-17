@@ -4,7 +4,7 @@ module.exports = Object.assign(
   {},
   base,
   {
-    setupTestFrameworkScriptFile: './test/unit.setuptest.js',
+    setupTestFrameworkScriptFile: './test/unit.setupTestFrameworkScriptFile.js',
     rootDir: '../',
     transform: {
       '^.+\\.jsx$': 'babel-jest',
@@ -14,21 +14,18 @@ module.exports = Object.assign(
       'enzyme-to-json/serializer',
     ],
     collectCoverageFrom: [
-      // Main files
-      'app/main/events/**/*.js',
-      'app/main/utils/**/*.js',
-      'app/main/config/**/*.js',
-      'app/main/ipc/**/*.js',
-      'app/main/controllers/**/*.js',
-      // Renderer files
-      'app/renderer/reducers/**/*.{js,jsx}',
-      'app/renderer/actions/**/*.{js,jsx}',
-      'app/renderer/components/**/*.{js,jsx}',
-      'app/renderer/containers/**/*.{js,jsx}',
-      'app/renderer/utils/**/*.{js,jsx}',
-      'app/renderer/ipc/**/*.{js,jsx}',
-      // Ignore index.js files
-      '!**/index.js',
+      /* Renderer files */
+      'app/renderer/**/*.{js,jsx}',
+      '!app/renderer/store/**/*.{js,jsx}', // Not worth covering
+      '!app/renderer/*.{js,jsx}', // Ignore root files
+      /* Worker files */
+      'app/worker/**/*.{js,jsx}',
+      '!app/worker/controllers/**/*.{js,jsx}', // Covered by integration tests
+      /* Common ignore */
+      '!**/utils/**/*', // Small helper files not worth covering
+      '!**/*.prod.{js,jsx}', // Production bundles
+      '!**/dist/**', // Dist files
+      '!**/index.{js,jsx}', // index.js files are primarily used to export files
     ],
   },
 );

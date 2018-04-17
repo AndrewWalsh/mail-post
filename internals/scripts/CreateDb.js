@@ -1,9 +1,8 @@
-// @flow
 import path from 'path';
 import { existsSync } from 'fs';
 import sqlite from '../../app/node_modules/sqlite3';
 
-const createDb = async (dbName: string, dbPath: string) => {
+const createDb = async (dbName, dbPath) => {
   if (existsSync(dbPath)) return;
   try {
     await new Promise((resolve, reject) => {

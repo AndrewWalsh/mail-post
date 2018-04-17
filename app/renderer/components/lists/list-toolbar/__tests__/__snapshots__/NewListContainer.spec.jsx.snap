@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewListContainer matches snapshot 1`] = `
+<Connect(Form(NewListContainer))
+  destroyOnUnmount={false}
+  enableReinitialize={false}
+  forceUnregisterOnUnmount={false}
+  form="FORM_NEW_LIST"
+  getFormState={[Function]}
+  keepDirtyOnReinitialize={false}
+  listNameValue="hello"
+  newListName="hi"
+  persistentSubmitErrors={false}
+  pure={true}
+  shouldAsyncValidate={[Function]}
+  shouldError={[Function]}
+  shouldValidate={[Function]}
+  shouldWarn={[Function]}
+  touchOnBlur={true}
+  touchOnChange={false}
+  updateUnregisteredFields={false}
+/>
+`;

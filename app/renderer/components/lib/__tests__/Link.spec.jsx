@@ -5,7 +5,8 @@ import Link from '../Link';
 
 describe('Link', () => {
   it('matches snapshot', async () => {
-    const wrapper = shallow(<Link />);
+    const TestComponent = () => <div />;
+    const wrapper = shallow(<Link><TestComponent /></Link>);
     expect(wrapper).toMatchSnapshot();
   });
 });

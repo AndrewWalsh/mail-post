@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageHoc matches snapshot 1`] = `
+<PageHoc__StyledPageHOC>
+  <TestComponent />
+</PageHoc__StyledPageHOC>
+`;

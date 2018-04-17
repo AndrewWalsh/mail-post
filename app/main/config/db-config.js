@@ -1,4 +1,3 @@
-// @flow
 const { Op } = require('sequelize');
 const path = require('path');
 const app = process && process.type !== 'renderer'

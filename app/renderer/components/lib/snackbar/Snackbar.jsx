@@ -1,32 +1,27 @@
-// @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MaterialSnackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
-type Props = {
-  id: string,
-  message: string,
-};
+export default class Snackbar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      open: false,
+    };
+    this.handleClose = this.handleClose.bind(this);
+  }
 
-type State = {
-  open: boolean,
-};
-
-export default class Snackbar extends Component<Props, State> {
-  state = {
-    open: false,
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
     const { id } = this.props;
     const nextId = nextProps.id;
     if (id !== nextId) this.setState({ open: true });
   }
 
-  handleClose = () => {
+  handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   render() {
     const { message } = this.props;
@@ -58,3 +53,8 @@ export default class Snackbar extends Component<Props, State> {
     );
   }
 }
+
+Snackbar.propTypes = {
+  id: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+};

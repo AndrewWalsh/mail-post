@@ -1,4 +1,3 @@
-// @flow
 import Umzug from 'umzug';
 import path from 'path';
 import db from '../models';
