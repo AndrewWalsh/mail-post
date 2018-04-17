@@ -1,5 +1,9 @@
 os: unstable
 
+branches:
+  only:
+    - master
+
 environment:
   matrix:
     - nodejs_version: 8
