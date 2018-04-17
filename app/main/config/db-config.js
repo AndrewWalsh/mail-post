@@ -10,7 +10,7 @@ module.exports = {
     username: 'default',
     password: null,
     dialect: 'sqlite',
-    storage: path.resolve(app.getAppPath(), '../development-db.sqlite3'),
+    storage: path.resolve('./development-db.sqlite3'),
     operatorsAliases: Op,
   },
   test: {

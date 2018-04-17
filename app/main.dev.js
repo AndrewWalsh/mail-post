@@ -11,7 +11,7 @@ import {
 import {
   logSetupDbFailed,
   logCleanDbFailed,
-} from './main/logging';
+} from './lib/logging';
 
 require('electron-unhandled')();
 

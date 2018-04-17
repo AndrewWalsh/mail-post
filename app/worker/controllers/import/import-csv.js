@@ -6,6 +6,7 @@ import csvParser from 'csv-parser';
 import fs from 'fs';
 import { compose, dissoc, keys } from 'ramda';
 
+import { logListNameInvalidOnCsvImport } from '../../../lib/logging';
 import db from '../../../main/models';
 import { initialiseList } from './helpers';
 
@@ -53,8 +54,14 @@ const formatDataForUpsert = (data) => {
   return values;
 };
 
-export default csvPath => new Promise(async (resolve) => {
-  const list = await initialiseList('list');
+export default (csvPath, name) => new Promise(async (resolve) => {
+  let list;
+  try {
+    list = await initialiseList(name);
+  } catch (e) {
+    logListNameInvalidOnCsvImport(e);
+    return;
+  }
 
   const upsert = upsertUnderTransaction(db.Subscriber, db.sequelize, list);
   const buffer = getEmailBuffer();

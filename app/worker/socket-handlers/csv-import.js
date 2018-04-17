@@ -1,6 +1,6 @@
 import { CSV_INVALID } from '../../lib/websocket';
 
-export default ({ debug, importCsv, csvIsValid }) => async (csvPath, socket) => {
+export default ({ debug, importCsv, csvIsValid }) => async ({ csvPath, name }, socket) => {
   try {
     await csvIsValid(csvPath);
   } catch (e) {
@@ -11,7 +11,7 @@ export default ({ debug, importCsv, csvIsValid }) => async (csvPath, socket) => 
 
   try {
     debug(`${csvPath} is valid`);
-    await importCsv(csvPath);
+    await importCsv(csvPath, name);
     debug(`${csvPath} imported`);
   } catch (e) {
     debug(`${e.message} error importing csv`);
