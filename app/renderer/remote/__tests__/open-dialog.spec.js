@@ -2,8 +2,9 @@ import td from 'testdouble';
 
 require('testdouble-jest')(td, jest);
 
-const channel = 'any channel';
 const filePath = ['mocked file path'];
+const emitValues = { test: 'hi there' };
+const channel = 'any channel';
 let electron;
 let utils;
 let openDialog;
@@ -32,7 +33,7 @@ describe('openDialog', () => {
   });
 
   it('calls io.emit with the channel name filePath as a string', async () => {
-    openDialog(channel, {});
-    td.verify(utils.io.emit(channel, filePath[0]));
+    openDialog(channel, {}, emitValues);
+    td.verify(utils.io.emit(channel, { csvPath: filePath[0], ...emitValues }));
   });
 });

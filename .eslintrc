@@ -1,9 +1,4 @@
 {
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
-  },
   "extends": "airbnb",
   "env": {
     "browser": true,

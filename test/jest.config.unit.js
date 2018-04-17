@@ -15,16 +15,17 @@ module.exports = Object.assign(
     ],
     collectCoverageFrom: [
       /* Renderer files */
-      'app/renderer/**/*.js',
-      '!app/renderer/store/**/*.js', // Not worth covering
+      'app/renderer/**/*.{js,jsx}',
+      '!app/renderer/store/**/*.{js,jsx}', // Not worth covering
+      '!app/renderer/*.{js,jsx}', // Ignore root files
       /* Worker files */
-      'app/worker/**/*.js',
-      '!app/worker/controllers/**/*.js', // Covered by integration tests
+      'app/worker/**/*.{js,jsx}',
+      '!app/worker/controllers/**/*.{js,jsx}', // Covered by integration tests
       /* Common ignore */
       '!**/utils/**/*', // Small helper files not worth covering
-      '!**/*.prod.js', // Production bundles
+      '!**/*.prod.{js,jsx}', // Production bundles
       '!**/dist/**', // Dist files
-      '!**/index.js', // index.js files are primarily used to export files
+      '!**/index.{js,jsx}', // index.js files are primarily used to export files
     ],
   },
 );

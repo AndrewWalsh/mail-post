@@ -5,9 +5,13 @@ import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
 export default class Snackbar extends Component {
-  state = {
-    open: false,
-  };
+  constructor() {
+    super();
+    this.state = {
+      open: false,
+    };
+    this.handleClose = this.handleClose.bind(this);
+  }
 
   componentWillReceiveProps(nextProps) {
     const { id } = this.props;
@@ -15,9 +19,9 @@ export default class Snackbar extends Component {
     if (id !== nextId) this.setState({ open: true });
   }
 
-  handleClose = () => {
+  handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   render() {
     const { message } = this.props;

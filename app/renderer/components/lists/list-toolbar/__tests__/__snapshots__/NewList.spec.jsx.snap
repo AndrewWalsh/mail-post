@@ -1,15 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewList matches snapshot 1`] = `
-<div>
-  <WithStyles(Button)
-    color="primary"
-    data-test="import-csv"
-    onClick={[Function]}
-    variant="raised"
-  >
-    <pure(Add) />
-    New List
-  </WithStyles(Button)>
-</div>
+<form
+  onSubmit={[Function]}
+>
+  <Field
+    component={[Function]}
+    name="nameOfList"
+    placeholder="List name"
+  />
+  <NewList />
+</form>
 `;

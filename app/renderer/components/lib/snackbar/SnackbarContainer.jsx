@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Snackbar from '../../components/lib/Snackbar';
+import Snackbar from './Snackbar';
 
 const SnackbarContainer = ({ message, id, ...rest }) =>
   <Snackbar message={message} id={id} {...rest} />;

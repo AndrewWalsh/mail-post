@@ -23,7 +23,6 @@
     "dev": "rimraf ./development-db.sqlite3 2>/dev/null && cross-env START_HOT=1 node -r babel-register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 npm run start-renderer-dev",
     "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev,optional --module-dir app",
     "lint": "cross-env NODE_ENV=development eslint --cache --format=node_modules/eslint-formatter-pretty .",
-    "lint-fix": "npm run lint -- --fix",
     "lint-styles": "stylelint app/*.css app/components/*.css --syntax scss",
     "lint-styles-fix": "stylefmt -r app/*.css app/components/*.css",
     "package": "rimraf ./production-db.sqlite3 release && npm run build && build --publish never",
@@ -106,7 +105,6 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.3",
     "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -197,6 +195,8 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "redux-form-material-ui": "^5.0.0-beta.2",
     "redux-saga": "^0.16.0",
     "source-map-support": "^0.5.3",
     "styled-components": "^3.2.1"

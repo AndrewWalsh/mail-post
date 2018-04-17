@@ -13,7 +13,7 @@ const websocketConfig = {
   [ON_CONNECTION]: () => {
     debug('Received connection from client');
   },
-  [CSV_IMPORT]: (csvPath, socket) => {
+  [CSV_IMPORT]: ({ csvPath }, socket) => {
     debug(`${CSV_IMPORT} message received with path ${csvPath}`);
     csvImport(csvPath, socket);
   },

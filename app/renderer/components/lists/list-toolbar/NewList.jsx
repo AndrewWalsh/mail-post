@@ -1,30 +1,27 @@
 import React from 'react';
-import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
+import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
+import { TextField } from 'redux-form-material-ui';
 
-import { openDialog } from '../../../remote';
-import { CSV_IMPORT } from '../../../../lib/websocket';
+import openDialogCsvImport from './open-dialog-csv-import';
 
-const dialogOptions = {
-  title: 'Import CSV',
-  filters: [
-    { name: 'CSV', extensions: ['csv'] },
-  ],
-  properties: ['openFile'],
+import NewListButton from './NewListButton';
+
+const onSubmit = (e, listNameValue) => {
+  e.preventDefault();
+  openDialogCsvImport(listNameValue);
 };
 
-const NewList = () => (
-  <div>
-    <Button
-      onClick={() => openDialog(CSV_IMPORT, dialogOptions)}
-      color="primary"
-      variant="raised"
-      data-test="import-csv"
-    >
-      <AddIcon />
-      New List
-    </Button>
-  </div>
+const NewList = ({ nameOfList, listNameValue }) => (
+  <form onSubmit={e => onSubmit(e, listNameValue)}>
+    <Field name={nameOfList} component={TextField} placeholder="List name" />
+    <NewListButton />
+  </form>
 );
+
+NewList.propTypes = {
+  nameOfList: PropTypes.string.isRequired,
+  listNameValue: PropTypes.string.isRequired,
+};
 
 export default NewList;
