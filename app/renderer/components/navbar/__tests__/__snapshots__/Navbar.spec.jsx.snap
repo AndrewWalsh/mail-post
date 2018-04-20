@@ -157,7 +157,7 @@ exports[`Navbar matches snapshot 1`] = `
           "color": "#fff",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "0.875rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.46429em",
         },
         "body2": Object {
@@ -177,21 +177,21 @@ exports[`Navbar matches snapshot 1`] = `
           "color": "rgba(255, 255, 255, 0.7)",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "0.75rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.375em",
         },
         "display1": Object {
           "color": "rgba(255, 255, 255, 0.7)",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "2.125rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.20588em",
         },
         "display2": Object {
           "color": "rgba(255, 255, 255, 0.7)",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "2.8125rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.06667em",
           "marginLeft": "-.02em",
         },
@@ -199,7 +199,7 @@ exports[`Navbar matches snapshot 1`] = `
           "color": "rgba(255, 255, 255, 0.7)",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "3.5rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "letterSpacing": "-.02em",
           "lineHeight": "1.30357em",
           "marginLeft": "-.02em",
@@ -217,12 +217,12 @@ exports[`Navbar matches snapshot 1`] = `
         "fontSize": 14,
         "fontWeightLight": 300,
         "fontWeightMedium": 500,
-        "fontWeightRegular": 400,
+        "fontWeightRegular": 300,
         "headline": Object {
           "color": "#fff",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "1.5rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.35417em",
         },
         "pxToRem": [Function],
@@ -231,7 +231,7 @@ exports[`Navbar matches snapshot 1`] = `
           "color": "#fff",
           "fontFamily": "\\"Roboto\\", \\"Helvetica\\", \\"Arial\\", sans-serif",
           "fontSize": "1rem",
-          "fontWeight": 400,
+          "fontWeight": 300,
           "lineHeight": "1.5em",
         },
         "title": Object {
@@ -254,39 +254,30 @@ exports[`Navbar matches snapshot 1`] = `
   }
 >
   <MenuList>
-    y
-    <Link
+    <NavbarLink
       data-test="nav-dashboard"
+      renderIcon={[Function]}
+      text="Dashboard"
       to="/dashboard"
-    >
-      <WithStyles(MenuItem)>
-        Dashboard
-      </WithStyles(MenuItem)>
-    </Link>
-    <Link
+    />
+    <NavbarLink
       data-test="nav-campaigns"
+      renderIcon={[Function]}
+      text="Campaigns"
       to="/campaigns"
-    >
-      <WithStyles(MenuItem)>
-        Campaigns
-      </WithStyles(MenuItem)>
-    </Link>
-    <Link
+    />
+    <NavbarLink
       data-test="nav-lists"
+      renderIcon={[Function]}
+      text="Lists"
       to="/lists"
-    >
-      <WithStyles(MenuItem)>
-        Lists
-      </WithStyles(MenuItem)>
-    </Link>
-    <Link
+    />
+    <NavbarLink
       data-test="nav-settings"
+      renderIcon={[Function]}
+      text="Settings"
       to="/settings"
-    >
-      <WithStyles(MenuItem)>
-        Settings
-      </WithStyles(MenuItem)>
-    </Link>
+    />
   </MenuList>
 </MuiThemeProvider>
 `;

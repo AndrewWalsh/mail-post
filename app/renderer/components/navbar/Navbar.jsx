@@ -1,6 +1,12 @@
 import React from 'react';
-import { MenuItem, MenuList } from 'material-ui/Menu';
-import { Link } from '../lib';
+import { MenuList } from 'material-ui/Menu';
+import DashboardIcon from 'material-ui-icons/Dashboard';
+import EmailIcon from 'material-ui-icons/Email';
+import ListIcon from 'material-ui-icons/List';
+import SettingsIcon from 'material-ui-icons/Settings';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+import NavbarLink from './NavbarLink';
 
 import {
   ROUTE_DASHBOARD,
@@ -9,21 +15,47 @@ import {
   ROUTE_LISTS,
 } from '../../constants';
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+  typography: {
+    fontWeightRegular: 300,
+  },
+});
+
 const Navbar = () => (
-  <MenuList>y
-    <Link to={ROUTE_DASHBOARD} data-test="nav-dashboard">
-      <MenuItem>Dashboard</MenuItem>
-    </Link>
-    <Link to={ROUTE_CAMPAIGNS} data-test="nav-campaigns">
-      <MenuItem>Campaigns</MenuItem>
-    </Link>
-    <Link to={ROUTE_LISTS} data-test="nav-lists">
-      <MenuItem>Lists</MenuItem>
-    </Link>
-    <Link to={ROUTE_SETTINGS} data-test="nav-settings">
-      <MenuItem>Settings</MenuItem>
-    </Link>
-  </MenuList>
+  <MuiThemeProvider theme={theme}>
+    <MenuList>
+      <NavbarLink
+        to={ROUTE_DASHBOARD}
+        text="Dashboard"
+        renderIcon={() => <DashboardIcon />}
+        data-test="nav-dashboard"
+      />
+
+      <NavbarLink
+        to={ROUTE_CAMPAIGNS}
+        text="Campaigns"
+        renderIcon={() => <EmailIcon />}
+        data-test="nav-campaigns"
+      />
+
+      <NavbarLink
+        to={ROUTE_LISTS}
+        text="Lists"
+        renderIcon={() => <ListIcon />}
+        data-test="nav-lists"
+      />
+
+      <NavbarLink
+        to={ROUTE_SETTINGS}
+        text="Settings"
+        renderIcon={() => <SettingsIcon />}
+        data-test="nav-settings"
+      />
+    </MenuList>
+  </MuiThemeProvider>
 );
 
 export default Navbar;

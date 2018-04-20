@@ -13,9 +13,7 @@ import SnackbarContainer from './components/lib/snackbar';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#11cb5f' }, // Purple and green play nicely together.
-    secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
-    type: 'dark',
+    // type: 'dark',
   },
   typography: {
     fontWeightRegular: 300,
