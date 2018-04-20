@@ -5,6 +5,8 @@ import EmailIcon from 'material-ui-icons/Email';
 import ListIcon from 'material-ui-icons/List';
 import SettingsIcon from 'material-ui-icons/Settings';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import Divider from 'material-ui/Divider';
+import styled from 'styled-components';
 
 import NavbarLink from './NavbarLink';
 
@@ -24,30 +26,44 @@ const theme = createMuiTheme({
   },
 });
 
+const HeaderTitle = styled.div`
+  color: white;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+`;
+
 const Navbar = () => (
   <MuiThemeProvider theme={theme}>
-    <MenuList>
+    <HeaderTitle>
+      <h1>
+        MailPost
+      </h1>
+    </HeaderTitle>
+    <Divider />
+    <MenuList style={{ padding: 0 }}>
       <NavbarLink
         to={ROUTE_DASHBOARD}
         text="Dashboard"
         renderIcon={() => <DashboardIcon />}
         data-test="nav-dashboard"
       />
-
+      <Divider />
       <NavbarLink
         to={ROUTE_CAMPAIGNS}
         text="Campaigns"
         renderIcon={() => <EmailIcon />}
         data-test="nav-campaigns"
       />
-
+      <Divider />
       <NavbarLink
         to={ROUTE_LISTS}
         text="Lists"
         renderIcon={() => <ListIcon />}
         data-test="nav-lists"
       />
-
+      <Divider />
       <NavbarLink
         to={ROUTE_SETTINGS}
         text="Settings"

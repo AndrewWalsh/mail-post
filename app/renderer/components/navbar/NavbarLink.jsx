@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MenuItem } from 'material-ui/Menu';
-import { ListItemIcon, ListItemText } from 'material-ui/List';
+import { ListItemIcon, ListItemSecondaryAction } from 'material-ui/List';
 import { Link } from '../lib';
 
 const NavbarLink = ({
@@ -12,10 +12,12 @@ const NavbarLink = ({
 }) => (
   <Link to={to} {...rest} >
     <MenuItem>
-      <ListItemIcon>
-        {renderIcon()}
-      </ListItemIcon>
-      <ListItemText inset primary={text} />
+      {text}
+      <ListItemSecondaryAction>
+        <ListItemIcon>
+          {renderIcon()}
+        </ListItemIcon>
+      </ListItemSecondaryAction>
     </MenuItem>
   </Link>
 );

@@ -19,20 +19,12 @@ const Wrapper = styled.section`
   max-width: 100vw;
   display: grid;
   grid-template:
-      "hd hd" minmax(min-content, ${HEADER_HEIGHT})
-      "nv mn" 1fr / minmax(min-content, ${NAV_WIDTH}) 1fr;
+      "nv hd" ${HEADER_HEIGHT}
+      "nv mn" 1fr / minmax(200px, ${NAV_WIDTH}) 1fr;
 `;
 const Header = styled.header`
   background-color: ${COLOUR_PRIMARY};
   grid-area: hd;
-`;
-const HeaderTitle = styled.div`
-  color: ${COLOUR_WHITE};
-  height: 100%;
-  width: ${NAV_WIDTH};
-  display: flex;
-  align-items: center;
-  margin-left: 16px;
 `;
 const Nav = styled.nav`
   background-color: ${COLOUR_SECONDARY};
@@ -45,13 +37,7 @@ const Main = styled.main`
 
 const Layout = ({ children }) => (
   <Wrapper>
-    <Header>
-      <HeaderTitle>
-        <h1>
-          MailPost
-        </h1>
-      </HeaderTitle>
-    </Header>
+    <Header />
 
     <Nav>
       <Navbar />
