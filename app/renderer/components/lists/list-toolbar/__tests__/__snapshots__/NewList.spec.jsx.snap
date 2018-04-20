@@ -6,9 +6,12 @@ exports[`NewList matches snapshot 1`] = `
 >
   <Field
     component={[Function]}
+    disabled={false}
     name="nameOfList"
     placeholder="List name"
   />
-  <NewList />
+  <NewList
+    disabled={false}
+  />
 </form>
 `;

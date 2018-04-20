@@ -33,12 +33,13 @@ const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!UPGRADE_EXTENSIONS;
   const extensions = [
-    'REACT_DEVELOPER_TOOLS',
-    'REDUX_DEVTOOLS',
+    installer.REDUX_DEVTOOLS,
+    installer.REACT_DEVELOPER_TOOLS,
+    installer.APOLLO_DEVELOPER_TOOLS,
   ];
 
   return Promise
-    .all(extensions.map(name => installer.default(installer[name], forceDownload)))
+    .all(extensions.map(ext => installer.default(ext, forceDownload)))
     .catch(console.log);
 };
 

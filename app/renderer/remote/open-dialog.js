@@ -1,10 +1,9 @@
 import { remote } from 'electron';
-import { io } from '../utils';
 
-export default (channel, options, emitValues) => {
+export default (options, callback) => {
   remote.dialog.showOpenDialog(options, async (filePaths) => {
     if (!Array.isArray(filePaths) || !filePaths[0]) return;
-    const csvPath = filePaths[0];
-    io.emit(channel, { csvPath, ...emitValues });
+    const filePath = filePaths[0];
+    callback(filePath);
   });
 };

@@ -1,5 +1,4 @@
 import td from 'testdouble';
-import { CSV_IMPORT } from '../../../../../lib/websocket';
 
 require('testdouble-jest')(td, jest);
 
@@ -27,9 +26,9 @@ describe('open-dialog-csv-import', () => {
   });
 
   it('calls openDialog with CSV_IMPORT, dialogOptions and an object', () => {
-    const listNameValue = 'listNameValue test';
-    openDialogCsvImport(listNameValue);
-    td.verify(remote.openDialog(CSV_IMPORT, dialogOptions, { name: listNameValue }));
+    const callback = td.function();
+    openDialogCsvImport(callback);
+    td.verify(remote.openDialog(dialogOptions, callback));
   });
 });
 

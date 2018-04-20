@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      total_users: {
+      total_subscribers: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },

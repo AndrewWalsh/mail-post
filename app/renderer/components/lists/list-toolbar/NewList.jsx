@@ -7,21 +7,34 @@ import openDialogCsvImport from './open-dialog-csv-import';
 
 import NewListButton from './NewListButton';
 
-const onSubmit = (e, listNameValue) => {
+const onSubmit = (e, listNameValue, callback) => {
   e.preventDefault();
-  openDialogCsvImport(listNameValue);
+  const callbackFormat = csvPath => callback({
+    variables: {
+      csvPath,
+      name: listNameValue,
+    },
+  });
+  openDialogCsvImport(callbackFormat);
 };
 
-const NewList = ({ nameOfList, listNameValue }) => (
-  <form onSubmit={e => onSubmit(e, listNameValue)}>
-    <Field name={nameOfList} component={TextField} placeholder="List name" />
-    <NewListButton />
+const NewList = ({
+  nameOfList,
+  listNameValue,
+  mutationCreateListCsv,
+  disabled,
+}) => (
+  <form onSubmit={e => !disabled && onSubmit(e, listNameValue, mutationCreateListCsv)}>
+    <Field name={nameOfList} component={TextField} placeholder="List name" disabled={disabled} />
+    <NewListButton disabled={disabled} />
   </form>
 );
 
 NewList.propTypes = {
+  mutationCreateListCsv: PropTypes.func.isRequired,
   nameOfList: PropTypes.string.isRequired,
   listNameValue: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default NewList;

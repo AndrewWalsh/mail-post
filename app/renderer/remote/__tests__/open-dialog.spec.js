@@ -3,10 +3,8 @@ import td from 'testdouble';
 require('testdouble-jest')(td, jest);
 
 const filePath = ['mocked file path'];
-const emitValues = { test: 'hi there' };
-const channel = 'any channel';
 let electron;
-let utils;
+let callback;
 let openDialog;
 describe('openDialog', () => {
   beforeEach(() => {
@@ -19,12 +17,7 @@ describe('openDialog', () => {
     });
     td.when(electron.remote.dialog.showOpenDialog(td.matchers.isA(Object))).thenCallback(filePath);
 
-    utils = td.replace('../../utils', {
-      io: {
-        emit: td.function(),
-      },
-    });
-
+    callback = td.function();
     openDialog = require('../open-dialog');
   });
 
@@ -32,8 +25,8 @@ describe('openDialog', () => {
     td.reset();
   });
 
-  it('calls io.emit with the channel name filePath as a string', async () => {
-    openDialog(channel, {}, emitValues);
-    td.verify(utils.io.emit(channel, { csvPath: filePath[0], ...emitValues }));
+  it('calls callback with the file path', async () => {
+    openDialog({}, callback);
+    td.verify(callback(filePath[0]));
   });
 });

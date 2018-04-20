@@ -8,7 +8,7 @@ import { compose, dissoc, keys } from 'ramda';
 
 import { logListNameInvalidOnCsvImport } from '../../../lib/logging';
 import db from '../../../main/models';
-import { initialiseList } from './helpers';
+import createList from './create-list';
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) => {
   if (Array.isArray(arr)) {
@@ -55,9 +55,11 @@ const formatDataForUpsert = (data) => {
 };
 
 export default (csvPath, name) => new Promise(async (resolve) => {
+  // Name must not be an empty string, this is validated client-side
+  if (!name) return;
   let list;
   try {
-    list = await initialiseList(name);
+    list = await createList(name);
   } catch (e) {
     logListNameInvalidOnCsvImport(e);
     return;
@@ -71,10 +73,12 @@ export default (csvPath, name) => new Promise(async (resolve) => {
     buffer,
   );
 
+  let totalSubscribers = 0;
   const readStream = fs.createReadStream(csvPath);
   readStream
     .pipe(csvParser({ strict: true }))
     .on('data', async (data) => {
+      totalSubscribers += 1;
       const transaction = save(formatDataForUpsert(data));
       if (transaction) {
         readStream.pause();
@@ -88,7 +92,10 @@ export default (csvPath, name) => new Promise(async (resolve) => {
       // Mark all lists and list subscribers as 'finalised'
       await db.sequelize.transaction(transaction =>
         Promise.all([
-          list.update({ finalised: true }, { transaction }),
+          list.update({
+            finalised: true,
+            total_subscribers: totalSubscribers,
+          }, { transaction }),
           db.sequelize.query(
             `UPDATE Subscribers SET finalised=1 WHERE EXISTS (SELECT * FROM ListSubscribers WHERE (ListSubscribers.subscriberId = Subscribers.id) AND (ListSubscribers.listId = ${list.get({ plain: true }).id}))`,
             { transaction },
