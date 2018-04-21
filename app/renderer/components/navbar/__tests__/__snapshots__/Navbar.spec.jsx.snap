@@ -253,25 +253,40 @@ exports[`Navbar matches snapshot 1`] = `
     }
   }
 >
-  <MenuList>
+  <Navbar__HeaderTitle>
+    <h1>
+      MailPost
+    </h1>
+  </Navbar__HeaderTitle>
+  <WithStyles(Divider) />
+  <MenuList
+    style={
+      Object {
+        "padding": 0,
+      }
+    }
+  >
     <NavbarLink
       data-test="nav-dashboard"
       renderIcon={[Function]}
       text="Dashboard"
       to="/dashboard"
     />
+    <WithStyles(Divider) />
     <NavbarLink
       data-test="nav-campaigns"
       renderIcon={[Function]}
       text="Campaigns"
       to="/campaigns"
     />
+    <WithStyles(Divider) />
     <NavbarLink
       data-test="nav-lists"
       renderIcon={[Function]}
       text="Lists"
       to="/lists"
     />
+    <WithStyles(Divider) />
     <NavbarLink
       data-test="nav-settings"
       renderIcon={[Function]}

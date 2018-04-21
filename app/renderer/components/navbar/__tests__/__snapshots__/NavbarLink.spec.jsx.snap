@@ -5,11 +5,10 @@ exports[`NavbarLink matches snapshot 1`] = `
   to="a route"
 >
   <WithStyles(MenuItem)>
-    <WithStyles(ListItemIcon) />
-    <WithStyles(ListItemText)
-      inset={true}
-      primary="name"
-    />
+    name
+    <WithStyles(ListItemSecondaryAction)>
+      <WithStyles(ListItemIcon) />
+    </WithStyles(ListItemSecondaryAction)>
   </WithStyles(MenuItem)>
 </Link>
 `;
