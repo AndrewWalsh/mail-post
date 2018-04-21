@@ -7,7 +7,7 @@ import App from './App';
 import { store, history } from './store';
 import { injectGlobalStyles } from './utils';
 
-require('electron-unhandled')();
+// require('electron-unhandled')();
 
 injectGlobalStyles();
 

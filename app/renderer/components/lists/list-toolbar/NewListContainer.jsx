@@ -11,14 +11,14 @@ import {
   FORM_NEW_LIST,
 } from '../../../constants';
 
-import NewList from './NewList';
+import NewListWrapper from './NewListWrapper';
 
 const nameOfList = 'newList';
 
 const NewListContainer = ({ listNameValue, nameOfListProp, ...rest }) => (
   <Mutation mutation={MutationCreateListCsv}>
     {(mutationCreateListCsv, { loading, data }) => (
-      <NewList
+      <NewListWrapper
         data={data}
         disabled={loading}
         mutationCreateListCsv={mutationCreateListCsv}

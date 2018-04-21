@@ -25,7 +25,12 @@ const NewList = ({
   disabled,
 }) => (
   <form onSubmit={e => !disabled && onSubmit(e, listNameValue, mutationCreateListCsv)}>
-    <Field name={nameOfList} component={TextField} placeholder="List name" disabled={disabled} />
+    <Field
+      name={nameOfList}
+      component={TextField}
+      placeholder="List name"
+      disabled={disabled}
+    />
     <NewListButton disabled={disabled} />
   </form>
 );

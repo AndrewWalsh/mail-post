@@ -6,7 +6,6 @@ const NewList = ({ ...props }) => (
   <Button
     type="submit"
     color="primary"
-    variant="raised"
     data-test="import-csv"
     {...props}
   >
