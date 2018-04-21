@@ -3,7 +3,7 @@ import { debug } from './utils';
 import { WORKER_PORT } from '../lib/shared-constants';
 import schema from './schema';
 
-// require('electron-unhandled')();
+require('electron-unhandled')();
 
 const server = configServer(WORKER_PORT, schema);
 

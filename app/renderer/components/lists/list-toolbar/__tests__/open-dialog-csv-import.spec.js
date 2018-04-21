@@ -25,7 +25,7 @@ describe('open-dialog-csv-import', () => {
     td.reset();
   });
 
-  it('calls openDialog with CSV_IMPORT, dialogOptions and an object', () => {
+  it('calls openDialog with dialogOptions and the provided callback', () => {
     const callback = td.function();
     openDialogCsvImport(callback);
     td.verify(remote.openDialog(dialogOptions, callback));

@@ -4,11 +4,10 @@ exports[`NewList matches snapshot 1`] = `
 <form
   onSubmit={[Function]}
 >
-  <Field
-    component={[Function]}
+  <NewListNameField
     disabled={false}
+    lists={Array []}
     name="nameOfList"
-    placeholder="List name"
   />
   <NewList
     disabled={false}

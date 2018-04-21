@@ -2,67 +2,100 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import td from 'testdouble';
 
+import NewListNameField from '../NewListNameField';
+import NewListButton from '../NewListButton';
+
 require('testdouble-jest')(td, jest);
 
-const nameOfList = 'nameOfList';
-const listNameValue = 'listNameValue';
+let props;
 let NewList;
 let openDialogCsvImport;
 let mutationCreateListCsv;
 describe('NewList', () => {
   beforeEach(() => {
+    mutationCreateListCsv = td.function();
+    props = {
+      nameOfList: 'nameOfList',
+      listNameValue: 'listNameValue',
+      disabled: false,
+      mutationCreateListCsv,
+      data: {
+        lists: [],
+      },
+      invalid: false,
+    };
     openDialogCsvImport = td.replace('../open-dialog-csv-import');
     td.when(openDialogCsvImport())
-      .thenCallback(nameOfList);
+      .thenCallback(props.nameOfList);
     NewList = require('../NewList');
-    mutationCreateListCsv = td.function();
   });
 
   afterEach(() => {
     td.reset();
   });
 
-  it('matches snapshot', async () => {
-    const wrapper = shallow(
-      <NewList
-        disabled={false}
-        nameOfList={nameOfList}
-        listNameValue={listNameValue}
-        mutationCreateListCsv={mutationCreateListCsv}
-      />,
-    );
+  it('matches snapshot', () => {
+    const wrapper = shallow(<NewList {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('when form submits calls openDialogCsvImport', async () => {
-    const wrapper = shallow(
-      <NewList
-        disabled={false}
-        nameOfList={nameOfList}
-        listNameValue={listNameValue}
-        mutationCreateListCsv={mutationCreateListCsv}
-      />,
-    );
+  it('when form submits calls openDialogCsvImport', () => {
+    const wrapper = shallow(<NewList {...props} />);
     wrapper.simulate('submit', { preventDefault() {} });
     td.verify(openDialogCsvImport(td.matchers.anything()));
   });
 
-  it('when openDialogCsvImport calls back, mutationCreateListCsv is called', async () => {
-    const wrapper = shallow(
-      <NewList
-        disabled={false}
-        nameOfList={nameOfList}
-        listNameValue={listNameValue}
-        mutationCreateListCsv={mutationCreateListCsv}
-      />,
-    );
+  it('when openDialogCsvImport calls back, mutationCreateListCsv is called', () => {
+    const wrapper = shallow(<NewList {...props} />);
     wrapper.simulate('submit', { preventDefault() {} });
     const variables = {
       variables: {
-        csvPath: nameOfList,
-        name: listNameValue,
+        csvPath: props.nameOfList,
+        name: props.listNameValue,
       },
     };
     td.verify(mutationCreateListCsv(variables));
+  });
+
+  it('when disabled is true, NewListNameField disabled prop is true', () => {
+    const disabled = true;
+    const wrapper = shallow(<NewList {...props} disabled={disabled} />);
+    const wrapperItem = wrapper.find(NewListNameField);
+    expect(wrapperItem.prop('disabled')).toBeTruthy();
+  });
+
+  it('when disabled is true, NewListNameField disabled prop is true', () => {
+    const disabled = false;
+    const wrapper = shallow(<NewList {...props} disabled={disabled} />);
+    const wrapperItem = wrapper.find(NewListNameField);
+    expect(wrapperItem.prop('disabled')).toBeFalsy();
+  });
+
+  it('when disabled is true, NewListButton disabled prop is true', () => {
+    const disabled = true;
+    const wrapper = shallow(<NewList {...props} disabled={disabled} />);
+    const wrapperItem = wrapper.find(NewListButton);
+    expect(wrapperItem.prop('disabled')).toBeTruthy();
+  });
+
+  it('when disabled is true, NewListButton disabled prop is true', () => {
+    const disabled = false;
+    const wrapper = shallow(<NewList {...props} disabled={disabled} />);
+    const wrapperItem = wrapper.find(NewListButton);
+    expect(wrapperItem.prop('disabled')).toBeFalsy();
+  });
+
+  it('when listNameValue is an empty string, NewListButton disabled prop is true', () => {
+    const listNameValue = '';
+    const wrapper = shallow(<NewList {...props} listNameValue={listNameValue} />);
+    const wrapperItem = wrapper.find(NewListButton);
+    expect(wrapperItem.prop('disabled')).toBeTruthy();
+  });
+
+  it('when invalid is true, NewListButton disabled prop is true', () => {
+    const invalid = true;
+    const wrapper = shallow(<NewList {...props} invalid={invalid} />);
+    const wrapperItem = wrapper.find(NewListButton);
+    expect(wrapperItem.prop('disabled')).toBeTruthy();
   });
 });

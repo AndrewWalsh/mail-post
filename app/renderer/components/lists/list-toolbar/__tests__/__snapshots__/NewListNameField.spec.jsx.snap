@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewListNameField matches snapshot 1`] = `
+<Field
+  anotherProp="hi"
+  component={[Function]}
+  disabled={false}
+  name="howdy"
+  placeholder="List name"
+  validate={[Function]}
+/>
+`;

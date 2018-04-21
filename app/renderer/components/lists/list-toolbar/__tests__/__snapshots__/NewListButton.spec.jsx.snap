@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewListButton matches snapshot 1`] = `
+<WithStyles(Button)
+  color="primary"
+  data-test="import-csv"
+  type="submit"
+>
+  <pure(Add) />
+  New List
+</WithStyles(Button)>
+`;

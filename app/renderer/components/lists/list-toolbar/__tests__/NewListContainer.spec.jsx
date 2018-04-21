@@ -9,13 +9,13 @@ const listNameValue = 'hello';
 const newListName = 'hi';
 const props = { listNameValue, newListName };
 describe('NewListContainer', () => {
-  it('passes props', async () => {
+  it('passes props', () => {
     const wrapper = shallow(<WrappedNewListContainer {...props} />);
     expect(wrapper.prop('listNameValue')).toEqual(listNameValue);
     expect(wrapper.prop('newListName')).toEqual(newListName);
   });
 
-  it('matches snapshot', async () => {
+  it('matches snapshot', () => {
     const wrapper = shallow(<WrappedNewListContainer {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
