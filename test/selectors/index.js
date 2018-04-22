@@ -1,6 +1,7 @@
 // Navbar
 export const SELECTOR_NAV_DASHBOARD = '[data-test^="nav-dashboard"]';
 export const SELECTOR_NAV_CAMPAIGNS = '[data-test^="nav-campaigns"]';
+export const SELECTOR_NAV_LISTS = '[data-test^="nav-lists"]';
 export const SELECTOR_NAV_SETTINGS = '[data-test^="nav-settings"]';
 
 // Campaigns page
