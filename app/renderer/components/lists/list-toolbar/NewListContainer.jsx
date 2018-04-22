@@ -17,9 +17,8 @@ const nameOfList = 'newList';
 
 const NewListContainer = ({ listNameValue, nameOfListProp, ...rest }) => (
   <Mutation mutation={MutationCreateListCsv}>
-    {(mutationCreateListCsv, { loading, data }) => (
+    {(mutationCreateListCsv, { loading }) => (
       <NewListWrapper
-        data={data}
         disabled={loading}
         mutationCreateListCsv={mutationCreateListCsv}
         listNameValue={listNameValue}
@@ -47,7 +46,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
-  graphql(QueryGetAllLists),
+  graphql(QueryGetAllLists, { options: { fetchPolicy: 'cache-and-network' } }),
   reduxForm({
     form: FORM_NEW_LIST,
     destroyOnUnmount: false,

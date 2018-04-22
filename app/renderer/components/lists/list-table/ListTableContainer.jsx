@@ -27,5 +27,5 @@ ListTableContainer.propTypes = {
 };
 
 export default compose(
-  graphql(QueryGetAllLists),
+  graphql(QueryGetAllLists, { options: { fetchPolicy: 'cache-and-network' } }),
 )(ListTableContainer);

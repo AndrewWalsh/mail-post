@@ -1,17 +1,11 @@
-import { ApolloClient } from 'apollo-client';
-import { ApolloLink } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import ApolloClient from 'apollo-boost';
 
 import { store } from '../store';
 import { notification } from '../actions';
 import { WORKER_PORT } from '../../lib/shared-constants';
 
-const httpLink = new HttpLink({ uri: `http://localhost:${WORKER_PORT}/graphql` });
-
 // Dispatches custom error messages to the snackbar component
-const errorLink = onError(({ graphQLErrors, response }) => {
+const onError = (({ graphQLErrors, response }) => {
   if (Array.isArray(graphQLErrors)) {
     graphQLErrors.forEach((err) => {
       store.dispatch(notification(err.message));
@@ -20,14 +14,16 @@ const errorLink = onError(({ graphQLErrors, response }) => {
   }
 });
 
-const link = ApolloLink.from([
-  errorLink,
-  httpLink,
-]);
+const defaults = {
+  lists: [],
+};
 
 const apolloClient = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
+  uri: `http://localhost:${WORKER_PORT}/graphql`,
+  onError,
+  clientState: {
+    defaults,
+  },
 });
 
 export default apolloClient;

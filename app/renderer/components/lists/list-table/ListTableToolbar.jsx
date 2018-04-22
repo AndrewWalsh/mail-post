@@ -50,7 +50,7 @@ const EnhancedTableToolbar = (props) => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title">Nutrition</Typography>
+          <Typography variant="title">Lists</Typography>
         )}
       </div>
       <div className={classes.spacer} />

@@ -1,0 +1,24 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "no-console": "off"
+  },
+  "plugins": [
+    "import",
+    "promise",
+    "compat",
+    "react"
+  ],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.eslint.js"
+      }
+    }
+  }
+}
