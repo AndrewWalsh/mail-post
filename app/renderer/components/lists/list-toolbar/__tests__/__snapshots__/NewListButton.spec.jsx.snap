@@ -7,6 +7,6 @@ exports[`NewListButton matches snapshot 1`] = `
   type="submit"
 >
   <pure(Add) />
-  New List
+  Import
 </WithStyles(Button)>
 `;

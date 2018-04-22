@@ -10,7 +10,7 @@ const NewList = ({ ...props }) => (
     {...props}
   >
     <AddIcon />
-    New List
+    Import
   </Button>
 );
 

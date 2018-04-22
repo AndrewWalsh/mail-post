@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { QUERY_GET_LISTS } from '../../../constants';
 import openDialogCsvImport from './open-dialog-csv-import';
@@ -27,6 +28,17 @@ const onSubmit = (e, listNameValue, callback, reset) => {
 const buttonIsDisabled = (disabled, invalid, listNameValue) =>
   disabled || invalid || listNameValue === '';
 
+const StyledForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const StyledFieldWrapper = styled.div`
+  width: 100%;
+  margin-right: 1em;
+`;
+
 const NewList = ({
   data,
   nameOfList,
@@ -36,14 +48,17 @@ const NewList = ({
   invalid,
   reset,
 }) => (
-  <form onSubmit={e => !disabled && onSubmit(e, listNameValue, MUTATION_IMPORT_CSV, reset)}>
-    <NewListNameField
-      lists={data.lists}
-      name={nameOfList}
-      disabled={disabled}
-    />
+  <StyledForm onSubmit={e => !disabled && onSubmit(e, listNameValue, MUTATION_IMPORT_CSV, reset)}>
+    <StyledFieldWrapper>
+      <NewListNameField
+        lists={data.lists}
+        name={nameOfList}
+        disabled={disabled}
+        fullWidth
+      />
+    </StyledFieldWrapper>
     <NewListButton disabled={buttonIsDisabled(disabled, invalid, listNameValue)} />
-  </form>
+  </StyledForm>
 );
 
 NewList.propTypes = {
