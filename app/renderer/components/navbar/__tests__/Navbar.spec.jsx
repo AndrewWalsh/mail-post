@@ -1,11 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import MockRouter from 'react-mock-router';
+import { mount } from 'enzyme';
 
 import Navbar from '../Navbar';
 
 describe('Navbar', () => {
   it('matches snapshot', async () => {
-    const wrapper = shallow(<Navbar />);
+    const wrapper = mount(
+      <MockRouter>
+        <Navbar />
+      </MockRouter>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
