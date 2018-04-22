@@ -1,8 +1,8 @@
 import React from 'react';
+import td from 'testdouble';
 import { shallow } from 'enzyme';
 
-import NewListNameField from '../NewListNameField';
-import { toBuffer } from 'ip';
+require('testdouble-jest')(td, jest);
 
 const props = {
   name: 'howdy',
@@ -23,7 +23,16 @@ const props = {
     },
   ],
 };
+let NewListNameField;
+let newListHelpers;
 describe('NewListNameField', () => {
+  beforeEach(() => {
+    newListHelpers = td.replace('../new-list-helpers', {
+      validateName: td.function(),
+    });
+    NewListNameField = require('../NewListNameField');
+  });
+
   it('matches snapshot', () => {
     const wrapper = shallow(<NewListNameField {...props} />);
     expect(wrapper).toMatchSnapshot();
@@ -37,5 +46,12 @@ describe('NewListNameField', () => {
       disabled: props.disabled,
     };
     expect(wrapper.props()).toEqual(expect.objectContaining(passedProps));
+  });
+
+  it('when validate is called, validateName is called with spread args', () => {
+    const exampleArgs = ['a', 'b', 'c'];
+    const wrapper = shallow(<NewListNameField {...props} />);
+    wrapper.prop('validate')(...exampleArgs);
+    td.verify(newListHelpers.validateName(props.lists, ...exampleArgs));
   });
 });
