@@ -11,10 +11,10 @@ const reducer = require('../notification');
 
 describe('notification reducer', () => {
   it('returns initial state', () => {
-    const state = { message: 'test' };
-    const action = { type: 'TEST_ACTION', payload: 'anything' };
-    expect(reducer(state, action)).toEqual(state);
+    const state = { message: '', id: uuidStubName };
+    expect(reducer(undefined, {})).toEqual(state);
   });
+
   it('handles NOTIFICATION', () => {
     const state = { message: 'test' };
     const action = { type: NOTIFICATION, payload: 'new message' };
