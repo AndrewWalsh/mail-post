@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import IconButton from 'material-ui/IconButton';
 import MaterialSnackbar from 'material-ui/Snackbar';
 
@@ -12,7 +12,7 @@ const props = {
 
 describe('Snackbar', () => {
   it('matches snapshot', async () => {
-    const wrapper = mount(<Snackbar {...props} />);
+    const wrapper = shallow(<Snackbar {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 

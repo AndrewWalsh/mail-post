@@ -1,97 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Snackbar matches snapshot 1`] = `
-<Snackbar
-  id="an id"
-  message="hello"
->
-  <WithStyles(Snackbar)
-    SnackbarContentProps={
-      Object {
-        "aria-describedby": "message-id",
-      }
+<WithStyles(Snackbar)
+  SnackbarContentProps={
+    Object {
+      "aria-describedby": "message-id",
     }
-    action={
-      Array [
-        <WithStyles(IconButton)
-          aria-label="Close"
-          color="inherit"
-          onClick={[Function]}
-        >
-          <pure(Close) />
-        </WithStyles(IconButton)>,
-      ]
-    }
-    anchorOrigin={
-      Object {
-        "horizontal": "right",
-        "vertical": "bottom",
-      }
-    }
-    autoHideDuration={6000}
-    message={
-      <span
-        id="message-id"
+  }
+  action={
+    Array [
+      <WithStyles(IconButton)
+        aria-label="Close"
+        color="inherit"
+        onClick={[Function]}
       >
-        hello
-      </span>
+        <pure(Close) />
+      </WithStyles(IconButton)>,
+    ]
+  }
+  anchorOrigin={
+    Object {
+      "horizontal": "right",
+      "vertical": "bottom",
     }
-    onClose={[Function]}
-    open={false}
-  >
-    <Snackbar
-      SnackbarContentProps={
-        Object {
-          "aria-describedby": "message-id",
-        }
-      }
-      action={
-        Array [
-          <WithStyles(IconButton)
-            aria-label="Close"
-            color="inherit"
-            onClick={[Function]}
-          >
-            <pure(Close) />
-          </WithStyles(IconButton)>,
-        ]
-      }
-      anchorOrigin={
-        Object {
-          "horizontal": "right",
-          "vertical": "bottom",
-        }
-      }
-      autoHideDuration={6000}
-      classes={
-        Object {
-          "anchorOriginBottomCenter": "MuiSnackbar-anchorOriginBottomCenter-3",
-          "anchorOriginBottomLeft": "MuiSnackbar-anchorOriginBottomLeft-7",
-          "anchorOriginBottomRight": "MuiSnackbar-anchorOriginBottomRight-5",
-          "anchorOriginTopCenter": "MuiSnackbar-anchorOriginTopCenter-2",
-          "anchorOriginTopLeft": "MuiSnackbar-anchorOriginTopLeft-6",
-          "anchorOriginTopRight": "MuiSnackbar-anchorOriginTopRight-4",
-          "root": "MuiSnackbar-root-1",
-        }
-      }
-      disableWindowBlurListener={false}
-      message={
-        <span
-          id="message-id"
-        >
-          hello
-        </span>
-      }
-      onClose={[Function]}
-      open={false}
-      transition={[Function]}
-      transitionDuration={
-        Object {
-          "enter": 225,
-          "exit": 195,
-        }
-      }
-    />
-  </WithStyles(Snackbar)>
-</Snackbar>
+  }
+  autoHideDuration={6000}
+  message={
+    <span
+      id="message-id"
+    >
+      hello
+    </span>
+  }
+  onClose={[Function]}
+  open={false}
+/>
 `;

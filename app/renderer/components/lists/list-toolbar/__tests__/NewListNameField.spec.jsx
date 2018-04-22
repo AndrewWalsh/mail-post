@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import NewListNameField from '../NewListNameField';
+import { toBuffer } from 'ip';
 
 const props = {
   name: 'howdy',
@@ -30,8 +31,11 @@ describe('NewListNameField', () => {
 
   it('passes props', () => {
     const wrapper = shallow(<NewListNameField {...props} />);
-    expect(wrapper.prop('name')).toEqual(props.name);
-    expect(wrapper.prop('disabled')).toEqual(props.disabled);
-    expect(wrapper.prop('anotherProp')).toEqual(props.anotherProp);
+    const passedProps = {
+      name: props.name,
+      anotherProp: props.anotherProp,
+      disabled: props.disabled,
+    };
+    expect(wrapper.props()).toEqual(expect.objectContaining(passedProps));
   });
 });
