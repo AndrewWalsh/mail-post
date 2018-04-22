@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import gql from 'graphql-tag';
 
-export const MutationCreateListCsv = gql`
-  mutation MutationCreateListCsv($csvPath: String!, $name: String!) {
+export const MUTATION_IMPORT_CSV = gql`
+  mutation MUTATION_IMPORT_CSV($csvPath: String!, $name: String!) {
     importCsv(csvPath: $csvPath, name: $name) {
       id
       name

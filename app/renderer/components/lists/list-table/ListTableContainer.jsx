@@ -4,18 +4,18 @@ import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
 
 import {
-  MutationCreateListCsv,
-  QueryGetAllLists,
+  MUTATION_IMPORT_CSV,
+  QUERY_GET_LISTS,
 } from '../../../constants';
 
 import ListTable from './ListTable';
 
 const ListTableContainer = ({ data, ...rest }) => (
-  <Mutation mutation={MutationCreateListCsv}>
-    {(mutationCreateListCsv, { loading }) => (
+  <Mutation mutation={MUTATION_IMPORT_CSV}>
+    {(MUTATION_IMPORT_CSV, { loading }) => (
       <ListTable
         data={data}
-        mutationCreateListCsv={mutationCreateListCsv}
+        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV}
         {...rest}
       />
     )}
@@ -27,5 +27,5 @@ ListTableContainer.propTypes = {
 };
 
 export default compose(
-  graphql(QueryGetAllLists, { options: { fetchPolicy: 'cache-and-network' } }),
+  graphql(QUERY_GET_LISTS, { options: { fetchPolicy: 'cache-and-network' } }),
 )(ListTableContainer);

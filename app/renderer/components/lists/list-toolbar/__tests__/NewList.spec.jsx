@@ -10,15 +10,15 @@ require('testdouble-jest')(td, jest);
 let props;
 let NewList;
 let openDialogCsvImport;
-let mutationCreateListCsv;
+let MUTATION_IMPORT_CSV;
 describe('NewList', () => {
   beforeEach(() => {
-    mutationCreateListCsv = td.function();
+    MUTATION_IMPORT_CSV = td.function();
     props = {
       nameOfList: 'nameOfList',
       listNameValue: 'listNameValue',
       disabled: false,
-      mutationCreateListCsv,
+      MUTATION_IMPORT_CSV,
       data: {
         lists: [],
       },
@@ -53,10 +53,10 @@ describe('NewList', () => {
     td.verify(reset());
   });
 
-  it('when openDialogCsvImport calls back, mutationCreateListCsv is called', () => {
+  it('when openDialogCsvImport calls back, MUTATION_IMPORT_CSV is called', () => {
     const wrapper = shallow(<NewList {...props} />);
     wrapper.simulate('submit', { preventDefault() {} });
-    td.verify(mutationCreateListCsv(td.matchers.anything()));
+    td.verify(MUTATION_IMPORT_CSV(td.matchers.anything()));
   });
 
   it('when disabled is true, NewListNameField disabled prop is true', () => {

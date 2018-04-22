@@ -7,7 +7,7 @@ import NewList from '../NewList';
 describe('NewListWrapper', () => {
   it('passes props to NewList', () => {
     const props = {
-      mutationCreateListCsv: () => {},
+      MUTATION_IMPORT_CSV: () => {},
       nameOfList: 'test',
       listNameValue: 'value',
       disabled: false,

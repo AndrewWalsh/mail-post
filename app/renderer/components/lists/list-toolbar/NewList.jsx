@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { QueryGetAllLists } from '../../../constants';
+import { QUERY_GET_LISTS } from '../../../constants';
 import openDialogCsvImport from './open-dialog-csv-import';
 
 import NewListNameField from './NewListNameField';
@@ -15,9 +15,9 @@ const onSubmit = (e, listNameValue, callback, reset) => {
       name: listNameValue,
     },
     update: (store, { data: { importCsv } }) => {
-      const data = store.readQuery({ query: QueryGetAllLists });
+      const data = store.readQuery({ query: QUERY_GET_LISTS });
       data.lists.push(importCsv);
-      store.writeQuery({ query: QueryGetAllLists, data });
+      store.writeQuery({ query: QUERY_GET_LISTS, data });
     },
   });
   openDialogCsvImport(callbackFormat);
@@ -31,12 +31,12 @@ const NewList = ({
   data,
   nameOfList,
   listNameValue,
-  mutationCreateListCsv,
+  MUTATION_IMPORT_CSV,
   disabled,
   invalid,
   reset,
 }) => (
-  <form onSubmit={e => !disabled && onSubmit(e, listNameValue, mutationCreateListCsv, reset)}>
+  <form onSubmit={e => !disabled && onSubmit(e, listNameValue, MUTATION_IMPORT_CSV, reset)}>
     <NewListNameField
       lists={data.lists}
       name={nameOfList}
@@ -48,7 +48,7 @@ const NewList = ({
 
 NewList.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  mutationCreateListCsv: PropTypes.func.isRequired,
+  MUTATION_IMPORT_CSV: PropTypes.func.isRequired,
   nameOfList: PropTypes.string.isRequired,
   listNameValue: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,

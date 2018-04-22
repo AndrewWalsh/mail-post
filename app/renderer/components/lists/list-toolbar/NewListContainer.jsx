@@ -6,8 +6,8 @@ import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
 
 import {
-  MutationCreateListCsv,
-  QueryGetAllLists,
+  MUTATION_IMPORT_CSV,
+  QUERY_GET_LISTS,
   FORM_NEW_LIST,
 } from '../../../constants';
 
@@ -16,11 +16,11 @@ import NewListWrapper from './NewListWrapper';
 const nameOfList = 'newList';
 
 const NewListContainer = ({ listNameValue, nameOfListProp, ...rest }) => (
-  <Mutation mutation={MutationCreateListCsv}>
-    {(mutationCreateListCsv, { loading }) => (
+  <Mutation mutation={MUTATION_IMPORT_CSV}>
+    {(MUTATION_IMPORT_CSV, { loading }) => (
       <NewListWrapper
         disabled={loading}
-        mutationCreateListCsv={mutationCreateListCsv}
+        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV}
         listNameValue={listNameValue}
         nameOfList={nameOfListProp}
         {...rest}
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
-  graphql(QueryGetAllLists, { options: { fetchPolicy: 'cache-and-network' } }),
+  graphql(QUERY_GET_LISTS, { options: { fetchPolicy: 'cache-and-network' } }),
   reduxForm({
     form: FORM_NEW_LIST,
     destroyOnUnmount: false,
