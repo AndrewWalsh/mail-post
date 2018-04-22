@@ -157,6 +157,7 @@
     "react-mock-router": "^1.0.15",
     "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "spectron": "^3.8.0",
