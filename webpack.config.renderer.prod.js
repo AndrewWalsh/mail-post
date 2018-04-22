@@ -104,6 +104,8 @@ export default merge.smart(baseConfig, {
           options: {
             limit: 10000,
             mimetype: 'application/font-woff',
+            publicPath: './',
+            outputPath: 'renderer/dist',
           },
         },
       },
@@ -115,6 +117,8 @@ export default merge.smart(baseConfig, {
           options: {
             limit: 10000,
             mimetype: 'application/font-woff',
+            publicPath: './',
+            outputPath: 'renderer/dist',
           },
         },
       },
