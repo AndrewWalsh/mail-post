@@ -23,6 +23,7 @@ describe('NewList', () => {
         lists: [],
       },
       invalid: false,
+      reset: () => {},
     };
     openDialogCsvImport = td.replace('../open-dialog-csv-import');
     td.when(openDialogCsvImport())
@@ -45,16 +46,17 @@ describe('NewList', () => {
     td.verify(openDialogCsvImport(td.matchers.anything()));
   });
 
+  it('when form submits calls reset', () => {
+    const reset = td.function();
+    const wrapper = shallow(<NewList {...props} reset={reset} />);
+    wrapper.simulate('submit', { preventDefault() {} });
+    td.verify(reset());
+  });
+
   it('when openDialogCsvImport calls back, mutationCreateListCsv is called', () => {
     const wrapper = shallow(<NewList {...props} />);
     wrapper.simulate('submit', { preventDefault() {} });
-    const variables = {
-      variables: {
-        csvPath: props.nameOfList,
-        name: props.listNameValue,
-      },
-    };
-    td.verify(mutationCreateListCsv(variables));
+    td.verify(mutationCreateListCsv(td.matchers.anything()));
   });
 
   it('when disabled is true, NewListNameField disabled prop is true', () => {

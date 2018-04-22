@@ -15,6 +15,7 @@ describe('NewListWrapper', () => {
         lists: [],
       },
       invalid: false,
+      reset: () => {},
     };
     const wrapper = shallow(<NewListWrapper {...props} />);
     const wrappedNewList = wrapper.dive().find(NewList);
