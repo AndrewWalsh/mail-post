@@ -38,10 +38,7 @@ export default csvPath => new Promise((resolve, reject) => {
           readStream.close();
           break;
         }
-        default: {
-          reject(new Error(err.message));
-          readStream.close();
-        }
+        default:
       }
     })
     .on('data', (data) => {

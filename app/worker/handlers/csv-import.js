@@ -11,5 +11,6 @@ export default ({ debug, importCsv, csvIsValid }) => async (csvPath, name) => {
     debug(`${csvPath} imported`);
   } catch (e) {
     debug(`${e.message} error importing csv`);
+    throw new Error(e);
   }
 };
