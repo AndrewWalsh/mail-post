@@ -17,10 +17,10 @@ const nameOfList = 'newList';
 
 const NewListContainer = ({ listNameValue, nameOfListProp, ...rest }) => (
   <Mutation mutation={MUTATION_IMPORT_CSV}>
-    {(MUTATION_IMPORT_CSV, { loading }) => (
+    {(MUTATION_IMPORT_CSV_PROP, { loading }) => (
       <NewListWrapper
         disabled={loading}
-        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV}
+        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV_PROP}
         listNameValue={listNameValue}
         nameOfList={nameOfListProp}
         {...rest}

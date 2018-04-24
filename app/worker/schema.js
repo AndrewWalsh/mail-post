@@ -43,7 +43,8 @@ const resolvers = {
     },
     deleteLists: async (_, { ids }) => {
       try {
-        await deleteLists(ids);
+        const deleted = await deleteLists(ids);
+        return deleted.map(id => ({ id }));
       } catch (e) {
         throw new Error(e);
       }
