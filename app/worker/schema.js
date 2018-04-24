@@ -1,7 +1,10 @@
 /* eslint-disable camelcase */
 import { makeExecutableSchema } from 'graphql-tools';
 
-import { getLists } from './controllers';
+import {
+  getLists,
+  deleteLists,
+} from './controllers';
 import { csvImport } from './handlers';
 
 const typeDefs = `
@@ -11,12 +14,13 @@ const typeDefs = `
 
   type Mutation {
     importCsv (csvPath: String!, name: String!): List
+    deleteLists (ids: [ID]!): [List]
   }
 
   type List {
     id: ID!
-    name: String!
-    total_subscribers: Int!
+    name: String
+    total_subscribers: Int
   }
 `;
 
@@ -33,6 +37,13 @@ const resolvers = {
         await csvImport(csvPath, name);
         const list = await getListsFormatted(name);
         return list[0];
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    deleteLists: async (_, { ids }) => {
+      try {
+        await deleteLists(ids);
       } catch (e) {
         throw new Error(e);
       }

@@ -10,3 +10,11 @@ export const MUTATION_IMPORT_CSV = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_LISTS = gql`
+  mutation MUTATION_DELETE_LISTS($ids: [ID]!) {
+    deleteLists(ids: $ids) {
+      id
+    }
+  }
+`;

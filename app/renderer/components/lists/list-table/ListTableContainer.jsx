@@ -4,18 +4,18 @@ import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
 
 import {
-  MUTATION_IMPORT_CSV,
+  MUTATION_DELETE_LISTS,
   QUERY_GET_LISTS,
 } from '../../../constants';
 
 import ListTable from './ListTable';
 
 const ListTableContainer = ({ data, ...rest }) => (
-  <Mutation mutation={MUTATION_IMPORT_CSV}>
-    {(MUTATION_IMPORT_CSV, { loading }) => (
+  <Mutation mutation={MUTATION_DELETE_LISTS}>
+    {(MUTATION_DELETE_LISTS, { loading }) => (
       <ListTable
         data={data}
-        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV}
+        MUTATION_DELETE_LISTS={MUTATION_DELETE_LISTS}
         {...rest}
       />
     )}

@@ -7,7 +7,6 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Tooltip from 'material-ui/Tooltip';
 import DeleteIcon from 'material-ui-icons/Delete';
-import FilterListIcon from 'material-ui-icons/FilterList';
 import { lighten } from 'material-ui/styles/colorManipulator';
 
 const toolbarStyles = theme => ({
@@ -36,7 +35,7 @@ const toolbarStyles = theme => ({
 });
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected, classes } = props;
+  const { numSelected, classes, onClickDelete } = props;
 
   return (
     <Toolbar
@@ -55,16 +54,10 @@ const EnhancedTableToolbar = (props) => {
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
+        {numSelected > 0 && (
           <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
+            <IconButton aria-label="Delete" onClick={onClickDelete}>
               <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
             </IconButton>
           </Tooltip>
         )}
@@ -76,6 +69,7 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   numSelected: PropTypes.number.isRequired,
+  onClickDelete: PropTypes.func.isRequired,
 };
 
 const StyledEnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);

@@ -36,6 +36,7 @@ class EnhancedTable extends React.Component {
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
     this.isSelected = this.isSelected.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -100,11 +101,22 @@ class EnhancedTable extends React.Component {
     return this.state.selected.indexOf(id) !== -1;
   }
 
+  handleDelete() {
+    this.props.MUTATION_DELETE_LISTS({
+      variables: {
+        ids: this.state.selected,
+      },
+    });
+  }
+
   render() {
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
     return (
       <Paper>
-        <ListTableToolbar numSelected={selected.length} />
+        <ListTableToolbar
+          numSelected={selected.length}
+          onClickDelete={this.handleDelete}
+        />
         <div>
           <Table>
             <ListTableHeader
@@ -160,6 +172,7 @@ class EnhancedTable extends React.Component {
 
 EnhancedTable.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  MUTATION_DELETE_LISTS: PropTypes.func.isRequired,
 };
 
 export default EnhancedTable;

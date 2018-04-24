@@ -14,7 +14,8 @@ module.exports = {
             model: 'lists',
             key: 'id'
           },
-          allowNull: false
+          allowNull: false,
+          onDelete: 'cascade',
         },
         subscriberId: {
           type: Sequelize.INTEGER,
