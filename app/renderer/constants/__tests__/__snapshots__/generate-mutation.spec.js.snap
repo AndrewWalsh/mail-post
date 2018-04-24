@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate mutations generateImportCsv generateImportCsv snapshot 1`] = `
+Object {
+  "update": [Function],
+  "variables": Object {
+    "csvPath": "a csv path",
+    "name": "a name",
+  },
+}
+`;

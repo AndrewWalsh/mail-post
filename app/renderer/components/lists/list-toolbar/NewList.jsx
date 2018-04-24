@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { QUERY_GET_LISTS } from '../../../constants';
+import { generateImportCsv } from '../../../constants';
 import openDialogCsvImport from './open-dialog-csv-import';
 
 import NewListNameField from './NewListNameField';
@@ -10,17 +10,7 @@ import NewListButton from './NewListButton';
 
 const onSubmit = (e, listNameValue, callback, reset) => {
   e.preventDefault();
-  const callbackFormat = csvPath => callback({
-    variables: {
-      csvPath,
-      name: listNameValue,
-    },
-    update: (store, { data: { importCsv } }) => {
-      const data = store.readQuery({ query: QUERY_GET_LISTS });
-      data.lists.push(importCsv);
-      store.writeQuery({ query: QUERY_GET_LISTS, data });
-    },
-  });
+  const callbackFormat = csvPath => callback(generateImportCsv(csvPath, listNameValue));
   openDialogCsvImport(callbackFormat);
   reset();
 };
