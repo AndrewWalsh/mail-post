@@ -8,19 +8,18 @@ EventEmitter.defaultMaxListeners = 0;
 
 require('testdouble-jest')(td, jest);
 
-const mockCsv = (headers, numRows = 100) => {
-  const rows = [];
-  rows.push(`${headers.join(',')}\n`);
-  for (let i = 0; i < numRows; i += 1) {
-    rows.push(`${uuidv4()}@email.com${headers.slice(1).map(() => ',a').join('')}\n`);
-  }
-  return rows.join('');
-};
-
-const fakeFilePath = '/test/dir/test-csv.csv';
-
-let csvIsValid;
 describe('csv-is-valid', () => {
+  const mockCsv = (headers, numRows = 100) => {
+    const rows = [];
+    rows.push(`${headers.join(',')}\n`);
+    for (let i = 0; i < numRows; i += 1) {
+      rows.push(`${uuidv4()}@email.com${headers.slice(1).map(() => ',a').join('')}\n`);
+    }
+    return rows.join('');
+  };
+  const fakeFilePath = '/test/dir/test-csv.csv';
+  let csvIsValid;
+
   beforeEach(() => {
     csvIsValid = require('../csv-is-valid');
   });

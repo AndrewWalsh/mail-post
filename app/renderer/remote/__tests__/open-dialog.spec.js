@@ -2,11 +2,12 @@ import td from 'testdouble';
 
 require('testdouble-jest')(td, jest);
 
-const filePath = ['mocked file path'];
-let electron;
-let callback;
-let openDialog;
 describe('openDialog', () => {
+  const filePath = ['mocked file path'];
+  let electron;
+  let callback;
+  let openDialog;
+
   beforeEach(() => {
     electron = td.replace('electron', {
       remote: {

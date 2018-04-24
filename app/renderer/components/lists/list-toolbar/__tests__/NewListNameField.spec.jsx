@@ -4,28 +4,29 @@ import { shallow } from 'enzyme';
 
 require('testdouble-jest')(td, jest);
 
-const props = {
-  name: 'howdy',
-  disabled: false,
-  anotherProp: 'hi',
-  lists: [
-    {
-      id: 1,
-      name: 'hi',
-    },
-    {
-      id: 2,
-      name: 'ho',
-    },
-    {
-      id: 1,
-      name: 'hum',
-    },
-  ],
-};
-let NewListNameField;
-let newListHelpers;
 describe('NewListNameField', () => {
+  const props = {
+    name: 'howdy',
+    disabled: false,
+    anotherProp: 'hi',
+    lists: [
+      {
+        id: 1,
+        name: 'hi',
+      },
+      {
+        id: 2,
+        name: 'ho',
+      },
+      {
+        id: 1,
+        name: 'hum',
+      },
+    ],
+  };
+  let NewListNameField;
+  let newListHelpers;
+
   beforeEach(() => {
     newListHelpers = td.replace('../new-list-helpers', {
       validateName: td.function(),

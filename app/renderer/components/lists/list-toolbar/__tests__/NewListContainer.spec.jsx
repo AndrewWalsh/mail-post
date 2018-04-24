@@ -14,9 +14,9 @@ import { apolloClient } from '../../../../utils';
 
 import NewListWrapper from '../NewListWrapper';
 
-const mockStore = configureStore();
-const listNameValue = 'hello';
 describe('NewListContainer', () => {
+  const mockStore = configureStore();
+  const listNameValue = 'hello';
   let wrapper;
   let store;
   let state;

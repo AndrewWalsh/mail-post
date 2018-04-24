@@ -2,12 +2,13 @@ import td from 'testdouble';
 
 require('testdouble-jest')(td, jest);
 
-const csvPath = 'abc';
-const name = 'a name';
-let csvImport;
-let csvIsValid;
-let importCsv;
 describe('csv-import', () => {
+  const csvPath = 'abc';
+  const name = 'a name';
+  let csvImport;
+  let csvIsValid;
+  let importCsv;
+
   beforeEach(() => {
     const noop = () => {};
     importCsv = td.function();

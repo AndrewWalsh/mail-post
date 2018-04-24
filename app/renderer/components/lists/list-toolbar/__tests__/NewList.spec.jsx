@@ -7,11 +7,12 @@ import NewListButton from '../NewListButton';
 
 require('testdouble-jest')(td, jest);
 
-let props;
-let NewList;
-let openDialogCsvImport;
-let MUTATION_IMPORT_CSV;
 describe('NewList', () => {
+  let props;
+  let NewList;
+  let openDialogCsvImport;
+  let MUTATION_IMPORT_CSV;
+
   beforeEach(() => {
     MUTATION_IMPORT_CSV = td.function();
     props = {

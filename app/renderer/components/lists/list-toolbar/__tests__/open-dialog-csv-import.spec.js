@@ -2,17 +2,18 @@ import td from 'testdouble';
 
 require('testdouble-jest')(td, jest);
 
-const dialogOptions = {
-  title: 'Import CSV',
-  filters: [
-    { name: 'CSV', extensions: ['csv'] },
-  ],
-  properties: ['openFile'],
-};
-
-let remote;
-let openDialogCsvImport;
 describe('open-dialog-csv-import', () => {
+  const dialogOptions = {
+    title: 'Import CSV',
+    filters: [
+      { name: 'CSV', extensions: ['csv'] },
+    ],
+    properties: ['openFile'],
+  };
+
+  let remote;
+  let openDialogCsvImport;
+
   beforeEach(() => {
     remote = td.replace('../../../../remote', {
       openDialog: td.function(),

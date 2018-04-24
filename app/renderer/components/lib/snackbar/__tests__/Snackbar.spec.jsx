@@ -5,12 +5,12 @@ import MaterialSnackbar from 'material-ui/Snackbar';
 
 import Snackbar from '../Snackbar';
 
-const props = {
-  id: 'an id',
-  message: 'hello',
-}
-
 describe('Snackbar', () => {
+  const props = {
+    id: 'an id',
+    message: 'hello',
+  };
+
   it('matches snapshot', async () => {
     const wrapper = shallow(<Snackbar {...props} />);
     expect(wrapper).toMatchSnapshot();

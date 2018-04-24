@@ -4,9 +4,8 @@ import configureStore from 'redux-mock-store';
 
 import SnackbarContainer from '../SnackbarContainer';
 
-const mockStore = configureStore();
-
 describe('SnackbarContainer', () => {
+  const mockStore = configureStore();
   let wrapper;
   let store;
   let state;
