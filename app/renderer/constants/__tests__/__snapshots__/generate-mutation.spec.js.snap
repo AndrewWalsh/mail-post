@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generate mutations generateDeleteLists generateDeleteLists snapshot 1`] = `
+Object {
+  "optimisticResponse": Object {
+    "deleteLists": Array [
+      Object {
+        "__typename": "List",
+        "id": Object {
+          "id": "1",
+        },
+      },
+      Object {
+        "__typename": "List",
+        "id": Object {
+          "id": "2",
+        },
+      },
+      Object {
+        "__typename": "List",
+        "id": Object {
+          "id": "3",
+        },
+      },
+    ],
+  },
+  "update": [Function],
+  "variables": Object {
+    "ids": Array [
+      Object {
+        "id": "1",
+      },
+      Object {
+        "id": "2",
+      },
+      Object {
+        "id": "3",
+      },
+    ],
+  },
+}
+`;
+
 exports[`generate mutations generateImportCsv generateImportCsv snapshot 1`] = `
 Object {
   "update": [Function],

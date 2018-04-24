@@ -9,7 +9,7 @@ import Table, {
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 
-import { QUERY_GET_LISTS } from '../../../constants';
+import { generateDeleteLists } from '../../../constants';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 
@@ -104,21 +104,7 @@ class EnhancedTable extends React.Component {
 
   handleDelete() {
     const { selected } = this.state;
-    this.props.MUTATION_DELETE_LISTS({
-      variables: {
-        ids: selected,
-      },
-      optimisticResponse: {
-        deleteLists: selected.map(id => ({ id, __typename: 'List' })),
-      },
-      update: (store, { data: { deleteLists: listIds } }) => {
-        const data = store.readQuery({ query: QUERY_GET_LISTS });
-        const without = val => listIds.some(({ id }) => id !== val);
-        const withoutIds = data.lists.filter(({ id }) => without(id));
-        data.lists = withoutIds;
-        store.writeQuery({ query: QUERY_GET_LISTS, data });
-      },
-    });
+    this.props.MUTATION_DELETE_LISTS(generateDeleteLists(selected));
     this.setState({ selected: [] });
   }
 

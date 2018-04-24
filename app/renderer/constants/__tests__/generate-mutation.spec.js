@@ -1,5 +1,8 @@
 import td from 'testdouble';
-import { generateImportCsv } from '../generate-mutation';
+import {
+  generateImportCsv,
+  generateDeleteLists,
+} from '../generate-mutation';
 import { QUERY_GET_LISTS } from '../queries';
 
 require('testdouble-jest')(td, jest);
@@ -20,7 +23,7 @@ describe('generate mutations', () => {
       expect(generateImportCsv(csvPath, name)).toMatchSnapshot();
     });
 
-    it('generateImportCsv update', () => {
+    it('generateImportCsv update appends list to cache', () => {
       const importCsv = generateImportCsv(csvPath, name);
       const data = {
         importCsv: 'test',
@@ -35,6 +38,35 @@ describe('generate mutations', () => {
       };
       td.when(storeStub.readQuery(expectRead)).thenReturn(cache);
       importCsv.update(storeStub, { data });
+      td.verify(storeStub.writeQuery(expectWrite));
+    });
+  });
+
+  describe('generateDeleteLists', () => {
+    const ids = [
+      { id: '1' },
+      { id: '2' },
+      { id: '3' },
+    ];
+    it('generateDeleteLists snapshot', () => {
+      expect(generateDeleteLists(ids)).toMatchSnapshot();
+    });
+
+    it('generateDeleteLists update deletes list from cache', () => {
+      const deleteLists = generateDeleteLists(ids);
+      const data = {
+        deleteLists: ids.slice(1),
+      };
+      const cache = { lists: ids };
+      const expectRead = { query: QUERY_GET_LISTS };
+      const expectWrite = {
+        ...expectRead,
+        data: {
+          lists: [ids[0]],
+        },
+      };
+      td.when(storeStub.readQuery(expectRead)).thenReturn(cache);
+      deleteLists.update(storeStub, { data });
       td.verify(storeStub.writeQuery(expectWrite));
     });
   });
