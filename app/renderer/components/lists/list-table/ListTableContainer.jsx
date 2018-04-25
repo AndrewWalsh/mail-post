@@ -6,7 +6,7 @@ import { graphql, Mutation } from 'react-apollo';
 import {
   MUTATION_DELETE_LISTS,
   QUERY_GET_LISTS,
-} from '../../../constants';
+} from '../../../graphql';
 
 import ListTable from './ListTable';
 

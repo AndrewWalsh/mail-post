@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
 
+import { FORM_NEW_LIST } from '../../../constants';
 import {
   MUTATION_IMPORT_CSV,
   QUERY_GET_LISTS,
-  FORM_NEW_LIST,
-} from '../../../constants';
+} from '../../../graphql';
 
 import NewListWrapper from './NewListWrapper';
 

@@ -9,7 +9,7 @@ import Table, {
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 
-import { generateDeleteLists } from '../../../constants';
+import { generateDeleteLists } from '../../../graphql';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 

@@ -1,4 +1,4 @@
-import { QUERY_GET_LISTS } from './queries';
+import { QUERY_GET_LISTS } from '../graphql';
 
 export const generateImportCsv = (csvPath, name) => ({
   variables: {

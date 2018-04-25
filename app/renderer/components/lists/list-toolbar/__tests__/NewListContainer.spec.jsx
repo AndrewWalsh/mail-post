@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { ApolloProvider, Query, Mutation } from 'react-apollo';
 import configureStore from 'redux-mock-store';
 
+import { FORM_NEW_LIST } from '../../../../constants';
 import {
   MUTATION_IMPORT_CSV,
   QUERY_GET_LISTS,
-  FORM_NEW_LIST,
-} from '../../../../constants';
+} from '../../../../graphql';
 import NewListContainer from '../NewListContainer';
 import { apolloClient } from '../../../../utils';
 

@@ -3,7 +3,7 @@ import {
   generateImportCsv,
   generateDeleteLists,
 } from '../generate-mutation';
-import { QUERY_GET_LISTS } from '../queries';
+import { QUERY_GET_LISTS } from '../../graphql';
 
 require('testdouble-jest')(td, jest);
 

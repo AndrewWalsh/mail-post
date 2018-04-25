@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { generateImportCsv } from '../../../constants';
+import { generateImportCsv } from '../../../graphql';
 import openDialogCsvImport from './open-dialog-csv-import';
 
 import NewListNameField from './NewListNameField';
