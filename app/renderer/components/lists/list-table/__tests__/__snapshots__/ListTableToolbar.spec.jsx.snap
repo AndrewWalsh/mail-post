@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTableToolbar matches snapshot 1`] = `
+<WithStyles(EnhancedTableToolbar)
+  classes={Object {}}
+  numSelected={0}
+  onClickDelete={[Function]}
+>
+  <EnhancedTableToolbar
+    classes={
+      Object {
+        "actions": "EnhancedTableToolbar-actions-4",
+        "highlight": "EnhancedTableToolbar-highlight-2",
+        "root": "EnhancedTableToolbar-root-1",
+        "spacer": "EnhancedTableToolbar-spacer-3",
+        "title": "EnhancedTableToolbar-title-5",
+      }
+    }
+    numSelected={0}
+    onClickDelete={[Function]}
+  >
+    <WithStyles(Toolbar)
+      className="EnhancedTableToolbar-root-1"
+    >
+      <Toolbar
+        className="EnhancedTableToolbar-root-1"
+        classes={
+          Object {
+            "gutters": "MuiToolbar-gutters-7",
+            "root": "MuiToolbar-root-6",
+          }
+        }
+        disableGutters={false}
+      >
+        <div
+          className="MuiToolbar-root-6 MuiToolbar-gutters-7 EnhancedTableToolbar-root-1"
+        >
+          <div
+            className="EnhancedTableToolbar-title-5"
+          >
+            <WithStyles(Typography)
+              variant="title"
+            >
+              <Typography
+                align="inherit"
+                classes={
+                  Object {
+                    "alignCenter": "MuiTypography-alignCenter-21",
+                    "alignJustify": "MuiTypography-alignJustify-23",
+                    "alignLeft": "MuiTypography-alignLeft-20",
+                    "alignRight": "MuiTypography-alignRight-22",
+                    "body1": "MuiTypography-body1-17",
+                    "body2": "MuiTypography-body2-16",
+                    "button": "MuiTypography-button-19",
+                    "caption": "MuiTypography-caption-18",
+                    "colorError": "MuiTypography-colorError-31",
+                    "colorInherit": "MuiTypography-colorInherit-27",
+                    "colorPrimary": "MuiTypography-colorPrimary-28",
+                    "colorSecondary": "MuiTypography-colorSecondary-29",
+                    "colorTextSecondary": "MuiTypography-colorTextSecondary-30",
+                    "display1": "MuiTypography-display1-12",
+                    "display2": "MuiTypography-display2-11",
+                    "display3": "MuiTypography-display3-10",
+                    "display4": "MuiTypography-display4-9",
+                    "gutterBottom": "MuiTypography-gutterBottom-25",
+                    "headline": "MuiTypography-headline-13",
+                    "noWrap": "MuiTypography-noWrap-24",
+                    "paragraph": "MuiTypography-paragraph-26",
+                    "root": "MuiTypography-root-8",
+                    "subheading": "MuiTypography-subheading-15",
+                    "title": "MuiTypography-title-14",
+                  }
+                }
+                color="default"
+                gutterBottom={false}
+                headlineMapping={
+                  Object {
+                    "body1": "p",
+                    "body2": "aside",
+                    "display1": "h1",
+                    "display2": "h1",
+                    "display3": "h1",
+                    "display4": "h1",
+                    "headline": "h1",
+                    "subheading": "h3",
+                    "title": "h2",
+                  }
+                }
+                noWrap={false}
+                paragraph={false}
+                variant="title"
+              >
+                <h2
+                  className="MuiTypography-root-8 MuiTypography-title-14"
+                >
+                  Lists
+                </h2>
+              </Typography>
+            </WithStyles(Typography)>
+          </div>
+          <div
+            className="EnhancedTableToolbar-spacer-3"
+          />
+          <div
+            className="EnhancedTableToolbar-actions-4"
+          />
+        </div>
+      </Toolbar>
+    </WithStyles(Toolbar)>
+  </EnhancedTableToolbar>
+</WithStyles(EnhancedTableToolbar)>
+`;
