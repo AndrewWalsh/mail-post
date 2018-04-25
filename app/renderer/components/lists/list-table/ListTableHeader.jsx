@@ -38,7 +38,7 @@ class EnhancedTableHead extends Component {
   }
 
   createSortHandler(property) {
-    return event => this.props.onRequestSort(event, property);
+    return e => this.props.onRequestSort(e, property);
   }
 
   render() {
