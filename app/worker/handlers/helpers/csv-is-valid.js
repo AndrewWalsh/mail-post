@@ -31,15 +31,10 @@ export default csvPath => new Promise((resolve, reject) => {
       const err = headerHasError(header);
       if (err) onError(readStream, reject, new Error(err));
     })
-    .on('error', (err) => {
-      switch (err.message) {
-        case 'Row length does not match headers': {
-          reject(new Error(`Line ${lineNumber} has greater or fewer columns than the header`));
-          readStream.close();
-          break;
-        }
-        default:
-      }
+    .on('error', () => {
+      // The only error csv-parser throws is as below
+      reject(new Error(`Line ${lineNumber} has greater or fewer columns than the header`));
+      readStream.close();
     })
     .on('data', (data) => {
       const err = rowHasError(data, lineNumber);
