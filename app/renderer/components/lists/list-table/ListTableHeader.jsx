@@ -10,8 +10,18 @@ import Checkbox from 'material-ui/Checkbox';
 import Tooltip from 'material-ui/Tooltip';
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'total_subscribers', numeric: true, disablePadding: false, label: 'Subscribers' },
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: 'Name',
+  },
+  {
+    id: 'total_subscribers',
+    numeric: true,
+    disablePadding: false,
+    label: 'Subscribers',
+  },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -25,7 +35,13 @@ class EnhancedTableHead extends React.Component {
   }
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const {
+      onSelectAllClick,
+      order,
+      orderBy,
+      numSelected,
+      rowCount,
+    } = this.props;
     return (
       <TableHead>
         <TableRow>

@@ -12,7 +12,7 @@ import ListTable from './ListTable';
 
 const ListTableContainer = ({ data, ...rest }) => (
   <Mutation mutation={MUTATION_DELETE_LISTS}>
-    {(MUTATION_DELETE_LISTS_PROP, { loading }) => (
+    {MUTATION_DELETE_LISTS_PROP => (
       <ListTable
         data={data}
         MUTATION_DELETE_LISTS={MUTATION_DELETE_LISTS_PROP}

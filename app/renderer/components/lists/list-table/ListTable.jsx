@@ -13,12 +13,6 @@ import { generateDeleteLists } from '../../../graphql';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 
-let counter = 0;
-function createData(name, total_subscribers) {
-  counter += 1;
-  return { id: counter, name, total_subscribers };
-}
-
 class EnhancedTable extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -41,7 +35,6 @@ class EnhancedTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const newLists = nextProps.data.lists || [];
     this.setState({ data: nextProps.data.lists });
   }
 
@@ -96,7 +89,7 @@ class EnhancedTable extends React.Component {
 
   handleChangeRowsPerPage(event) {
     this.setState({ rowsPerPage: event.target.value });
-  };
+  }
 
   isSelected(id) {
     return this.state.selected.indexOf(id) !== -1;
@@ -109,7 +102,14 @@ class EnhancedTable extends React.Component {
   }
 
   render() {
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    const {
+      data,
+      order,
+      orderBy,
+      selected,
+      rowsPerPage,
+      page,
+    } = this.state;
     return (
       <Paper>
         <ListTableToolbar
@@ -127,7 +127,7 @@ class EnhancedTable extends React.Component {
               rowCount={data.length}
             />
             <TableBody>
-              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n) => {
+              {data.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((n) => {
                 const isSelected = this.isSelected(n.id);
                 return (
                   <TableRow
