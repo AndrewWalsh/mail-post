@@ -7,6 +7,7 @@ export const QUERY_GET_LISTS = gql`
       id
       name
       total_subscribers
+      createdAt
     }
   }
 `;

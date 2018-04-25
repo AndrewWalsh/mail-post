@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   TableCell,
@@ -9,6 +9,7 @@ import {
 import Checkbox from 'material-ui/Checkbox';
 import Tooltip from 'material-ui/Tooltip';
 
+// The numeric prop in material-ui determines padding
 const columnData = [
   {
     id: 'name',
@@ -22,9 +23,15 @@ const columnData = [
     disablePadding: false,
     label: 'Subscribers',
   },
+  {
+    id: 'createdAt',
+    numeric: true,
+    disablePadding: false,
+    label: 'Created',
+  },
 ];
 
-class EnhancedTableHead extends React.Component {
+class EnhancedTableHead extends Component {
   constructor() {
     super();
     this.createSortHandler = this.createSortHandler.bind(this);
@@ -56,7 +63,7 @@ class EnhancedTableHead extends React.Component {
             <TableCell
               key={column.id}
               numeric={column.numeric}
-              padding={column.disablePadding ? 'none' : 'default'}
+              padding={column.disablePadding ? 'none' : 'dense'}
               sortDirection={orderBy === column.id ? order : false}
             >
               <Tooltip

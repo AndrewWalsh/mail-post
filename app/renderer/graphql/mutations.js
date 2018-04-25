@@ -7,6 +7,7 @@ export const MUTATION_IMPORT_CSV = gql`
       id
       name
       total_subscribers
+      createdAt
     }
   }
 `;

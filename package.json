@@ -196,6 +196,7 @@
     "isemail": "^3.1.1",
     "material-ui": "^1.0.0-beta.37",
     "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.22.1",
     "normalize.css": "^8.0.0",
     "ramda": "^0.25.0",
     "react": "^16.2.0",

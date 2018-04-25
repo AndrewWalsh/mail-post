@@ -21,11 +21,23 @@ const typeDefs = `
     id: ID!
     name: String
     total_subscribers: Int
+    createdAt: String
   }
 `;
 
 const getListsFormatted = listName => getLists(listName).then(lists =>
-  lists.map(({ total_subscribers, name, id }) => ({ total_subscribers, name, id })));
+  lists.map(({
+    total_subscribers,
+    name,
+    id,
+    createdAt,
+  }) =>
+    ({
+      total_subscribers,
+      name,
+      id,
+      createdAt,
+    })));
 
 const resolvers = {
   Query: {

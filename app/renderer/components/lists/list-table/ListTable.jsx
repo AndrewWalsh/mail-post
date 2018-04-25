@@ -8,23 +8,41 @@ import Table, {
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
+import moment from 'moment';
+import { clone } from 'ramda';
 
 import { generateDeleteLists } from '../../../graphql';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 
+const sort = (data, order, orderBy, property) => {
+  let newOrder = 'desc';
+
+  if (orderBy === property && order === 'desc') {
+    newOrder = 'asc';
+  }
+
+  const newData =
+    newOrder === 'desc'
+      ? data.sort((a, b) => (b[property] < a[property] ? -1 : 1))
+      : data.sort((a, b) => (a[property] < b[property] ? -1 : 1));
+
+  return { data: newData, order: newOrder };
+};
+
 class EnhancedTable extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.state = {
-      order: 'asc',
-      orderBy: 'total_subscribers',
+      order: 'desc',
+      orderBy: 'createdAt',
       selected: [],
       data: [],
       page: 0,
       rowsPerPage: 5,
     };
+
     this.handleRequestSort = this.handleRequestSort.bind(this);
     this.handleSelectAllClick = this.handleSelectAllClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -35,23 +53,19 @@ class EnhancedTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ data: nextProps.data.lists });
+    if (this.props.data !== nextProps.data) {
+      const lists = clone(nextProps.data.lists).map(({ createdAt, ...rest }) => ({
+        ...rest,
+        createdAt: new Date(createdAt).getTime(),
+      }));
+      const { data } = sort(lists, this.state.order, this.state.orderBy);
+      this.setState({ data });
+    }
   }
 
   handleRequestSort(event, property) {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    const data =
-      order === 'desc'
-        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1));
-
-    this.setState({ data, order, orderBy });
+    const { data, order } = sort(this.state.data, this.state.order, this.state.orderBy, property);
+    this.setState({ data, order, orderBy: property });
   }
 
   handleSelectAllClick(event, checked) {
@@ -144,6 +158,7 @@ class EnhancedTable extends React.Component {
                     </TableCell>
                     <TableCell padding="none">{n.name}</TableCell>
                     <TableCell numeric>{n.total_subscribers}</TableCell>
+                    <TableCell numeric>{moment(n.createdAt).add(24, 'hours').format('LLL')}</TableCell>
                   </TableRow>
                 );
               })}
