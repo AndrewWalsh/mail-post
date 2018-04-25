@@ -88,6 +88,17 @@ Object {
                   },
                   "selectionSet": undefined,
                 },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "createdAt",
+                  },
+                  "selectionSet": undefined,
+                },
               ],
             },
           },
@@ -141,7 +152,7 @@ Object {
   ],
   "kind": "Document",
   "loc": Object {
-    "end": 171,
+    "end": 187,
     "start": 0,
   },
 }

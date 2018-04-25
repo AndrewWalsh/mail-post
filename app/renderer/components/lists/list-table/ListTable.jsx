@@ -15,7 +15,7 @@ import { generateDeleteLists } from '../../../graphql';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 
-const sort = (data, order, orderBy, property) => {
+const sort = (data, order, orderBy, property = null) => {
   let newOrder = 'desc';
 
   if (orderBy === property && order === 'desc') {
