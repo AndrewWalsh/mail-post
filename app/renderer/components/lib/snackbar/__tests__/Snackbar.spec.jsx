@@ -31,6 +31,12 @@ describe('Snackbar', () => {
     expect(wrapper.find(MaterialSnackbar).prop('open')).toBe(true);
   });
 
+  it('when passed the same id, does not render the snackbar', async () => {
+    const wrapper = mount(<Snackbar {...props} />);
+    wrapper.setProps(Object.assign({}, props, { message: 'no new id' }));
+    expect(wrapper.find(MaterialSnackbar).prop('open')).toBe(false);
+  });
+
   it('when close button is clicked, the snackbar closes', async () => {
     const newMessage = {
       id: 'unique',
