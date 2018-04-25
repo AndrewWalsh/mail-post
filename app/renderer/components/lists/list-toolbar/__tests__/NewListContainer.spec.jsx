@@ -16,7 +16,6 @@ import NewListWrapper from '../NewListWrapper';
 
 describe('NewListContainer', () => {
   const mockStore = configureStore();
-  const listNameValue = 'hello';
   let wrapper;
   let store;
   let state;
@@ -43,8 +42,23 @@ describe('NewListContainer', () => {
 
   it('passes listNameValue and nameOfList from store to NewListWrapper', () => {
     const props = {
-      listNameValue,
+      listNameValue: 'hello',
       nameOfList: 'newList',
+    };
+    expect(wrapper.find(NewListWrapper).props()).toEqual(expect.objectContaining(props));
+  });
+
+  it('when form is not defined in store, listNameValue is ""', () => {
+    store = mockStore({});
+    wrapper = mount(
+      <ApolloProvider client={apolloClient}>
+        <Provider store={store}>
+          <NewListContainer />
+        </Provider>
+      </ApolloProvider>,
+    );
+    const props = {
+      listNameValue: '',
     };
     expect(wrapper.find(NewListWrapper).props()).toEqual(expect.objectContaining(props));
   });
