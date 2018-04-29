@@ -1,4 +1,8 @@
-export const COLOUR_PRIMARY = '#0277BD';
-export const COLOUR_SECONDARY = '#37474F';
-export const COLOUR_BLACK = '#212121';
-export const COLOUR_WHITE = '#FAFAFA';
+import blueGrey from 'material-ui/colors/blueGrey';
+import teal from 'material-ui/colors/teal';
+import grey from 'material-ui/colors/grey';
+
+export const COLOUR_PRIMARY = teal[600];
+export const COLOUR_SECONDARY = blueGrey[900];
+export const COLOUR_BLACK = grey[900];
+export const COLOUR_WHITE = grey[100];

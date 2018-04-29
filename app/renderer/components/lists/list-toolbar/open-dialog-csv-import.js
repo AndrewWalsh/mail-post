@@ -1,5 +1,4 @@
 import { openDialog } from '../../../remote';
-import { CSV_IMPORT } from '../../../../lib/websocket';
 
 const dialogOptions = {
   title: 'Import CSV',
@@ -9,8 +8,8 @@ const dialogOptions = {
   properties: ['openFile'],
 };
 
-const openDialogCsvImport = (listNameValue) => {
-  openDialog(CSV_IMPORT, dialogOptions, { name: listNameValue });
+const openDialogCsvImport = (callback) => {
+  openDialog(dialogOptions, callback);
 };
 
 export default openDialogCsvImport;

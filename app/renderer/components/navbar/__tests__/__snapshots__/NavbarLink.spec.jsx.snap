@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavbarLink matches snapshot 1`] = `
+<Link
+  to="a route"
+>
+  <WithStyles(MenuItem)>
+    name
+    <WithStyles(ListItemSecondaryAction)>
+      <WithStyles(ListItemIcon) />
+    </WithStyles(ListItemSecondaryAction)>
+  </WithStyles(MenuItem)>
+</Link>
+`;

@@ -1,5 +1,9 @@
 sudo: true
 
+branches:
+  only:
+    - master
+
 osx_image: xcode8.3
 
 language: node_js

@@ -3,19 +3,30 @@ import PropTypes from 'prop-types';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'ramda';
+import { graphql, Mutation } from 'react-apollo';
 
 import { FORM_NEW_LIST } from '../../../constants';
+import {
+  MUTATION_IMPORT_CSV,
+  QUERY_GET_LISTS,
+} from '../../../graphql';
 
-import NewList from './NewList';
+import NewListWrapper from './NewListWrapper';
 
 const nameOfList = 'newList';
 
 const NewListContainer = ({ listNameValue, nameOfListProp, ...rest }) => (
-  <NewList
-    listNameValue={listNameValue}
-    nameOfList={nameOfListProp}
-    {...rest}
-  />
+  <Mutation mutation={MUTATION_IMPORT_CSV}>
+    {(MUTATION_IMPORT_CSV_PROP, { loading }) => (
+      <NewListWrapper
+        disabled={loading}
+        MUTATION_IMPORT_CSV={MUTATION_IMPORT_CSV_PROP}
+        listNameValue={listNameValue}
+        nameOfList={nameOfListProp}
+        {...rest}
+      />
+    )}
+  </Mutation>
 );
 
 NewListContainer.propTypes = {
@@ -35,6 +46,7 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
+  graphql(QUERY_GET_LISTS, { options: { fetchPolicy: 'cache-and-network' } }),
   reduxForm({
     form: FORM_NEW_LIST,
     destroyOnUnmount: false,

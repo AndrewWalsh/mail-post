@@ -2,6 +2,7 @@
 
 exports[`Lists matches snapshot 1`] = `
 <React.Fragment>
-  <Connect(ReduxForm) />
+  <Connect(Apollo(ReduxForm)) />
+  <Apollo(ListTableContainer) />
 </React.Fragment>
 `;

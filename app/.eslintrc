@@ -7,6 +7,7 @@
   ],
   "rules": {
     "jsx-a11y/anchor-is-valid": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "function-paren-newline": "off"
   }
 }

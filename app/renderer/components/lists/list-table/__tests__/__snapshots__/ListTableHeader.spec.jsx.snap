@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTableHeader matches snapshot 1`] = `
+<WithStyles(TableHead)>
+  <WithStyles(TableRow)>
+    <WithStyles(TableCell)
+      padding="checkbox"
+    >
+      <WithStyles(Checkbox)
+        checked={true}
+        indeterminate={false}
+        onChange={[Function]}
+      />
+    </WithStyles(TableCell)>
+    <WithStyles(TableCell)
+      key="name"
+      numeric={false}
+      padding="none"
+      sortDirection={false}
+    >
+      <WithStyles(Tooltip)
+        enterDelay={300}
+        placement="bottom-start"
+        title="Sort"
+      >
+        <WithStyles(TableSortLabel)
+          active={false}
+          direction="desc"
+          onClick={[Function]}
+        >
+          Name
+        </WithStyles(TableSortLabel)>
+      </WithStyles(Tooltip)>
+    </WithStyles(TableCell)>
+    <WithStyles(TableCell)
+      key="total_subscribers"
+      numeric={true}
+      padding="dense"
+      sortDirection={false}
+    >
+      <WithStyles(Tooltip)
+        enterDelay={300}
+        placement="bottom-end"
+        title="Sort"
+      >
+        <WithStyles(TableSortLabel)
+          active={false}
+          direction="desc"
+          onClick={[Function]}
+        >
+          Subscribers
+        </WithStyles(TableSortLabel)>
+      </WithStyles(Tooltip)>
+    </WithStyles(TableCell)>
+    <WithStyles(TableCell)
+      key="createdAt"
+      numeric={true}
+      padding="dense"
+      sortDirection={false}
+    >
+      <WithStyles(Tooltip)
+        enterDelay={300}
+        placement="bottom-end"
+        title="Sort"
+      >
+        <WithStyles(TableSortLabel)
+          active={false}
+          direction="desc"
+          onClick={[Function]}
+        >
+          Created
+        </WithStyles(TableSortLabel)>
+      </WithStyles(Tooltip)>
+    </WithStyles(TableCell)>
+  </WithStyles(TableRow)>
+</WithStyles(TableHead)>
+`;

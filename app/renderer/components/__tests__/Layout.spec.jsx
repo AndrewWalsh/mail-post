@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 
 import Layout from '../Layout';
 
-const TestComponent = () => <div>hello</div>;
 describe('Layout', () => {
+  const TestComponent = () => <div>hello</div>;
   it('renders children in the main element', async () => {
     const wrapper = shallow(<Layout><TestComponent /></Layout>);
 

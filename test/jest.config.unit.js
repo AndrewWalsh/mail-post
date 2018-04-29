@@ -20,6 +20,7 @@ module.exports = Object.assign(
       '!app/renderer/*.{js,jsx}', // Ignore root files
       /* Worker files */
       'app/worker/**/*.{js,jsx}',
+      '!app/worker/*.{js,jsx}', // Ignore root files
       '!app/worker/controllers/**/*.{js,jsx}', // Covered by integration tests
       /* Common ignore */
       '!**/utils/**/*', // Small helper files not worth covering

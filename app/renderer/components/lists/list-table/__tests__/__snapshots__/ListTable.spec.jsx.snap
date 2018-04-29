@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTable matches snapshot 1`] = `
+<WithStyles(Paper)>
+  <WithStyles(EnhancedTableToolbar)
+    numSelected={0}
+    onClickDelete={[Function]}
+  />
+  <div>
+    <WithStyles(Table)>
+      <EnhancedTableHead
+        numSelected={0}
+        onRequestSort={[Function]}
+        onSelectAllClick={[Function]}
+        order="desc"
+        orderBy="createdAt"
+        rowCount={2}
+      />
+      <WithStyles(TableBody)>
+        <WithStyles(TableRow)
+          aria-checked={false}
+          hover={true}
+          key="1"
+          onClick={[Function]}
+          role="checkbox"
+          selected={false}
+          tabIndex={-1}
+        >
+          <WithStyles(TableCell)
+            padding="checkbox"
+          >
+            <WithStyles(Checkbox)
+              checked={false}
+            />
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            padding="none"
+          >
+            name
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            numeric={true}
+          >
+            10
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            numeric={true}
+          >
+            March 26, 2015 6:30 PM
+          </WithStyles(TableCell)>
+        </WithStyles(TableRow)>
+        <WithStyles(TableRow)
+          aria-checked={false}
+          hover={true}
+          key="2"
+          onClick={[Function]}
+          role="checkbox"
+          selected={false}
+          tabIndex={-1}
+        >
+          <WithStyles(TableCell)
+            padding="checkbox"
+          >
+            <WithStyles(Checkbox)
+              checked={false}
+            />
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            padding="none"
+          >
+            name
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            numeric={true}
+          >
+            10
+          </WithStyles(TableCell)>
+          <WithStyles(TableCell)
+            numeric={true}
+          >
+            March 26, 2015 6:30 PM
+          </WithStyles(TableCell)>
+        </WithStyles(TableRow)>
+      </WithStyles(TableBody)>
+    </WithStyles(Table)>
+  </div>
+  <WithStyles(TablePagination)
+    backIconButtonProps={
+      Object {
+        "aria-label": "Previous Page",
+      }
+    }
+    component="div"
+    count={2}
+    nextIconButtonProps={
+      Object {
+        "aria-label": "Next Page",
+      }
+    }
+    onChangePage={[Function]}
+    onChangeRowsPerPage={[Function]}
+    page={0}
+    rowsPerPage={5}
+  />
+</WithStyles(Paper)>
+`;

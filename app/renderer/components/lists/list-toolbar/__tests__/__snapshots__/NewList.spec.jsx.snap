@@ -1,14 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewList matches snapshot 1`] = `
-<form
+<NewList__StyledForm
   onSubmit={[Function]}
 >
-  <Field
-    component={[Function]}
-    name="nameOfList"
-    placeholder="List name"
+  <NewList__StyledFieldWrapper>
+    <NewListNameField
+      disabled={false}
+      fullWidth={true}
+      lists={Array []}
+      name="nameOfList"
+    />
+  </NewList__StyledFieldWrapper>
+  <NewList
+    disabled={false}
   />
-  <NewList />
-</form>
+</NewList__StyledForm>
 `;
