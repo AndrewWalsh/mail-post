@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Table, {
   TableBody,
@@ -11,26 +11,12 @@ import Checkbox from 'material-ui/Checkbox';
 import moment from 'moment';
 import { clone } from 'ramda';
 
+import sort from './sort-data';
 import { generateDeleteLists } from '../../../graphql';
 import ListTableHeader from './ListTableHeader';
 import ListTableToolbar from './ListTableToolbar';
 
-const sort = (data, order, orderBy, property = null) => {
-  let newOrder = 'desc';
-
-  if (orderBy === property && order === 'desc') {
-    newOrder = 'asc';
-  }
-
-  const newData =
-    newOrder === 'desc'
-      ? data.sort((a, b) => (b[property] < a[property] ? -1 : 1))
-      : data.sort((a, b) => (a[property] < b[property] ? -1 : 1));
-
-  return { data: newData, order: newOrder };
-};
-
-class EnhancedTable extends React.Component {
+class EnhancedTable extends Component {
   constructor(props) {
     super(props);
 
@@ -38,7 +24,7 @@ class EnhancedTable extends React.Component {
       order: 'desc',
       orderBy: 'createdAt',
       selected: [],
-      data: [],
+      data: props.data && props.data.lists ? props.data.lists : [],
       page: 0,
       rowsPerPage: 5,
     };
