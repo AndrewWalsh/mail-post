@@ -3,11 +3,11 @@ import td from 'testdouble';
 import { mount } from 'enzyme';
 import IconButton from 'material-ui/IconButton';
 
-import ListTableToolbar from '../ListTableToolbar';
+import TableToolbar from '../TableToolbar';
 
 require('testdouble-jest')(td, jest);
 
-describe('ListTableToolbar', () => {
+describe('TableToolbar', () => {
   let props;
   let wrapper;
 
@@ -17,7 +17,7 @@ describe('ListTableToolbar', () => {
       numSelected: 0,
       onClickDelete: td.function(),
     };
-    wrapper = mount(<ListTableToolbar {...props} />);
+    wrapper = mount(<TableToolbar {...props} />);
   });
 
   it('matches snapshot', async () => {
@@ -30,13 +30,13 @@ describe('ListTableToolbar', () => {
 
   it('when numSelected > 0, renders "{n} selected" heading', async () => {
     const numSelected = 8;
-    wrapper = mount(<ListTableToolbar {...props} numSelected={numSelected} />);
+    wrapper = mount(<TableToolbar {...props} numSelected={numSelected} />);
     expect(wrapper.text().includes(`${numSelected} selected`)).toBe(true);
   });
 
   it('when numSelected > 0 AND IconButton is clicked, calls prop onClickDelete', async () => {
     const numSelected = 8;
-    wrapper = mount(<ListTableToolbar {...props} numSelected={numSelected} />);
+    wrapper = mount(<TableToolbar {...props} numSelected={numSelected} />);
     wrapper.find(IconButton).simulate('click');
     td.verify(props.onClickDelete(td.matchers.anything()));
   });

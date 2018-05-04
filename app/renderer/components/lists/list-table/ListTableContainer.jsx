@@ -8,12 +8,12 @@ import {
   QUERY_GET_LISTS,
 } from '../../../graphql';
 
-import ListTable from './ListTable';
+import { Table } from '../../lib';
 
 const ListTableContainer = ({ data, ...rest }) => (
   <Mutation mutation={MUTATION_DELETE_LISTS}>
     {MUTATION_DELETE_LISTS_PROP => (
-      <ListTable
+      <Table
         data={data}
         MUTATION_DELETE_LISTS={MUTATION_DELETE_LISTS_PROP}
         {...rest}

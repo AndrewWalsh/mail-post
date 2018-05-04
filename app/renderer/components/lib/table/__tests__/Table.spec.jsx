@@ -6,12 +6,12 @@ import {
   TablePagination,
 } from 'material-ui/Table';
 
-import ListTable from '../ListTable';
-import ListTableToolbar from '../ListTableToolbar';
+import Table from '../Table';
+import TableToolbar from '../TableToolbar';
 
 require('testdouble-jest')(td, jest);
 
-describe('ListTable', () => {
+describe('Table', () => {
   let props;
   let wrapper;
 
@@ -35,15 +35,15 @@ describe('ListTable', () => {
       },
       MUTATION_DELETE_LISTS: td.function(),
     };
-    wrapper = shallow(<ListTable {...props} />);
+    wrapper = shallow(<Table {...props} />);
   });
 
   it('matches snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('when ListTableToolbar onClickDelete prop is called, calls prop MUTATION_DELETE_LISTS', () => {
-    wrapper.find(ListTableToolbar).prop('onClickDelete')();
+  it('when TableToolbar onClickDelete prop is called, calls prop MUTATION_DELETE_LISTS', () => {
+    wrapper.find(TableToolbar).prop('onClickDelete')();
     td.verify(props.MUTATION_DELETE_LISTS(td.matchers.anything()));
   });
 

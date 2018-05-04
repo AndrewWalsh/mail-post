@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListTable matches snapshot 1`] = `
+exports[`Table matches snapshot 1`] = `
 <WithStyles(Paper)>
   <WithStyles(EnhancedTableToolbar)
     numSelected={0}

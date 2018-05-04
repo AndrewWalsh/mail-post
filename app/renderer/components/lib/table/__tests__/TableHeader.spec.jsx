@@ -4,11 +4,11 @@ import { shallow } from 'enzyme';
 import { TableSortLabel, TableCell } from 'material-ui/Table';
 import Checkbox from 'material-ui/Checkbox';
 
-import ListTableHeader from '../ListTableHeader';
+import TableHeader from '../TableHeader';
 
 require('testdouble-jest')(td, jest);
 
-describe('ListTableHeader', () => {
+describe('TableHeader', () => {
   let props;
   let wrapper;
 
@@ -21,7 +21,7 @@ describe('ListTableHeader', () => {
       orderBy: 'id',
       rowCount: 0,
     };
-    wrapper = shallow(<ListTableHeader {...props} />);
+    wrapper = shallow(<TableHeader {...props} />);
   });
 
   it('matches snapshot', async () => {
@@ -42,7 +42,7 @@ describe('ListTableHeader', () => {
     const numSelected = 2;
     const rowCount = 1;
     wrapper = shallow(
-      <ListTableHeader
+      <TableHeader
         {...props}
         numSelected={numSelected}
         rowCount={rowCount}
@@ -55,7 +55,7 @@ describe('ListTableHeader', () => {
     const numSelected = 1;
     const rowCount = 2;
     wrapper = shallow(
-      <ListTableHeader
+      <TableHeader
         {...props}
         numSelected={numSelected}
         rowCount={rowCount}
@@ -68,7 +68,7 @@ describe('ListTableHeader', () => {
     const orderBy = 'name';
     const label = 'Name';
     wrapper = shallow(
-      <ListTableHeader
+      <TableHeader
         {...props}
         orderBy={orderBy}
       />,

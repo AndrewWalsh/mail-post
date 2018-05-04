@@ -13,8 +13,8 @@ import { clone } from 'ramda';
 
 import sort from './sort-data';
 import { generateDeleteLists } from '../../../graphql';
-import ListTableHeader from './ListTableHeader';
-import ListTableToolbar from './ListTableToolbar';
+import TableHeader from './TableHeader';
+import TableToolbar from './TableToolbar';
 
 class EnhancedTable extends Component {
   constructor(props) {
@@ -112,13 +112,13 @@ class EnhancedTable extends Component {
     } = this.state;
     return (
       <Paper>
-        <ListTableToolbar
+        <TableToolbar
           numSelected={selected.length}
           onClickDelete={this.handleDelete}
         />
         <div>
           <Table>
-            <ListTableHeader
+            <TableHeader
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
