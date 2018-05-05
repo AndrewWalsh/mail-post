@@ -29,7 +29,12 @@ const toolbarStyles = theme => ({
 });
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected, classes, onClickDelete } = props;
+  const {
+    numSelected,
+    classes,
+    onClickDelete,
+    title,
+  } = props;
 
   return (
     <Toolbar
@@ -43,7 +48,7 @@ const EnhancedTableToolbar = (props) => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title">Lists</Typography>
+          <Typography variant="title">{title}</Typography>
         )}
       </div>
       <div className={classes.spacer} />
@@ -64,6 +69,7 @@ EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   numSelected: PropTypes.number.isRequired,
   onClickDelete: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 const StyledEnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);

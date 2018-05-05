@@ -33,7 +33,7 @@ describe('Table', () => {
           },
         ],
       },
-      MUTATION_DELETE_LISTS: td.function(),
+      deleteItem: td.function(),
     };
     wrapper = shallow(<Table {...props} />);
   });
@@ -42,9 +42,9 @@ describe('Table', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('when TableToolbar onClickDelete prop is called, calls prop MUTATION_DELETE_LISTS', () => {
+  it('when TableToolbar onClickDelete prop is called, calls prop deleteItem', () => {
     wrapper.find(TableToolbar).prop('onClickDelete')();
-    td.verify(props.MUTATION_DELETE_LISTS(td.matchers.anything()));
+    td.verify(props.deleteItem(td.matchers.anything()));
   });
 
   it('when TableRow is selected, selected state contains item', () => {

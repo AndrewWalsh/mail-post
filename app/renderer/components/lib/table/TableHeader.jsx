@@ -9,28 +9,6 @@ import {
 import Checkbox from 'material-ui/Checkbox';
 import Tooltip from 'material-ui/Tooltip';
 
-// The numeric prop in material-ui determines padding
-const columnData = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Name',
-  },
-  {
-    id: 'total_subscribers',
-    numeric: true,
-    disablePadding: false,
-    label: 'Subscribers',
-  },
-  {
-    id: 'createdAt',
-    numeric: true,
-    disablePadding: false,
-    label: 'Created',
-  },
-];
-
 class EnhancedTableHead extends Component {
   constructor() {
     super();
@@ -48,6 +26,7 @@ class EnhancedTableHead extends Component {
       orderBy,
       numSelected,
       rowCount,
+      columnData,
     } = this.props;
     return (
       <TableHead>
@@ -94,6 +73,12 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  columnData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    numeric: PropTypes.bool.isRequired,
+    disablePadding: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export default EnhancedTableHead;
