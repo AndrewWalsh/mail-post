@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuList } from 'material-ui/Menu';
+import List from 'material-ui/List';
 import DashboardIcon from 'material-ui-icons/Dashboard';
 import EmailIcon from 'material-ui-icons/Email';
 import ListIcon from 'material-ui-icons/List';
@@ -42,7 +42,7 @@ const Navbar = () => (
       </h1>
     </HeaderTitle>
     <Divider />
-    <MenuList style={{ padding: 0 }}>
+    <List>
       <NavbarLink
         to={ROUTE_DASHBOARD}
         text="Dashboard"
@@ -70,7 +70,7 @@ const Navbar = () => (
         renderIcon={() => <SettingsIcon />}
         data-test="nav-settings"
       />
-    </MenuList>
+    </List>
   </MuiThemeProvider>
 );
 
