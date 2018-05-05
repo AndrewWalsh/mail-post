@@ -5,6 +5,7 @@ exports[`TableToolbar matches snapshot 1`] = `
   classes={Object {}}
   numSelected={0}
   onClickDelete={[Function]}
+  title="Test Table"
 >
   <EnhancedTableToolbar
     classes={
@@ -18,6 +19,7 @@ exports[`TableToolbar matches snapshot 1`] = `
     }
     numSelected={0}
     onClickDelete={[Function]}
+    title="Test Table"
   >
     <WithStyles(Toolbar)
       className="EnhancedTableToolbar-root-1"
@@ -93,7 +95,7 @@ exports[`TableToolbar matches snapshot 1`] = `
                 <h2
                   className="MuiTypography-root-8 MuiTypography-title-14"
                 >
-                  Lists
+                  Test Table
                 </h2>
               </Typography>
             </WithStyles(Typography)>

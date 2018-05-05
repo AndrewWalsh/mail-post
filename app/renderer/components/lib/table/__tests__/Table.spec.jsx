@@ -17,23 +17,42 @@ describe('Table', () => {
 
   beforeEach(() => {
     props = {
-      data: {
-        lists: [
-          {
-            id: '1',
-            name: 'name',
-            total_subscribers: '10',
-            createdAt: '2015-03-25T12:00:00-06:30',
-          },
-          {
-            id: '2',
-            name: 'name',
-            total_subscribers: '10',
-            createdAt: '2015-03-25T12:00:00-06:30',
-          },
-        ],
-      },
+      data: [
+        {
+          id: '1',
+          name: 'name',
+          total_subscribers: '10',
+          createdAt: '2015-03-25T12:00:00-06:30',
+        },
+        {
+          id: '2',
+          name: 'name',
+          total_subscribers: '10',
+          createdAt: '2015-03-25T12:00:00-06:30',
+        },
+      ],
+      columnData: [
+        {
+          id: 'name',
+          numeric: false,
+          disablePadding: true,
+          label: 'Name',
+        },
+        {
+          id: 'total_subscribers',
+          numeric: true,
+          disablePadding: false,
+          label: 'Subscribers',
+        },
+        {
+          id: 'createdAt',
+          numeric: true,
+          disablePadding: false,
+          label: 'Created',
+        },
+      ],
       deleteItem: td.function(),
+      title: 'Test Table',
     };
     wrapper = shallow(<Table {...props} />);
   });
@@ -49,7 +68,7 @@ describe('Table', () => {
 
   it('when TableRow is selected, selected state contains item', () => {
     wrapper.find(TableRow).first().simulate('click');
-    expect(wrapper.state('selected')).toEqual([props.data.lists[0].id]);
+    expect(wrapper.state('selected')).toEqual([props.data[0].id]);
   });
 
   it('when TableRow is unselected, selected state does not contain item', () => {
@@ -60,7 +79,7 @@ describe('Table', () => {
 
   it('when multiple TableRows are selected, selected state contains items', () => {
     wrapper.find(TableRow).forEach(n => n.simulate('click'));
-    const ids = props.data.lists.map(({ id }) => id);
+    const ids = props.data.map(({ id }) => id);
     expect(wrapper.state('selected')).toEqual(ids);
   });
 

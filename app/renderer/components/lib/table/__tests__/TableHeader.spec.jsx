@@ -20,6 +20,26 @@ describe('TableHeader', () => {
       order: 'desc',
       orderBy: 'id',
       rowCount: 0,
+      columnData: [
+        {
+          id: 'name',
+          numeric: false,
+          disablePadding: true,
+          label: 'Name',
+        },
+        {
+          id: 'total_subscribers',
+          numeric: true,
+          disablePadding: false,
+          label: 'Subscribers',
+        },
+        {
+          id: 'createdAt',
+          numeric: true,
+          disablePadding: false,
+          label: 'Created',
+        },
+      ],
     };
     wrapper = shallow(<TableHeader {...props} />);
   });

@@ -16,6 +16,7 @@ describe('TableToolbar', () => {
       classes: {},
       numSelected: 0,
       onClickDelete: td.function(),
+      title: 'Test Table',
     };
     wrapper = mount(<TableToolbar {...props} />);
   });
@@ -24,8 +25,8 @@ describe('TableToolbar', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('when numSelected is NOT > 0, renders "Lists" heading', async () => {
-    expect(wrapper.text().includes('Lists')).toBe(true);
+  it('when numSelected is NOT > 0, renders title', async () => {
+    expect(wrapper.text().includes(props.title)).toBe(true);
   });
 
   it('when numSelected > 0, renders "{n} selected" heading', async () => {
