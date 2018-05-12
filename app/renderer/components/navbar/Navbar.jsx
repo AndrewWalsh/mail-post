@@ -55,7 +55,12 @@ const Navbar = () => (
         text="Campaigns"
         renderIcon={() => <EmailIcon />}
         data-test="nav-campaigns"
-      />
+      >
+        <NavbarLink
+          to={ROUTE_CAMPAIGNS}
+          text="New Campaign"
+        />
+      </NavbarLink>
       <Divider />
       <NavbarLink
         to={ROUTE_LISTS}
