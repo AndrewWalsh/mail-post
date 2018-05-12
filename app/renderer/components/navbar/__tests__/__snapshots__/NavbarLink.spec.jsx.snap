@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavbarLink matches snapshot 1`] = `
-<Link
+<NavbarLink
+  classes={
+    Object {
+      "ListItem": "NavbarLink-ListItem-1",
+      "ListItemIcon": "NavbarLink-ListItemIcon-3",
+      "ListItemNested": "NavbarLink-ListItemNested-2",
+    }
+  }
+  nested={null}
+  renderIcon={null}
+  text="name"
   to="a route"
->
-  <WithStyles(MenuItem)>
-    name
-    <WithStyles(ListItemSecondaryAction)>
-      <WithStyles(ListItemIcon) />
-    </WithStyles(ListItemSecondaryAction)>
-  </WithStyles(MenuItem)>
-</Link>
+/>
 `;
