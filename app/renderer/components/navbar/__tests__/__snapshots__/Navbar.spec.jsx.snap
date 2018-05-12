@@ -915,7 +915,7 @@ exports[`Navbar matches snapshot 1`] = `
                   key=".0"
                   nested={1}
                   text="New Campaign"
-                  to="/campaigns"
+                  to="/new-campaign"
                 >
                   <NavbarLink
                     classes={
@@ -928,18 +928,18 @@ exports[`Navbar matches snapshot 1`] = `
                     nested={1}
                     renderIcon={null}
                     text="New Campaign"
-                    to="/campaigns"
+                    to="/new-campaign"
                   >
                     <Link
-                      to="/campaigns"
+                      to="/new-campaign"
                     >
                       <Link__StyledLink
-                        to="/campaigns"
+                        to="/new-campaign"
                       >
                         <Link
                           className="Link__StyledLink-YoEat jpoEPZ"
                           replace={false}
-                          to="/campaigns"
+                          to="/new-campaign"
                         >
                           <a
                             className="Link__StyledLink-YoEat jpoEPZ"

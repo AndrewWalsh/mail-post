@@ -13,6 +13,7 @@ import NavbarLink from './NavbarLink';
 import {
   ROUTE_DASHBOARD,
   ROUTE_CAMPAIGNS,
+  ROUTE_NEW_CAMPAIGN,
   ROUTE_SETTINGS,
   ROUTE_LISTS,
 } from '../../constants';
@@ -57,7 +58,7 @@ const Navbar = () => (
         data-test="nav-campaigns"
       >
         <NavbarLink
-          to={ROUTE_CAMPAIGNS}
+          to={ROUTE_NEW_CAMPAIGN}
           text="New Campaign"
         />
       </NavbarLink>
