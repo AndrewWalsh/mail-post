@@ -4,26 +4,38 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  ListItemSecondaryAction,
 } from 'material-ui/List';
+import { withStyles } from 'material-ui/styles';
+
 import { Link } from '../lib';
+
+const styles = {
+  ListItem: {
+    padding: '12px 16px',
+  },
+  ListItemIcon: {
+    margin: '0px',
+  },
+};
+
 
 const NavbarLink = ({
   to,
   text,
   renderIcon,
   children,
+  classes,
   ...rest
 }) => (
   <Fragment>
     <Link to={to} {...rest}>
-      <ListItem button>
-        <ListItemText>{text}</ListItemText>
-        <ListItemSecondaryAction>
-          <ListItemIcon>
-            {renderIcon()}
-          </ListItemIcon>
-        </ListItemSecondaryAction>
+      <ListItem button classes={{ root: classes.ListItem }}>
+        <ListItemIcon classes={{ root: classes.ListItemIcon }}>
+          {renderIcon()}
+        </ListItemIcon>
+        <ListItemText>
+          {text}
+        </ListItemText>
       </ListItem>
     </Link>
     {children}
@@ -34,6 +46,7 @@ NavbarLink.propTypes = {
   to: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   renderIcon: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.node,
 };
 
@@ -41,4 +54,4 @@ NavbarLink.defaultProps = {
   children: null,
 };
 
-export default NavbarLink;
+export default withStyles(styles)(NavbarLink);
