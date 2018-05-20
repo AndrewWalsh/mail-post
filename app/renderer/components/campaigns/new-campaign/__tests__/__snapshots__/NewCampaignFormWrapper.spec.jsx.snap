@@ -2,6 +2,6 @@
 
 exports[`NewCampaignFormWrapper matches snapshot 1`] = `
 <WithStyles(Paper)>
-  NewCampaign
+  <WithStyles(NewCampaign) />
 </WithStyles(Paper)>
 `;
