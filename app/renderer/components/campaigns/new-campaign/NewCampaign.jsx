@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 
+import NewCampaignFormWrapper from './NewCampaignFormWrapper';
+
 const NewCampaign = () => (
   <Fragment>
-    NewCampaign
+    <NewCampaignFormWrapper />
   </Fragment>
 );
 
