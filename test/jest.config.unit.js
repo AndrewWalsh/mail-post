@@ -21,7 +21,6 @@ module.exports = Object.assign(
       /* Worker files */
       'app/worker/**/*.{js,jsx}',
       '!app/worker/*.{js,jsx}', // Ignore root files
-      '!app/worker/controllers/**/*.{js,jsx}', // Covered by integration tests
       /* Common ignore */
       '!**/utils/**/*', // Small helper files not worth covering
       '!**/*.prod.{js,jsx}', // Production bundles

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { makeExecutableSchema } from 'graphql-tools';
+import { head } from 'ramda';
 
 import {
   getLists,
@@ -48,7 +49,7 @@ const resolvers = {
       try {
         await csvImport(csvPath, name);
         const list = await getListsFormatted(name);
-        return list[0];
+        return head(list);
       } catch (e) {
         throw new Error(e);
       }
