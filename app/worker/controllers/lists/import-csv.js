@@ -20,12 +20,13 @@ const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) =>
           if (!instance) {
             return Model.create({ ...values });
           }
-          /* eslint-enable no-param-reassign */
-          if (values.template_data) {
-            if (instance.template_data) instance.template_data = { ...instance.template_data, ...values.template_data };
-            else instance.template_data = values.template_data;
-          }
           /* eslint-disable no-param-reassign */
+          if (values.template_data) {
+            if (instance.template_data) {
+              instance.template_data = { ...instance.template_data, ...values.template_data };
+            } else instance.template_data = values.template_data;
+          }
+          /* eslint-enable no-param-reassign */
           return instance.save();
         })
         .then(instance => instance.addLists(belongsToInstance))),

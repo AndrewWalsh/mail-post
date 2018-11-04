@@ -1,3 +1,4 @@
-import { configureStore, history } from './configure-store';
+import { configureStore, history as historyModule } from './configure-store';
 
-export default { store: configureStore(), history };
+export const store = configureStore();
+export const history = historyModule;

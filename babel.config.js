@@ -32,7 +32,7 @@ module.exports = (api) => {
       require('@babel/plugin-proposal-object-rest-spread'),
 
       ...(development ? developmentPlugins : productionPlugins),
-    ]
+    ],
   };
 };
 
