@@ -1,39 +1,34 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import td from 'testdouble';
+import { last } from 'ramda';
 
+import NewList from '../NewList';
+import openDialogCsvImport from '../open-dialog-csv-import';
 import NewListNameField from '../NewListNameField';
 import NewListButton from '../NewListButton';
 
-require('testdouble-jest')(td, jest);
+jest.mock('../open-dialog-csv-import');
+openDialogCsvImport.mockImplementation(() => (...args) => last(args)());
 
 describe('NewList', () => {
   let props;
-  let NewList;
-  let openDialogCsvImport;
-  let MUTATION_IMPORT_CSV;
 
   beforeEach(() => {
-    MUTATION_IMPORT_CSV = td.function();
     props = {
       nameOfList: 'nameOfList',
       listNameValue: 'listNameValue',
       disabled: false,
-      MUTATION_IMPORT_CSV,
+      MUTATION_IMPORT_CSV: jest.fn(),
       data: {
         lists: [],
       },
       invalid: false,
       reset: () => {},
     };
-    openDialogCsvImport = td.replace('../open-dialog-csv-import');
-    td.when(openDialogCsvImport())
-      .thenCallback(props.nameOfList);
-    NewList = require('../NewList');
   });
 
   afterEach(() => {
-    td.reset();
+    jest.resetAllMocks();
   });
 
   it('matches snapshot', () => {
@@ -44,20 +39,14 @@ describe('NewList', () => {
   it('when form submits calls openDialogCsvImport', () => {
     const wrapper = shallow(<NewList {...props} />);
     wrapper.simulate('submit', { preventDefault() {} });
-    td.verify(openDialogCsvImport(td.matchers.anything()));
+    expect(openDialogCsvImport).toHaveBeenCalled();
   });
 
   it('when form submits calls reset', () => {
-    const reset = td.function();
+    const reset = jest.fn();
     const wrapper = shallow(<NewList {...props} reset={reset} />);
     wrapper.simulate('submit', { preventDefault() {} });
-    td.verify(reset());
-  });
-
-  it('when openDialogCsvImport calls back, MUTATION_IMPORT_CSV is called', () => {
-    const wrapper = shallow(<NewList {...props} />);
-    wrapper.simulate('submit', { preventDefault() {} });
-    td.verify(MUTATION_IMPORT_CSV(td.matchers.anything()));
+    expect(reset).toHaveBeenCalled();
   });
 
   it('when disabled is true, NewListNameField disabled prop is true', () => {

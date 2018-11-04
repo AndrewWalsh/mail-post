@@ -4,7 +4,7 @@ exports[`TableToolbar matches snapshot 1`] = `
 <WithStyles(EnhancedTableToolbar)
   classes={Object {}}
   numSelected={0}
-  onClickDelete={[Function]}
+  onClickDelete={[MockFunction]}
   title="Test Table"
 >
   <EnhancedTableToolbar
@@ -18,7 +18,7 @@ exports[`TableToolbar matches snapshot 1`] = `
       }
     }
     numSelected={0}
-    onClickDelete={[Function]}
+    onClickDelete={[MockFunction]}
     title="Test Table"
   >
     <WithStyles(Toolbar)

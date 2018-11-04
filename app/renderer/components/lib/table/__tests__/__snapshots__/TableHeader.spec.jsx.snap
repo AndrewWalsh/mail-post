@@ -9,7 +9,7 @@ exports[`TableHeader matches snapshot 1`] = `
       <WithStyles(Checkbox)
         checked={true}
         indeterminate={false}
-        onChange={[Function]}
+        onChange={[MockFunction]}
       />
     </WithStyles(TableCell)>
     <WithStyles(TableCell)

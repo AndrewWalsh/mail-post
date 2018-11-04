@@ -1,5 +1,4 @@
 import React from 'react';
-import td from 'testdouble';
 import { shallow } from 'enzyme';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -7,7 +6,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Table from '../Table';
 import TableToolbar from '../TableToolbar';
 
-require('testdouble-jest')(td, jest);
 
 describe('Table', () => {
   let props;
@@ -49,7 +47,7 @@ describe('Table', () => {
           label: 'Created',
         },
       ],
-      deleteItem: td.function(),
+      deleteItem: jest.fn(),
       title: 'Test Table',
     };
     wrapper = shallow(<Table {...props} />);
@@ -61,7 +59,7 @@ describe('Table', () => {
 
   it('when TableToolbar onClickDelete prop is called, calls prop deleteItem', () => {
     wrapper.find(TableToolbar).prop('onClickDelete')();
-    td.verify(props.deleteItem(td.matchers.anything()));
+    expect(props.deleteItem).toHaveBeenCalled();
   });
 
   it('when TableRow is selected, selected state contains item', () => {

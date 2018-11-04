@@ -229,5 +229,5 @@
     "moduleNameMapper": {
       "electron": "<rootDir>/test/mocks/electronMock.js"
     }
-}
+  }
 }

@@ -1,13 +1,10 @@
 import React from 'react';
-import td from 'testdouble';
 import { shallow } from 'enzyme';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import TableHeader from '../TableHeader';
-
-require('testdouble-jest')(td, jest);
 
 describe('TableHeader', () => {
   let props;
@@ -16,8 +13,8 @@ describe('TableHeader', () => {
   beforeEach(() => {
     props = {
       numSelected: 0,
-      onRequestSort: td.function(),
-      onSelectAllClick: td.function(),
+      onRequestSort: jest.fn(),
+      onSelectAllClick: jest.fn(),
       order: 'desc',
       orderBy: 'id',
       rowCount: 0,
@@ -52,7 +49,9 @@ describe('TableHeader', () => {
   it('calls onRequestSort prop when TableSortLabel is clicked', async () => {
     const wrappers = wrapper.find(TableSortLabel);
     wrappers.every(node => node.simulate('click'));
-    wrappers.every((node, i) => td.verify(props.onRequestSort(td.matchers.anything, i)));
+    wrappers.every((node, i) => (
+      expect(props.onRequestSort).toHaveBeenCalledWith(jest.toBeDefined, i)
+    ));
   });
 
   it('checkbox is NOT indeterminate when numSelected is NOT > 0', async () => {

@@ -1,8 +1,4 @@
-import td from 'testdouble';
-
 import sort from '../sort-data';
-
-require('testdouble-jest')(td, jest);
 
 describe('ListTableToolbar', () => {
   const mockData = [{ a: 1 }, { b: 2 }, { c: 3 }];

@@ -6,6 +6,10 @@ module.exports = Object.assign(
   {
     setupTestFrameworkScriptFile: './test/unit.setupTestFrameworkScriptFile.js',
     rootDir: '../',
+    moduleNameMapper: {
+      electron: '<rootDir>/test/mocks/electronMock.js',
+      '\\.(css|less)$': 'identity-obj-proxy',
+    },
     transform: {
       '^.+\\.jsx$': 'babel-jest',
       '^.+\\.js$': 'babel-jest',

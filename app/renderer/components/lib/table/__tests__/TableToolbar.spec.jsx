@@ -1,11 +1,8 @@
 import React from 'react';
-import td from 'testdouble';
 import { mount } from 'enzyme';
 import IconButton from '@material-ui/core/IconButton';
 
 import TableToolbar from '../TableToolbar';
-
-require('testdouble-jest')(td, jest);
 
 describe('TableToolbar', () => {
   let props;
@@ -15,7 +12,7 @@ describe('TableToolbar', () => {
     props = {
       classes: {},
       numSelected: 0,
-      onClickDelete: td.function(),
+      onClickDelete: jest.fn(),
       title: 'Test Table',
     };
     wrapper = mount(<TableToolbar {...props} />);
@@ -39,6 +36,6 @@ describe('TableToolbar', () => {
     const numSelected = 8;
     wrapper = mount(<TableToolbar {...props} numSelected={numSelected} />);
     wrapper.find(IconButton).simulate('click');
-    td.verify(props.onClickDelete(td.matchers.anything()));
+    expect(props.onClickDelete).toHaveBeenCalled();
   });
 });
