@@ -2,13 +2,16 @@ import uuidv4 from 'uuid/v4'; // Used to signify that a notification is unique, 
 
 import { NOTIFICATION } from '../types';
 
-const initialState = { message: '' };
+const initialState = {
+  id: 'uuid',
+  message: '',
+};
 
 export default function notification(state = initialState, action) {
   switch (action.type) {
     case NOTIFICATION:
       return { ...state, message: action.payload, id: uuidv4() };
     default:
-      return { ...state, id: uuidv4() };
+      return state;
   }
 }
