@@ -1,4 +1,3 @@
-import td from 'testdouble';
 import csvImportModule from '../csv-import';
 
 describe('csv-import', () => {
