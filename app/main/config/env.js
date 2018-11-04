@@ -4,8 +4,9 @@ const {
   UPGRADE_EXTENSIONS,
 } = process.env;
 
-export default {
-  NODE_ENV: NODE_ENV || 'production', // Cannot be set in the electron package
+const nodeEnv = NODE_ENV || 'production';
+export {
+  nodeEnv as NODE_ENV, // Cannot be set in the electron package
   DEBUG_PROD,
   UPGRADE_EXTENSIONS,
 };
