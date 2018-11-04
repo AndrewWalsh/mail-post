@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MaterialSnackbar from 'material-ui/Snackbar';
-import IconButton from 'material-ui/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
+import MaterialSnackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default class Snackbar extends Component {
   constructor() {
@@ -35,7 +35,7 @@ export default class Snackbar extends Component {
         open={open}
         autoHideDuration={6000}
         onClose={this.handleClose}
-        SnackbarContentProps={{
+        ContentProps={{
           'aria-describedby': 'message-id',
         }}
         message={<span id="message-id">{message}</span>}

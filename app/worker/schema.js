@@ -26,19 +26,17 @@ const typeDefs = `
   }
 `;
 
-const getListsFormatted = listName => getLists(listName).then(lists =>
-  lists.map(({
-    total_subscribers,
-    name,
-    id,
-    createdAt,
-  }) =>
-    ({
-      total_subscribers,
-      name,
-      id,
-      createdAt,
-    })));
+const getListsFormatted = listName => getLists(listName).then(lists => lists.map(({
+  total_subscribers,
+  name,
+  id,
+  createdAt,
+}) => ({
+  total_subscribers,
+  name,
+  id,
+  createdAt,
+})));
 
 const resolvers = {
   Query: {

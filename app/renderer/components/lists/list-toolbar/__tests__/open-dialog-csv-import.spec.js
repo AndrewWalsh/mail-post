@@ -1,4 +1,5 @@
 import td from 'testdouble';
+import openDialogCsvImport from '../open-dialog-csv-import';
 
 require('testdouble-jest')(td, jest);
 
@@ -12,14 +13,11 @@ describe('open-dialog-csv-import', () => {
   };
 
   let remote;
-  let openDialogCsvImport;
 
   beforeEach(() => {
     remote = td.replace('../../../../remote', {
       openDialog: td.function(),
     });
-
-    openDialogCsvImport = require('../open-dialog-csv-import');
   });
 
   afterEach(() => {
@@ -32,4 +30,3 @@ describe('open-dialog-csv-import', () => {
     td.verify(remote.openDialog(dialogOptions, callback));
   });
 });
-

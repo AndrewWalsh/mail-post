@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Lists matches snapshot 1`] = `
-<React.Fragment>
+<Fragment>
   <Connect(Apollo(ReduxForm)) />
   <Apollo(ListTableContainer) />
-</React.Fragment>
+</Fragment>
 `;

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import Snackbar from './Snackbar';
 
-const SnackbarContainer = ({ message, id, ...rest }) =>
-  <Snackbar message={message} id={id} {...rest} />;
+const SnackbarContainer = ({ message, id, ...rest }) => (
+  <Snackbar message={message} id={id} {...rest} />
+);
 
 SnackbarContainer.propTypes = {
   message: PropTypes.string.isRequired,

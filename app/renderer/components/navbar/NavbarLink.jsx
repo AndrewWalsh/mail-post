@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-} from 'material-ui/List';
-import { withStyles } from 'material-ui/styles';
-import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import { withStyles } from '@material-ui/core/styles';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 import { Link } from '../lib';
 

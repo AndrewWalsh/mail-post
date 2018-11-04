@@ -1,10 +1,8 @@
 import React from 'react';
 import td from 'testdouble';
 import { shallow } from 'enzyme';
-import {
-  TableRow,
-  TablePagination,
-} from 'material-ui/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
 
 import Table from '../Table';
 import TableToolbar from '../TableToolbar';

@@ -27,4 +27,3 @@ const createDb = async (dbName, dbPath) => {
     if (!getDbExists(dbPath)) createDb(dbName, dbPath);
   });
 }
-

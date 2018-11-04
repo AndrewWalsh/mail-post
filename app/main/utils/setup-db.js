@@ -3,7 +3,7 @@ import path from 'path';
 import db from '../models';
 import seed from '../seeders';
 import { NODE_ENV } from '../config/env';
-import { getAppPath } from './';
+import { getAppPath } from '.';
 
 export default async () => {
   // Run migrations & seeders

@@ -35,6 +35,7 @@ addons:
       - libgnome-keyring-dev
 
 install:
+  - yarn config set ignore-engines true
   - yarn
   - cd app && yarn && cd ..
   - export DISPLAY=':99.0'

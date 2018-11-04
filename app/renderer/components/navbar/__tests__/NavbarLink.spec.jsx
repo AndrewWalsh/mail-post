@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 import NavbarLink from '../NavbarLink';
 

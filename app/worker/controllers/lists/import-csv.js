@@ -12,22 +12,24 @@ import createList from './create-list';
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) => {
   if (Array.isArray(arr)) {
-    return sequelize.transaction(() =>
-      Promise.all([
-        ...arr.map(values =>
-          Model.find({
-            where: { email: values.email },
-          })
-            .then((instance) => {
-              if (!instance) {
-                return Model.create({ ...values });
-              }
-              // eslint-disable-next-line no-param-reassign
-              instance.template_data = values.template_data;
-              return instance.save();
-            })
-            .then(instance => instance.addLists(belongsToInstance))),
-      ]));
+    return sequelize.transaction(() => Promise.all([
+      ...arr.map(values => Model.find({
+        where: { email: values.email },
+      })
+        .then((instance) => {
+          if (!instance) {
+            return Model.create({ ...values });
+          }
+          /* eslint-enable no-param-reassign */
+          if (values.template_data) {
+            if (instance.template_data) instance.template_data = { ...instance.template_data, ...values.template_data };
+            else instance.template_data = values.template_data;
+          }
+          /* eslint-disable no-param-reassign */
+          return instance.save();
+        })
+        .then(instance => instance.addLists(belongsToInstance))),
+    ]));
   }
   return arr;
 };
@@ -90,17 +92,16 @@ export default (csvPath, name) => new Promise(async (resolve) => {
       // Flush remaining emails
       await save(null, true);
       // Mark all lists and list subscribers as 'finalised'
-      await db.sequelize.transaction(transaction =>
-        Promise.all([
-          list.update({
-            finalised: true,
-            total_subscribers: totalSubscribers,
-          }, { transaction }),
-          db.sequelize.query(
-            `UPDATE Subscribers SET finalised=1 WHERE EXISTS (SELECT * FROM ListSubscribers WHERE (ListSubscribers.subscriberId = Subscribers.id) AND (ListSubscribers.listId = ${list.get({ plain: true }).id}))`,
-            { transaction },
-          ),
-        ]));
+      await db.sequelize.transaction(transaction => Promise.all([
+        list.update({
+          finalised: true,
+          total_subscribers: totalSubscribers,
+        }, { transaction }),
+        db.sequelize.query(
+          `UPDATE Subscribers SET finalised=1 WHERE EXISTS (SELECT * FROM ListSubscribers WHERE (ListSubscribers.subscriberId = Subscribers.id) AND (ListSubscribers.listId = ${list.get({ plain: true }).id}))`,
+          { transaction },
+        ),
+      ]));
       resolve();
     });
 });

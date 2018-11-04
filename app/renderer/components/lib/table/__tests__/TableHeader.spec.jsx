@@ -1,8 +1,9 @@
 import React from 'react';
 import td from 'testdouble';
 import { shallow } from 'enzyme';
-import { TableSortLabel, TableCell } from 'material-ui/Table';
-import Checkbox from 'material-ui/Checkbox';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TableCell from '@material-ui/core/TableCell';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import TableHeader from '../TableHeader';
 

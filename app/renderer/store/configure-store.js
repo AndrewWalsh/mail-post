@@ -1,5 +1,12 @@
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./configure-store.prod'); // eslint-disable-line global-require
-} else {
-  module.exports = require('./configure-store.dev'); // eslint-disable-line global-require
-}
+import configureStoreDev from './configure-store.dev';
+import configureStoreProd from './configure-store.prod';
+
+const selectedConfigureStore = (
+  process.env.NODE_ENV === 'production'
+    ? configureStoreProd
+    : configureStoreDev
+);
+
+export const { configureStore } = selectedConfigureStore;
+
+export const { history } = selectedConfigureStore;

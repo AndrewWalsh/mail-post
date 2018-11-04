@@ -1,7 +1,7 @@
 import React from 'react';
 import td from 'testdouble';
 import { mount } from 'enzyme';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 
 import TableToolbar from '../TableToolbar';
 

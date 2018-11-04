@@ -1,4 +1,5 @@
 import td from 'testdouble';
+import csvImportModule from '../csv-import';
 
 require('testdouble-jest')(td, jest);
 
@@ -13,7 +14,7 @@ describe('csv-import', () => {
     const noop = () => {};
     importCsv = td.function();
     csvIsValid = td.function();
-    csvImport = require('../csv-import')({ debug: noop, importCsv, csvIsValid });
+    csvImport = csvImportModule({ debug: noop, importCsv, csvIsValid });
   });
 
   afterEach(() => {

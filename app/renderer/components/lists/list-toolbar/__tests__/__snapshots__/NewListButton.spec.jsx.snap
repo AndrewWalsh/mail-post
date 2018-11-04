@@ -6,7 +6,7 @@ exports[`NewListButton matches snapshot 1`] = `
   data-test="import-csv"
   type="submit"
 >
-  <pure(Add) />
+  <pure(AddIcon) />
   Import
 </WithStyles(Button)>
 `;

@@ -1,4 +1,5 @@
 import td from 'testdouble';
+import openDialog from '../open-dialog';
 
 require('testdouble-jest')(td, jest);
 
@@ -6,7 +7,6 @@ describe('openDialog', () => {
   const filePath = ['mocked file path'];
   let electron;
   let callback;
-  let openDialog;
 
   beforeEach(() => {
     electron = td.replace('electron', {
@@ -17,7 +17,6 @@ describe('openDialog', () => {
       },
     });
     callback = td.function();
-    openDialog = require('../open-dialog');
   });
 
   afterEach(() => {

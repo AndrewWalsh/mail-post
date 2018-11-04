@@ -1,11 +1,11 @@
 import React from 'react';
-import List from 'material-ui/List';
-import DashboardIcon from 'material-ui-icons/Dashboard';
-import EmailIcon from 'material-ui-icons/Email';
-import ListIcon from 'material-ui-icons/List';
-import SettingsIcon from 'material-ui-icons/Settings';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
+import List from '@material-ui/core/List';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import EmailIcon from '@material-ui/icons/Email';
+import ListIcon from '@material-ui/icons/List';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import styled from 'styled-components';
 
 import NavbarLink from './NavbarLink';
@@ -23,6 +23,7 @@ const theme = createMuiTheme({
     type: 'dark',
   },
   typography: {
+    useNextVariants: true,
     fontWeightRegular: 300,
   },
 });

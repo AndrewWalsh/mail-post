@@ -5,10 +5,9 @@ export default (data, order, orderBy, property = null) => {
     newOrder = 'asc';
   }
 
-  const newData =
-    newOrder === 'desc'
-      ? data.sort((a, b) => (b[property] < a[property] ? -1 : 1))
-      : data.sort((a, b) => (a[property] < b[property] ? -1 : 1));
+  const newData = newOrder === 'desc'
+    ? data.sort((a, b) => (b[property] < a[property] ? -1 : 1))
+    : data.sort((a, b) => (a[property] < b[property] ? -1 : 1));
 
   return { data: newData, order: newOrder };
 };

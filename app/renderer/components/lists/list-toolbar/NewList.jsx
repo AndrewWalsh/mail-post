@@ -15,8 +15,7 @@ const onSubmit = (e, listNameValue, callback, reset) => {
   reset();
 };
 
-const buttonIsDisabled = (disabled, invalid, listNameValue) =>
-  disabled || invalid || listNameValue === '';
+const buttonIsDisabled = (disabled, invalid, listNameValue) => disabled || invalid || listNameValue === '';
 
 const StyledForm = styled.form`
   display: flex;

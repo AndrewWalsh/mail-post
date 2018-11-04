@@ -3,7 +3,7 @@ import {
   generateImportCsv,
   generateDeleteLists,
 } from '../generate-mutation';
-import { QUERY_GET_LISTS } from '../../graphql';
+import { QUERY_GET_LISTS } from '..';
 
 require('testdouble-jest')(td, jest);
 
@@ -71,4 +71,3 @@ describe('generate mutations', () => {
     });
   });
 });
-

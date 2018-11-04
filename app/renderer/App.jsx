@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { ApolloProvider } from 'react-apollo';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { apolloClient } from './utils';
 import Layout from './components/Layout';
@@ -16,6 +16,7 @@ const theme = createMuiTheme({
     // type: 'dark',
   },
   typography: {
+    useNextVariants: true,
     fontWeightRegular: 300,
   },
 });

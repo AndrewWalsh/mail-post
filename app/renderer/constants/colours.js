@@ -1,6 +1,6 @@
-import blueGrey from 'material-ui/colors/blueGrey';
-import teal from 'material-ui/colors/teal';
-import grey from 'material-ui/colors/grey';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+import teal from '@material-ui/core/colors/teal';
+import grey from '@material-ui/core/colors/grey';
 
 export const COLOUR_PRIMARY = teal[600];
 export const COLOUR_SECONDARY = blueGrey[900];
