@@ -224,5 +224,10 @@
       "pre-commit": "npm run lint",
       "pre-push": "npm run test-all"
     }
-  }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "electron": "<rootDir>/test/mocks/electronMock.js"
+    }
+}
 }
