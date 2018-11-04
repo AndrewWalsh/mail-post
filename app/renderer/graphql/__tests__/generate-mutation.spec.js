@@ -1,19 +1,20 @@
-import td from 'testdouble';
 import {
   generateImportCsv,
   generateDeleteLists,
 } from '../generate-mutation';
 import { QUERY_GET_LISTS } from '..';
 
-require('testdouble-jest')(td, jest);
-
 describe('generate mutations', () => {
   let storeStub;
   beforeEach(() => {
     storeStub = {
-      readQuery: td.function(),
-      writeQuery: td.function(),
+      readQuery: jest.fn(),
+      writeQuery: jest.fn(),
     };
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('generateImportCsv', () => {
@@ -36,9 +37,9 @@ describe('generate mutations', () => {
           lists: [...cache.lists, data.importCsv],
         },
       };
-      td.when(storeStub.readQuery(expectRead)).thenReturn(cache);
+      storeStub.readQuery.mockReturnValue(cache);
       importCsv.update(storeStub, { data });
-      td.verify(storeStub.writeQuery(expectWrite));
+      expect(storeStub.writeQuery).toHaveBeenCalledWith(expectWrite);
     });
   });
 
@@ -65,9 +66,9 @@ describe('generate mutations', () => {
           lists: [ids[0]],
         },
       };
-      td.when(storeStub.readQuery(expectRead)).thenReturn(cache);
+      storeStub.readQuery.mockReturnValue(cache);
       deleteLists.update(storeStub, { data });
-      td.verify(storeStub.writeQuery(expectWrite));
+      expect(storeStub.writeQuery).toHaveBeenCalledWith(expectWrite);
     });
   });
 });
