@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { makeExecutableSchema } from 'graphql-tools';
+import { gql } from 'apollo-server-express';
 import { head } from 'ramda';
 
 import {
@@ -8,7 +8,7 @@ import {
 } from './controllers';
 import { csvImport } from './handlers';
 
-const typeDefs = `
+const typeDefs = gql`
   type Query {
     lists: [List]
   }
@@ -63,9 +63,9 @@ const resolvers = {
   },
 };
 
-const schema = makeExecutableSchema({
+const schema = {
   typeDefs,
   resolvers,
-});
+};
 
 export default schema;

@@ -10,16 +10,24 @@ export default {
   externals: Object.keys(externals || {}),
 
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         },
       },
-    }],
+      {
+        test: /node_modules[\/\\](iconv-lite)[\/\\].+/, // eslint-disable-line
+        resolve: {
+          aliasFields: ['main'],
+        },
+      },
+    ],
   },
 
   output: {
