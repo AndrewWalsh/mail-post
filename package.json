@@ -33,7 +33,7 @@
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev",
     "start-renderer-dev": "cross-env NODE_ENV=development node --trace-warnings -r @babel/register ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.renderer.dev.babel.js",
     "test": "cross-env NODE_ENV=test jest app --config ./test/jest.config.unit.js --coverage",
-    "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r @babel/register ./internals/scripts/RunElectronTests.js . --config ./test/jest.config.electron.js --runInBand",
+    "test-e2e": "cross-env ELECTRON_DISABLE_SECURITY_WARNINGS=true NODE_ENV=test BABEL_DISABLE_CACHE=1 node --trace-warnings -r @babel/register ./internals/scripts/RunElectronTests.js . --config ./test/jest.config.electron.js --runInBand",
     "test-all": "npm-run-all --parallel lint test build && npm run test-e2e",
     "npm-rebuild": "node -r @babel/register ./internals/scripts/NpmRebuild.js",
     "create-db": "rimraf ./*.sqlite3 && cross-env node -r @babel/register ./internals/scripts/CreateDb.js",
@@ -174,7 +174,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@material-ui/core": "^1.2.1",
+    "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "apollo-boost": "^0.1.20",
     "apollo-client": "^2.4.5",
@@ -191,7 +191,6 @@
     "font-awesome": "^4.7.0",
     "graphql": "^0.13.0",
     "graphql-tag": "^2.10.0",
-    "graphql-tools": "^4.0.3",
     "history": "^4.7.2",
     "isemail": "^3.2.0",
     "moment": "^2.22.2",
