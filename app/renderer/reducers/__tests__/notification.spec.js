@@ -1,17 +1,14 @@
-import td from 'testdouble';
+import uuidV4 from 'uuid/v4';
+import notification from '../notification';
 import { NOTIFICATION } from '../../types';
 
-require('testdouble-jest')(td, jest);
+jest.mock('uuid/v4');
+uuidV4.mockImplementation(() => 'uuid');
 
 describe('notification reducer', () => {
-  const stubUuid = td.replace('uuid/v4');
-  const uuidStubName = 'stub';
-  td.when(stubUuid()).thenReturn(uuidStubName);
-  const reducer = require('../notification');
-
   it('returns initial state', () => {
-    const state = { message: '', id: uuidStubName };
-    expect(reducer(undefined, {})).toEqual(state);
+    const state = { message: '', id: 'uuid' };
+    expect(notification(undefined, {})).toEqual(state);
   });
 
   it('handles NOTIFICATION', () => {
@@ -20,8 +17,8 @@ describe('notification reducer', () => {
     const expected = {
       ...state,
       message: action.payload,
-      id: uuidStubName,
+      id: 'uuid',
     };
-    expect(reducer(state, action)).toEqual(expected);
+    expect(notification(state, action)).toEqual(expected);
   });
 });
