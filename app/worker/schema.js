@@ -49,7 +49,7 @@ const resolvers = {
         const list = await getListsFormatted(name);
         return head(list);
       } catch (e) {
-        throw new Error(e);
+        throw new Error('shit');
       }
     },
     deleteLists: async (_, { ids }) => {

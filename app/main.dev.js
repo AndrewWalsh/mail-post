@@ -49,7 +49,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-
 app.on('ready', async () => {
   if (NODE_ENV === 'development' || DEBUG_PROD === 'true') {
     await installExtensions();
