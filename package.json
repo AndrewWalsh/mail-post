@@ -183,7 +183,6 @@
     "devtron": "^1.4.0",
     "electron-debug": "2.0.0",
     "electron-log": "^2.2.17",
-    "electron-unhandled": "^1.1.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "font-awesome": "^4.7.0",
     "graphql": "^0.13.0",

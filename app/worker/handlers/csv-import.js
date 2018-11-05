@@ -1,5 +1,3 @@
-import { reject } from 'bluebird-lst';
-
 export default ({ debug, importCsv, csvIsValid }) => async (csvPath, name) => {
   try {
     await csvIsValid(csvPath);
@@ -8,6 +6,6 @@ export default ({ debug, importCsv, csvIsValid }) => async (csvPath, name) => {
     debug(`${csvPath} imported`);
   } catch (e) {
     debug(`${e.message} error importing csv`);
-    reject(e);
+    throw new Error(e);
   }
 };

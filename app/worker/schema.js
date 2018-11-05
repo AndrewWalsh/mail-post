@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { gql } from 'apollo-server-express';
+import { gql, UserInputError } from 'apollo-server-express';
 import { head } from 'ramda';
 
 import {
@@ -49,7 +49,7 @@ const resolvers = {
         const list = await getListsFormatted(name);
         return head(list);
       } catch (e) {
-        throw new Error('shit');
+        throw new UserInputError(e);
       }
     },
     deleteLists: async (_, { ids }) => {
@@ -57,7 +57,7 @@ const resolvers = {
         const deleted = await deleteLists(ids);
         return deleted.map(id => ({ id }));
       } catch (e) {
-        throw new Error(e);
+        throw new UserInputError(e);
       }
     },
   },

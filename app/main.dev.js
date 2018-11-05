@@ -13,8 +13,6 @@ import {
   logCleanDbFailed,
 } from './lib/logging';
 
-require('electron-unhandled')();
-
 let mainWindow = null;
 
 if (NODE_ENV === 'production') {

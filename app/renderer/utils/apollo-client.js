@@ -5,11 +5,10 @@ import { notification } from '../actions';
 import { WORKER_PORT } from '../../lib/shared-constants';
 
 // Dispatches custom error messages to the snackbar component
-const onError = (({ graphQLErrors, response }) => {
+const onError = (({ graphQLErrors }) => {
   if (Array.isArray(graphQLErrors)) {
     graphQLErrors.forEach((err) => {
       store.dispatch(notification(err.message));
-      response.errors = null;
     });
   }
 });

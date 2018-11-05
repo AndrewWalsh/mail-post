@@ -14,7 +14,7 @@ const rowHasError = (line, lineNumber) => {
 
 const headerHasError = (header) => {
   // First column must be "email" or "Email"
-  if (head(header).toLowerCase() !== 'email') return `The first column must be "email" or "Email", it is currently ${header[0]}`;
+  if (head(header).toLowerCase() !== 'email') return `The first column must be "email" or "Email", it is currently "${head(header)}"`;
   return false;
 };
 
@@ -30,15 +30,15 @@ export default csvPath => new Promise((resolve, reject) => {
     .pipe(csvParser({ strict: true }))
     .on('headers', (header) => {
       const err = headerHasError(header);
-      if (err) onError(readStream, reject, new Error(err));
+      if (err) onError(readStream, reject, err);
     })
     .on('error', () => {
-      onError(readStream, reject, new Error(`Line ${lineNumber} has greater or fewer columns than the header`));
+      onError(readStream, reject, `Line ${lineNumber} has greater or fewer columns than the header`);
     })
     .on('data', (data) => {
       const err = rowHasError(data, lineNumber);
-      if (err) onError(readStream, reject, new Error(err));
       lineNumber += 1;
+      if (err) onError(readStream, reject, err);
     })
     .on('end', () => {
       resolve();
