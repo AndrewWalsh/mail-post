@@ -1,12 +1,10 @@
-import td from 'testdouble';
 import mockFs from 'mock-fs';
 import uuidv4 from 'uuid/v4';
 import EventEmitter from 'events';
+import csvIsValid from '../csv-is-valid';
 
 // Run in parallel, this test will create more listeners than the default limit of 11
 EventEmitter.defaultMaxListeners = 0;
-
-require('testdouble-jest')(td, jest);
 
 describe('csv-is-valid', () => {
   const mockCsv = (headers, numRows = 100) => {
@@ -18,14 +16,8 @@ describe('csv-is-valid', () => {
     return rows.join('');
   };
   const fakeFilePath = '/test/dir/test-csv.csv';
-  let csvIsValid;
-
-  beforeEach(() => {
-    csvIsValid = require('../csv-is-valid');
-  });
 
   afterEach(() => {
-    td.reset();
     mockFs.restore();
   });
 

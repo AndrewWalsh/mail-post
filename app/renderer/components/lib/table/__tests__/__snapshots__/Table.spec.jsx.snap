@@ -1,14 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListTable matches snapshot 1`] = `
+exports[`Table matches snapshot 1`] = `
 <WithStyles(Paper)>
   <WithStyles(EnhancedTableToolbar)
     numSelected={0}
     onClickDelete={[Function]}
+    title="Test Table"
   />
   <div>
     <WithStyles(Table)>
       <EnhancedTableHead
+        columnData={
+          Array [
+            Object {
+              "disablePadding": true,
+              "id": "name",
+              "label": "Name",
+              "numeric": false,
+            },
+            Object {
+              "disablePadding": false,
+              "id": "total_subscribers",
+              "label": "Subscribers",
+              "numeric": true,
+            },
+            Object {
+              "disablePadding": false,
+              "id": "createdAt",
+              "label": "Created",
+              "numeric": true,
+            },
+          ]
+        }
         numSelected={0}
         onRequestSort={[Function]}
         onSelectAllClick={[Function]}

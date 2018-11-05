@@ -1,17 +1,38 @@
-sudo: true
-
 branches:
   only:
     - master
-
-osx_image: xcode8.3
 
 language: node_js
 
 matrix:
   include:
     - os: osx
+      language: node_js
+      node_js:
+        - node
+      env:
+        - ELECTRON_CACHE=$HOME/.cache/electron
+        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
     - os: linux
+      language: node_js
+      node_js:
+        - node
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-multilib
+            - g++-8
+            - g++-multilib
+            - icnsutils
+            - graphicsmagick
+            - xz-utils
+            - xorriso
+            - rpm
+            - xvfb
+            - libgnome-keyring-dev
 
 node_js:
   - 8
@@ -21,32 +42,33 @@ cache:
   directories:
     - node_modules
     - app/node_modules
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - icnsutils
-      - graphicsmagick
-      - xz-utils
-      - xorriso
-      - xvfb
-      - libgnome-keyring-dev
+    - $(npm config get prefix)/lib/node_modules
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
 
 install:
+  - yarn config set ignore-engines true
   - yarn
-  - cd app && yarn && cd ..
-  - export DISPLAY=':99.0'
-  - "Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &"
+  - |
+    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      /sbin/start-stop-daemon \
+      --start \
+      --quiet \
+      --pidfile /tmp/custom_xvfb_99.pid \
+      --make-pidfile \
+      --background \
+      --exec /usr/bin/Xvfb \
+      -- :99 -ac -screen 0 1280x1024x16
+    else
+      :
+    fi
 
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start &
-  - sleep 3
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
 script:
-  - node --version
   - yarn lint
   - yarn package
   - yarn test

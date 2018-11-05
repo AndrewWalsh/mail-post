@@ -2,7 +2,7 @@
 
 exports[`Snackbar matches snapshot 1`] = `
 <WithStyles(Snackbar)
-  SnackbarContentProps={
+  ContentProps={
     Object {
       "aria-describedby": "message-id",
     }
@@ -14,7 +14,7 @@ exports[`Snackbar matches snapshot 1`] = `
         color="inherit"
         onClick={[Function]}
       >
-        <pure(Close) />
+        <pure(CloseIcon) />
       </WithStyles(IconButton)>,
     ]
   }

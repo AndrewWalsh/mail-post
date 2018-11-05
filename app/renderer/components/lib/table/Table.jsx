@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Table, {
-  TableBody,
-  TableCell,
-  TablePagination,
-  TableRow,
-} from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Checkbox from '@material-ui/core/Checkbox';
 import moment from 'moment';
-import { clone } from 'ramda';
 
 import sort from './sort-data';
-import { generateDeleteLists } from '../../../graphql';
-import ListTableHeader from './ListTableHeader';
-import ListTableToolbar from './ListTableToolbar';
+import TableHeader from './TableHeader';
+import TableToolbar from './TableToolbar';
 
 class EnhancedTable extends Component {
   constructor(props) {
@@ -22,9 +19,9 @@ class EnhancedTable extends Component {
 
     this.state = {
       order: 'desc',
-      orderBy: 'createdAt',
+      orderBy: props.orderBy,
       selected: [],
-      data: props.data && props.data.lists ? props.data.lists : [],
+      data: props.data ? props.data : [],
       page: 0,
       rowsPerPage: 5,
     };
@@ -40,11 +37,7 @@ class EnhancedTable extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
-      const lists = clone(nextProps.data.lists).map(({ createdAt, ...rest }) => ({
-        ...rest,
-        createdAt: new Date(createdAt).getTime(),
-      }));
-      const { data } = sort(lists, this.state.order, this.state.orderBy);
+      const { data } = sort(nextProps.data, this.state.order, this.state.orderBy);
       this.setState({ data });
     }
   }
@@ -56,7 +49,7 @@ class EnhancedTable extends Component {
 
   handleSelectAllClick(event, checked) {
     if (checked) {
-      this.setState({ selected: this.state.data.map(n => n.id) });
+      this.setState(({ data }) => ({ selected: data.map(n => n.id) }));
       return;
     }
     this.setState({ selected: [] });
@@ -97,7 +90,7 @@ class EnhancedTable extends Component {
 
   handleDelete() {
     const { selected } = this.state;
-    this.props.MUTATION_DELETE_LISTS(generateDeleteLists(selected));
+    this.props.deleteItem(selected);
     this.setState({ selected: [] });
   }
 
@@ -110,21 +103,27 @@ class EnhancedTable extends Component {
       rowsPerPage,
       page,
     } = this.state;
+    const {
+      columnData,
+      title,
+    } = this.props;
     return (
       <Paper>
-        <ListTableToolbar
+        <TableToolbar
           numSelected={selected.length}
           onClickDelete={this.handleDelete}
+          title={title}
         />
         <div>
           <Table>
-            <ListTableHeader
+            <TableHeader
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
+              columnData={columnData}
             />
             <TableBody>
               {data.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((n) => {
@@ -171,8 +170,21 @@ class EnhancedTable extends Component {
 }
 
 EnhancedTable.propTypes = {
-  data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  MUTATION_DELETE_LISTS: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  deleteItem: PropTypes.func.isRequired,
+  orderBy: PropTypes.string,
+  columnData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    numeric: PropTypes.bool.isRequired,
+    disablePadding: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
+  title: PropTypes.string,
+};
+
+EnhancedTable.defaultProps = {
+  orderBy: 'createdAt',
+  title: 'Table',
 };
 
 export default EnhancedTable;

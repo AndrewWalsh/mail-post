@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import { makeExecutableSchema } from 'graphql-tools';
+import { gql } from 'apollo-server-express';
+import { head } from 'ramda';
 
 import {
   getLists,
@@ -7,7 +8,7 @@ import {
 } from './controllers';
 import { csvImport } from './handlers';
 
-const typeDefs = `
+const typeDefs = gql`
   type Query {
     lists: [List]
   }
@@ -25,19 +26,17 @@ const typeDefs = `
   }
 `;
 
-const getListsFormatted = listName => getLists(listName).then(lists =>
-  lists.map(({
-    total_subscribers,
-    name,
-    id,
-    createdAt,
-  }) =>
-    ({
-      total_subscribers,
-      name,
-      id,
-      createdAt,
-    })));
+const getListsFormatted = listName => getLists(listName).then(lists => lists.map(({
+  total_subscribers,
+  name,
+  id,
+  createdAt,
+}) => ({
+  total_subscribers,
+  name,
+  id,
+  createdAt,
+})));
 
 const resolvers = {
   Query: {
@@ -48,7 +47,7 @@ const resolvers = {
       try {
         await csvImport(csvPath, name);
         const list = await getListsFormatted(name);
-        return list[0];
+        return head(list);
       } catch (e) {
         throw new Error(e);
       }
@@ -64,9 +63,9 @@ const resolvers = {
   },
 };
 
-const schema = makeExecutableSchema({
+const schema = {
   typeDefs,
   resolvers,
-});
+};
 
 export default schema;

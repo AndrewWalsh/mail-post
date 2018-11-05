@@ -6,6 +6,10 @@ module.exports = Object.assign(
   {
     setupTestFrameworkScriptFile: './test/unit.setupTestFrameworkScriptFile.js',
     rootDir: '../',
+    moduleNameMapper: {
+      electron: '<rootDir>/test/mocks/electronMock.js',
+      '\\.(css|less)$': 'identity-obj-proxy',
+    },
     transform: {
       '^.+\\.jsx$': 'babel-jest',
       '^.+\\.js$': 'babel-jest',
@@ -21,7 +25,6 @@ module.exports = Object.assign(
       /* Worker files */
       'app/worker/**/*.{js,jsx}',
       '!app/worker/*.{js,jsx}', // Ignore root files
-      '!app/worker/controllers/**/*.{js,jsx}', // Covered by integration tests
       /* Common ignore */
       '!**/utils/**/*', // Small helper files not worth covering
       '!**/*.prod.{js,jsx}', // Production bundles

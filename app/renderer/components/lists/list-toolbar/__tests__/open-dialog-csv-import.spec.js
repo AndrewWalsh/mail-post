@@ -1,6 +1,7 @@
-import td from 'testdouble';
+import openDialogCsvImport from '../open-dialog-csv-import';
+import openDialog from '../../../../remote/open-dialog';
 
-require('testdouble-jest')(td, jest);
+jest.mock('../../../../remote/open-dialog');
 
 describe('open-dialog-csv-import', () => {
   const dialogOptions = {
@@ -11,25 +12,13 @@ describe('open-dialog-csv-import', () => {
     properties: ['openFile'],
   };
 
-  let remote;
-  let openDialogCsvImport;
-
-  beforeEach(() => {
-    remote = td.replace('../../../../remote', {
-      openDialog: td.function(),
-    });
-
-    openDialogCsvImport = require('../open-dialog-csv-import');
-  });
-
   afterEach(() => {
-    td.reset();
+    jest.restoreAllMocks();
   });
 
   it('calls openDialog with dialogOptions and the provided callback', () => {
-    const callback = td.function();
+    const callback = jest.fn();
     openDialogCsvImport(callback);
-    td.verify(remote.openDialog(dialogOptions, callback));
+    expect(openDialog).toHaveBeenCalledWith(dialogOptions, callback);
   });
 });
-

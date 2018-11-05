@@ -1,1 +1,2 @@
-export { default as Link } from './Link'; // eslint-disable-line import/prefer-default-export
+export { default as Link } from './Link';
+export { default as Table } from './table';

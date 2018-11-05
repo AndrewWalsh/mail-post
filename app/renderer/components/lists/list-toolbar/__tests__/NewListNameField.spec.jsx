@@ -1,8 +1,9 @@
 import React from 'react';
-import td from 'testdouble';
 import { shallow } from 'enzyme';
+import NewListNameField from '../NewListNameField';
+import * as newListHelpers from '../new-list-helpers';
 
-require('testdouble-jest')(td, jest);
+jest.mock('../new-list-helpers');
 
 describe('NewListNameField', () => {
   const props = {
@@ -24,15 +25,6 @@ describe('NewListNameField', () => {
       },
     ],
   };
-  let NewListNameField;
-  let newListHelpers;
-
-  beforeEach(() => {
-    newListHelpers = td.replace('../new-list-helpers', {
-      validateName: td.function(),
-    });
-    NewListNameField = require('../NewListNameField');
-  });
 
   it('matches snapshot', () => {
     const wrapper = shallow(<NewListNameField {...props} />);
@@ -53,6 +45,6 @@ describe('NewListNameField', () => {
     const exampleArgs = ['a', 'b', 'c'];
     const wrapper = shallow(<NewListNameField {...props} />);
     wrapper.prop('validate')(...exampleArgs);
-    td.verify(newListHelpers.validateName(props.lists, ...exampleArgs));
+    expect(newListHelpers.validateName).toHaveBeenCalledWith(props.lists, ...exampleArgs);
   });
 });

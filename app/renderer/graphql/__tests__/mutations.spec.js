@@ -7,4 +7,3 @@ describe('client mutations', () => {
     });
   });
 });
-

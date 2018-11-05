@@ -1,30 +1,63 @@
+/* eslint global-require: 0, import/no-dynamic-require: 0 */
+
 /**
- * Builds the DLL for development electron renderer process
+ * Build config for development electron renderer process that uses
+ * Hot-Module-Replacement
+ *
+ * https://webpack.js.org/concepts/hot-module-replacement/
  */
 
-import webpack from 'webpack';
 import path from 'path';
+import fs from 'fs';
+import webpack from 'webpack';
+import chalk from 'chalk';
 import merge from 'webpack-merge';
-import baseConfig from './webpack.config.base';
-import { dependencies } from './package.json';
+import { spawn, execSync } from 'child_process';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import baseConfig from './webpack.config.base.babel';
 import CheckNodeEnv from './internals/scripts/CheckNodeEnv';
 
 CheckNodeEnv('development');
 
-const dist = path.resolve(process.cwd(), 'dll');
+const port = process.env.PORT || 1212;
+const publicPath = `http://localhost:${port}/dist`;
+const dll = path.resolve(process.cwd(), 'dll');
+const manifest = path.resolve(dll, 'renderer.json');
+
+/**
+ * Warn if the DLL is not built
+ */
+if (!(fs.existsSync(dll) && fs.existsSync(manifest))) {
+  console.log(chalk.black.bgYellow.bold('The DLL files are missing. Sit back while we build them for you with "npm run build-dll"'));
+  execSync('npm run build-dll');
+}
 
 export default merge.smart(baseConfig, {
-  context: process.cwd(),
+  mode: 'development',
 
-  devtool: 'eval',
+  devtool: 'inline-source-map',
 
   target: 'electron-renderer',
 
-  externals: ['fsevents', 'crypto-browserify'],
+  entry: {
+    renderer: [
+      'react-hot-loader/patch',
+      `webpack-dev-server/client?http://localhost:${port}/`,
+      'webpack/hot/only-dev-server',
+      path.join(__dirname, 'app/renderer/index.jsx'),
+    ],
+    worker: [
+      `webpack-dev-server/client?http://localhost:${port}/`,
+      'webpack/hot/only-dev-server',
+      path.join(__dirname, 'app/worker/index.js'),
+    ],
+  },
 
-  /**
-   * Use `module` from `webpack.config.renderer.dev.js`
-   */
+  output: {
+    publicPath: `http://localhost:${port}/dist/`,
+    filename: '[name].dev.js',
+  },
+
   module: {
     rules: [
       {
@@ -35,11 +68,6 @@ export default merge.smart(baseConfig, {
           options: {
             cacheDirectory: true,
             plugins: [
-              // Here, we include babel plugins that are only required for the
-              // renderer process. The 'transform-*' plugins must be included
-              // before react-hot-loader/babel
-              'transform-class-properties',
-              'transform-es2015-classes',
               'react-hot-loader/babel',
             ],
           },
@@ -123,7 +151,6 @@ export default merge.smart(baseConfig, {
           options: {
             limit: 10000,
             mimetype: 'application/font-woff',
-            publicPath: '../../dll',
           },
         },
       },
@@ -135,7 +162,6 @@ export default merge.smart(baseConfig, {
           options: {
             limit: 10000,
             mimetype: 'application/font-woff',
-            publicPath: '../../dll',
           },
         },
       },
@@ -174,26 +200,18 @@ export default merge.smart(baseConfig, {
     ],
   },
 
-  entry: {
-    renderer: (
-      Object
-        .keys(dependencies || {})
-        .filter(dependency => dependency !== 'font-awesome')
-    ),
-  },
-
-  output: {
-    library: 'renderer',
-    path: dist,
-    filename: '[name].dev.dll.js',
-    libraryTarget: 'var',
-  },
-
   plugins: [
-    new webpack.DllPlugin({
-      path: path.join(dist, '[name].json'),
-      name: '[name]',
+    new webpack.DllReferencePlugin({
+      context: process.cwd(),
+      manifest: require(manifest),
+      sourceType: 'var',
     }),
+
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true,
+    }),
+
+    new webpack.NoEmitOnErrorsPlugin(),
 
     /**
      * Create global constants which can be configured at compile time.
@@ -203,6 +221,9 @@ export default merge.smart(baseConfig, {
      *
      * NODE_ENV should be production so that modules do not perform certain
      * development checks
+     *
+     * By default, use 'development' as NODE_ENV. This can be overriden with
+     * 'staging', for example, by changing the ENV variables in the npm scripts
      */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
@@ -210,12 +231,49 @@ export default merge.smart(baseConfig, {
 
     new webpack.LoaderOptionsPlugin({
       debug: true,
-      options: {
-        context: path.resolve(process.cwd(), 'app'),
-        output: {
-          path: path.resolve(process.cwd(), 'dll'),
-        },
-      },
+    }),
+
+    new ExtractTextPlugin({
+      filename: '[name].css',
     }),
   ],
+
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+
+  devServer: {
+    port,
+    publicPath,
+    compress: true,
+    noInfo: true,
+    stats: 'errors-only',
+    inline: true,
+    lazy: false,
+    hot: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    contentBase: path.join(__dirname, 'dist'),
+    watchOptions: {
+      aggregateTimeout: 300,
+      ignored: /node_modules/,
+      poll: 100,
+    },
+    historyApiFallback: {
+      verbose: true,
+      disableDotRule: false,
+    },
+    before() {
+      if (process.env.START_HOT) {
+        console.log('Starting Main Process...');
+        spawn(
+          'npm',
+          ['run', 'start-main-dev'],
+          { shell: true, env: process.env, stdio: 'inherit' },
+        )
+          .on('close', code => process.exit(code))
+          .on('error', spawnError => console.error(spawnError));
+      }
+    },
+  },
 });

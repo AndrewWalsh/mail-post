@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import IconButton from 'material-ui/IconButton';
-import MaterialSnackbar from 'material-ui/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import MaterialSnackbar from '@material-ui/core/Snackbar';
 
 import Snackbar from '../Snackbar';
 

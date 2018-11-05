@@ -2,6 +2,7 @@
 import csvParser from 'csv-parser';
 import fs from 'fs';
 import isEmail from 'isemail';
+import { head } from 'ramda';
 
 const rowHasError = (line, lineNumber) => {
   const emailHeader = line.email || line.Email;
@@ -13,7 +14,7 @@ const rowHasError = (line, lineNumber) => {
 
 const headerHasError = (header) => {
   // First column must be "email" or "Email"
-  if (header[0].toLowerCase() !== 'email') return `The first column must be "email" or "Email", it is currently ${header[0]}`;
+  if (head(header).toLowerCase() !== 'email') return `The first column must be "email" or "Email", it is currently ${header[0]}`;
   return false;
 };
 
@@ -32,14 +33,12 @@ export default csvPath => new Promise((resolve, reject) => {
       if (err) onError(readStream, reject, new Error(err));
     })
     .on('error', () => {
-      // The only error csv-parser throws is as below
-      reject(new Error(`Line ${lineNumber} has greater or fewer columns than the header`));
-      readStream.close();
+      onError(readStream, reject, new Error(`Line ${lineNumber} has greater or fewer columns than the header`));
     })
     .on('data', (data) => {
       const err = rowHasError(data, lineNumber);
+      if (err) onError(readStream, reject, new Error(err));
       lineNumber += 1;
-      if (err) onError(readStream, reject, err);
     })
     .on('end', () => {
       resolve();

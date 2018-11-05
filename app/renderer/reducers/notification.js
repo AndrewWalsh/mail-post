@@ -3,7 +3,7 @@ import uuidv4 from 'uuid/v4'; // Used to signify that a notification is unique, 
 import { NOTIFICATION } from '../types';
 
 const initialState = {
-  id: uuidv4(),
+  id: 'uuid',
   message: '',
 };
 

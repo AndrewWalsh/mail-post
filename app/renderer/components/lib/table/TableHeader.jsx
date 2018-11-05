@@ -1,35 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-} from 'material-ui/Table';
-import Checkbox from 'material-ui/Checkbox';
-import Tooltip from 'material-ui/Tooltip';
-
-// The numeric prop in material-ui determines padding
-const columnData = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Name',
-  },
-  {
-    id: 'total_subscribers',
-    numeric: true,
-    disablePadding: false,
-    label: 'Subscribers',
-  },
-  {
-    id: 'createdAt',
-    numeric: true,
-    disablePadding: false,
-    label: 'Created',
-  },
-];
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class EnhancedTableHead extends Component {
   constructor() {
@@ -48,6 +24,7 @@ class EnhancedTableHead extends Component {
       orderBy,
       numSelected,
       rowCount,
+      columnData,
     } = this.props;
     return (
       <TableHead>
@@ -80,7 +57,7 @@ class EnhancedTableHead extends Component {
                 </TableSortLabel>
               </Tooltip>
             </TableCell>
-            ), this)}
+          ), this)}
         </TableRow>
       </TableHead>
     );
@@ -94,6 +71,12 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  columnData: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    numeric: PropTypes.bool.isRequired,
+    disablePadding: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export default EnhancedTableHead;

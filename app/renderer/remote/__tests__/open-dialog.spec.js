@@ -1,38 +1,18 @@
-import td from 'testdouble';
-
-require('testdouble-jest')(td, jest);
+import openDialog from '../open-dialog';
 
 describe('openDialog', () => {
-  const filePath = ['mocked file path'];
-  let electron;
   let callback;
-  let openDialog;
 
   beforeEach(() => {
-    electron = td.replace('electron', {
-      remote: {
-        dialog: {
-          showOpenDialog: td.function(),
-        },
-      },
-    });
-    callback = td.function();
-    openDialog = require('../open-dialog');
+    callback = jest.fn();
   });
 
   afterEach(() => {
-    td.reset();
+    jest.resetAllMocks();
   });
 
   it('calls callback with the file path', async () => {
-    td.when(electron.remote.dialog.showOpenDialog(td.matchers.isA(Object))).thenCallback(filePath);
     openDialog({}, callback);
-    td.verify(callback(filePath[0]));
-  });
-
-  it('does not call callback if filePath is not an array', async () => {
-    td.when(electron.remote.dialog.showOpenDialog(td.matchers.isA(Object))).thenCallback('not array');
-    openDialog({}, callback);
-    td.verify(callback(td.matchers.anything()), { times: 0 });
+    expect(callback).toHaveBeenCalled();
   });
 });

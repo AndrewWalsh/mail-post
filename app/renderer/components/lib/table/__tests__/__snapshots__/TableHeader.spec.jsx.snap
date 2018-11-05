@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ListTableHeader matches snapshot 1`] = `
+exports[`TableHeader matches snapshot 1`] = `
 <WithStyles(TableHead)>
   <WithStyles(TableRow)>
     <WithStyles(TableCell)
@@ -9,7 +9,7 @@ exports[`ListTableHeader matches snapshot 1`] = `
       <WithStyles(Checkbox)
         checked={true}
         indeterminate={false}
-        onChange={[Function]}
+        onChange={[MockFunction]}
       />
     </WithStyles(TableCell)>
     <WithStyles(TableCell)

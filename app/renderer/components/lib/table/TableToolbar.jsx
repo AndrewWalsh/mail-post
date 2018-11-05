@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Tooltip from 'material-ui/Tooltip';
-import DeleteIcon from 'material-ui-icons/Delete';
-import { lighten } from 'material-ui/styles/colorManipulator';
+import { withStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 const toolbarStyles = theme => ({
   root: {
@@ -29,7 +29,12 @@ const toolbarStyles = theme => ({
 });
 
 const EnhancedTableToolbar = (props) => {
-  const { numSelected, classes, onClickDelete } = props;
+  const {
+    numSelected,
+    classes,
+    onClickDelete,
+    title,
+  } = props;
 
   return (
     <Toolbar
@@ -39,11 +44,13 @@ const EnhancedTableToolbar = (props) => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} selected
+          <Typography color="inherit" variant="subtitle1">
+            {numSelected}
+            {' '}
+selected
           </Typography>
         ) : (
-          <Typography variant="title">Lists</Typography>
+          <Typography variant="h6">{title}</Typography>
         )}
       </div>
       <div className={classes.spacer} />
@@ -64,6 +71,7 @@ EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   numSelected: PropTypes.number.isRequired,
   onClickDelete: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 const StyledEnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
