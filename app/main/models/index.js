@@ -1,3 +1,4 @@
+'use strict';
 // ReaddirSync entails not parsing es6 imports
 // App is unavailable in renderer processes
 const app = process && process.type !== 'renderer'

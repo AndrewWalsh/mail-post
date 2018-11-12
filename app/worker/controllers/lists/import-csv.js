@@ -7,8 +7,9 @@ import fs from 'fs';
 import { compose, dissoc, keys } from 'ramda';
 
 import { logListNameInvalidOnCsvImport } from '../../../lib/logging';
-import db from '../../../main/models';
 import createList from './create-list';
+
+const db = require('../../../main/models');
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) => {
   if (Array.isArray(arr)) {

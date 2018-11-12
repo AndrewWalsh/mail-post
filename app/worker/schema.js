@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { gql, UserInputError } from 'apollo-server-express';
 import { head } from 'ramda';
+import { PubSub } from 'graphql-subscriptions';
 
 import {
   getLists,
@@ -9,6 +10,10 @@ import {
 import { csvImport } from './handlers';
 
 const typeDefs = gql`
+  type Subscription {
+    notification (type: String!, message: String!): Message
+  }
+
   type Query {
     lists: [List]
   }
@@ -16,6 +21,11 @@ const typeDefs = gql`
   type Mutation {
     importCsv (csvPath: String!, name: String!): List
     deleteLists (ids: [ID]!): [List]
+  }
+
+  type Message {
+    type: String!
+    message: String!
   }
 
   type List {
@@ -38,7 +48,14 @@ const getListsFormatted = listName => getLists(listName).then(lists => lists.map
   createdAt,
 })));
 
+const pubsub = new PubSub();
+
 const resolvers = {
+  Subscription: {
+    notification: {
+      subscribe: () => pubsub.asyncIterator('notification'),
+    },
+  },
   Query: {
     lists: () => getListsFormatted(),
   },

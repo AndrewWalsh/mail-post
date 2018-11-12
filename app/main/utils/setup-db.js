@@ -1,9 +1,10 @@
 import Umzug from 'umzug';
 import path from 'path';
-import db from '../models';
 import seed from '../seeders';
 import { NODE_ENV } from '../config/env';
 import getAppPath from './get-app-path';
+
+const db = require('../models');
 
 export default async () => {
   // Run migrations & seeders

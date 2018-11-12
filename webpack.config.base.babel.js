@@ -53,5 +53,7 @@ export default {
     }),
 
     new webpack.NamedModulesPlugin(),
+
+    new webpack.IgnorePlugin(/utf-8-validate|bufferutil/), // Required due to ws import issues
   ],
 };

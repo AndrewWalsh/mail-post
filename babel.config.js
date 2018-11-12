@@ -14,13 +14,13 @@ module.exports = (api) => {
   const development = api.env(developmentEnvironments);
 
   return {
-    sourceType: 'unambiguous',
+    // sourceType: 'unambiguous',
     presets: [
       [
         require('@babel/preset-env'),
         {
           targets: { electron: require('electron/package.json').version },
-          useBuiltIns: 'usage',
+          useBuiltIns: 'entry',
         },
       ],
       [require('@babel/preset-react'), { development }],
