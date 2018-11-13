@@ -3,21 +3,19 @@ import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
 import { execute, subscribe } from 'graphql';
 
-import { SubscriptionServer } from 'subscriptions-transport-ws/dist/server';
-
-import { WORKER_WS_PORT } from './shared-constants';
+import { SubscriptionServer } from '../../node_modules/subscriptions-transport-ws/dist/server';
+import { debug } from '../worker/utils';
 
 export default (port, schema) => {
   const app = express();
-  const server = new ApolloServer(schema);
-  server.applyMiddleware({ app });
-
-  const websocketServer = createServer((request, response) => {
-    response.writeHead(404);
-    response.end();
+  const server = new ApolloServer({ schema });
+  server.applyMiddleware({
+    app,
+    path: '/graphql',
+    gui: { subscriptionEndpoint: '/graphql' },
   });
 
-  websocketServer.listen(WORKER_WS_PORT);
+  const httpServer = createServer(app);
 
   SubscriptionServer.create(
     {
@@ -26,15 +24,12 @@ export default (port, schema) => {
       subscribe,
     },
     {
-      server: websocketServer,
+      server: httpServer,
       path: '/graphql',
     },
   );
 
-  // server.use('/graphiql', graphiqlExpress({
-  //   endpointURL: '/graphql',
-  //   subscriptionsEndpoint: `ws://localhost:${port}/graphql`,
-  // }));
-
-  return app.listen(port);
+  return httpServer.listen(port, () => {
+    debug(`Server listening on port ${port}`);
+  });
 };

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { gql, UserInputError } from 'apollo-server-express';
+import { gql, makeExecutableSchema, UserInputError } from 'apollo-server-express';
 import { head } from 'ramda';
 import { PubSub } from 'graphql-subscriptions';
 
@@ -9,9 +9,11 @@ import {
 } from './controllers';
 import { csvImport } from './handlers';
 
+const SUB_NOTIFICATION = 'SUB_NOTIFICATION';
+
 const typeDefs = gql`
   type Subscription {
-    notification (type: String!, message: String!): Message
+    notification: Message
   }
 
   type Query {
@@ -24,8 +26,9 @@ const typeDefs = gql`
   }
 
   type Message {
-    type: String!
-    message: String!
+    id: String
+    type: String
+    text: String
   }
 
   type List {
@@ -53,11 +56,15 @@ const pubsub = new PubSub();
 const resolvers = {
   Subscription: {
     notification: {
-      subscribe: () => pubsub.asyncIterator('notification'),
+      subscribe: () => pubsub.asyncIterator(SUB_NOTIFICATION),
     },
   },
   Query: {
-    lists: () => getListsFormatted(),
+    lists: () => {
+      const notification = { text: 'hi', type: 'good', id: 'abc' };
+      pubsub.publish(SUB_NOTIFICATION, { notification });
+      return getListsFormatted();
+    },
   },
   Mutation: {
     importCsv: async (_, { csvPath, name }) => {
@@ -80,9 +87,9 @@ const resolvers = {
   },
 };
 
-const schema = {
+const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-};
+});
 
 export default schema;

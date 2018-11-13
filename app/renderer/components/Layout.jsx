@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Navbar from './navbar';
+import HeaderComponent from './header';
 import {
-  COLOUR_PRIMARY,
   COLOUR_SECONDARY,
   COLOUR_WHITE,
 } from '../constants';
@@ -23,7 +23,7 @@ const Wrapper = styled.section`
       "nv mn" 1fr / minmax(200px, ${NAV_WIDTH}) 1fr;
 `;
 const Header = styled.header`
-  background-color: ${COLOUR_PRIMARY};
+  background-color: ${COLOUR_WHITE};
   grid-area: hd;
 `;
 const Nav = styled.nav`
@@ -37,7 +37,9 @@ const Main = styled.main`
 
 const Layout = ({ children }) => (
   <Wrapper>
-    <Header />
+    <Header>
+      <HeaderComponent />
+    </Header>
 
     <Nav>
       <Navbar />
