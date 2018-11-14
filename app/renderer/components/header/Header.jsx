@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { tail, head, prepend } from 'ramda';
+import {
+  tail,
+  head,
+  prop,
+  prepend,
+} from 'ramda';
 
 import Badge from '@material-ui/core/Badge';
 import NotificationIcon from '@material-ui/icons/NotificationImportant';
@@ -30,7 +35,9 @@ export default class Header extends Component {
     if (notification) {
       const add = {
         activeId: notification.id,
-        notifications: prepend(notification, prevState.notifications),
+        notifications: prevState.notifications.find(n => n.id === notification.id)
+          ? prevState.notifications
+          : prepend(notification, prevState.notifications),
       };
       const update = {
         activeId: notification.id,
@@ -38,7 +45,7 @@ export default class Header extends Component {
           n => (n.id === notification.id ? notification : n)),
       };
       const remove = {
-        activeId: head(tail(prevState.notifications)),
+        activeId: prop('id', head(tail(prevState.notifications))),
         notifications: prevState.notifications.filter(n => n.id !== notification.id),
       };
       const action = ((type) => {
@@ -56,12 +63,11 @@ export default class Header extends Component {
 
   render() {
     const { notifications, activeId } = this.state;
-    console.log(notifications, activeId);
     return (
       <StyledWrapper>
         {activeId ? notifications.find(n => n.id === activeId).text : 'Nothing to show'}
 
-        <Badge badgeContent={4} color="secondary">
+        <Badge badgeContent={notifications.length} color="secondary">
           <NotificationIcon />
         </Badge>
       </StyledWrapper>
@@ -74,6 +80,7 @@ Header.propTypes = {
     text: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    progress: PropTypes.number,
   }),
 };
 

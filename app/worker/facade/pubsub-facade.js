@@ -1,8 +1,19 @@
 /* eslint-disable import/prefer-default-export */
 import { pubsub } from '../utils';
-import {
-  PUBSUB_NOTIFICATION,
-} from '../constants';
+import { PUBSUB_NOTIFICATION } from '../constants';
 
-export const pubsubNotification = id => (type, text) => (
-  pubsub.publish(PUBSUB_NOTIFICATION, { notification: { id, type, text } }));
+export const pubsubNotification = id => text => progress => type => (
+  pubsub.publish(
+    PUBSUB_NOTIFICATION,
+    {
+      notification: Object.assign(
+        {},
+        {
+          id,
+          type,
+          text,
+        },
+        progress ? { progress } : null,
+      ),
+    },
+  ));

@@ -26,9 +26,10 @@ const typeDefs = gql`
   }
 
   type Notification {
-    id: String
-    type: String
+    id: ID!
+    type: String!
     text: String
+    progress: Int
   }
 
   type List {

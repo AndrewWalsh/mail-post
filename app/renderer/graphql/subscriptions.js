@@ -7,6 +7,7 @@ export const SUBSCRIPTION_NOTIFICATION = gql`
       id
       type
       text
+      progress
     }
   }
 `;
