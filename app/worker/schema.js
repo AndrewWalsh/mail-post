@@ -1,19 +1,19 @@
 /* eslint-disable camelcase */
 import { gql, makeExecutableSchema, UserInputError } from 'apollo-server-express';
 import { head } from 'ramda';
-import { PubSub } from 'graphql-subscriptions';
 
 import {
   getLists,
   deleteLists,
 } from './controllers';
 import { csvImport } from './handlers';
+import { pubsub } from './utils';
 
-const SUB_NOTIFICATION = 'SUB_NOTIFICATION';
+import { PUBSUB_NOTIFICATION } from './constants';
 
 const typeDefs = gql`
   type Subscription {
-    notification: Message
+    notification: Notification
   }
 
   type Query {
@@ -25,7 +25,7 @@ const typeDefs = gql`
     deleteLists (ids: [ID]!): [List]
   }
 
-  type Message {
+  type Notification {
     id: String
     type: String
     text: String
@@ -51,20 +51,14 @@ const getListsFormatted = listName => getLists(listName).then(lists => lists.map
   createdAt,
 })));
 
-const pubsub = new PubSub();
-
 const resolvers = {
   Subscription: {
     notification: {
-      subscribe: () => pubsub.asyncIterator(SUB_NOTIFICATION),
+      subscribe: () => pubsub.asyncIterator(PUBSUB_NOTIFICATION),
     },
   },
   Query: {
-    lists: () => {
-      const notification = { text: 'hi', type: 'good', id: 'abc' };
-      pubsub.publish(SUB_NOTIFICATION, { notification });
-      return getListsFormatted();
-    },
+    lists: () => getListsFormatted(),
   },
   Mutation: {
     importCsv: async (_, { csvPath, name }) => {

@@ -6,10 +6,9 @@ import Header from './Header';
 
 const HeaderContainer = () => (
   <Subscription subscription={SUBSCRIPTION_NOTIFICATION}>
-    {({ data, loading }) => (
+    {({ data }) => (
       <Header
         notification={data && data.notification}
-        loading={loading}
       />
     )}
   </Subscription>
