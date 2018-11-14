@@ -2,7 +2,9 @@
 
 exports[`Layout matches snapshot 1`] = `
 <Layout__Wrapper>
-  <Layout__Header />
+  <Layout__Header>
+    <HeaderContainer />
+  </Layout__Header>
   <Layout__Nav>
     <Navbar />
   </Layout__Nav>

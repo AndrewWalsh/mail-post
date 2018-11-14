@@ -2,7 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
-import { ApolloLink, split } from 'apollo-link';
+import { from, split } from 'apollo-link';
 import { withClientState } from 'apollo-link-state';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
@@ -52,10 +52,10 @@ const apolloClient = new ApolloClient({
   clientState: {
     defaults,
   },
-  link: ApolloLink.from([
+  link: from([
     onError(onErrorFn),
-    link,
     withClientState({ defaults, cache }),
+    link,
   ]),
   cache,
 });
