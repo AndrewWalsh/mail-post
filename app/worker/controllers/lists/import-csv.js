@@ -91,14 +91,16 @@ export default (csvPath, name, totalEmails, notification) => new Promise(async (
       currentEmailCount += 1;
       const transaction = save(formatDataForUpsert(data));
       if (transaction) {
-        readStream.unpipe(writeCsvParser);
+        // readStream.unpipe(writeCsvParser);
+        writeCsvParser.cork();
         readStream.pause();
         await transaction;
         if (currentEmailCount % 1000 === 0) {
           const percent = Math.floor(currentEmailCount / totalEmails * 100);
           notification(percent)(NOTIFICATION_TYPE_UPDATE);
         }
-        readStream.pipe(writeCsvParser);
+        // readStream.pipe(writeCsvParser);
+        writeCsvParser.uncork();
         readStream.resume();
       }
     })
