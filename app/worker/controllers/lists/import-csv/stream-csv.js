@@ -39,5 +39,6 @@ export default (readStream, writeStream, minBufferSize) => {
   return {
     getLines,
     getTotal: () => totalLines,
+    hasEnded: () => ended,
   };
 };

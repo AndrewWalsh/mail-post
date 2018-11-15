@@ -5,7 +5,7 @@ import { tail } from 'ramda';
 
 import streamCsv from '../stream-csv';
 
-const csvPath = path.resolve('test/csvs/10-emails.csv');
+const csvPath = path.resolve('test/csvs/1k-emails.csv');
 
 const emails = tail(
   fs.readFileSync(csvPath, 'utf-8')
@@ -83,6 +83,16 @@ describe('stream-csv', () => {
     const stream = streamCsv(readStream, writeStream, bufferSize);
     await requestIncrement(stream, timesToGet);
 
-    expect(stream.getTotal()).toEqual(numberEmailsInCsv);
+    expect(stream.getTotal()).toBe(numberEmailsInCsv);
+  });
+
+  it('hasEnded returns true when stream has ended', async () => {
+    const bufferSize = 10;
+    const timesToGet = numberEmailsInCsv;
+
+    const stream = streamCsv(readStream, writeStream, bufferSize);
+    await requestIncrement(stream, timesToGet);
+
+    expect(stream.hasEnded()).toBe(true);
   });
 });
