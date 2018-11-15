@@ -17,7 +17,7 @@ export default (readStream, writeStream, minBufferSize) => {
       pauseHandler(buffer, minBufferSize, readStream);
     })
     .on('error', () => {})
-    .on('end', () => { ended = true; console.log('ended'); });
+    .on('end', () => { ended = true; });
 
   const splice = () => {
     if (buffer.length > minBufferSize) return buffer.splice(0, minBufferSize);

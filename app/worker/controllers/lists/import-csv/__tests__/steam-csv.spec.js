@@ -64,4 +64,15 @@ describe('stream-csv', () => {
 
     expect(results).toEqual(expected);
   });
+
+  it('when more lines are requested than exist in the CSV, returns correct result', async () => {
+    const bufferSize = 2;
+    const timesToGet = numberEmailsInCsv + 100;
+
+    const stream = streamCsv(readStream, writeStream, bufferSize);
+    const results = await requestIncrement(stream, timesToGet);
+    const expected = emails.slice(0, numberEmailsInCsv);
+
+    expect(results).toEqual(expected);
+  });
 });
