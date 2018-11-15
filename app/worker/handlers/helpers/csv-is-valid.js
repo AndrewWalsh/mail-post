@@ -19,10 +19,11 @@ const headerHasError = (header) => {
 };
 
 const onError = (readStream, reject, err) => {
-  reject(err);
+  reject(new Error(err));
   readStream.close();
 };
 
+// Resolve (no. emails) / Reject(error message)
 export default csvPath => new Promise((resolve, reject) => {
   let lineNumber = 2; // Ignore header
   const readStream = fs.createReadStream(csvPath);
@@ -41,6 +42,6 @@ export default csvPath => new Promise((resolve, reject) => {
       if (err) onError(readStream, reject, err);
     })
     .on('end', () => {
-      resolve();
+      resolve(lineNumber - 2);
     });
 });

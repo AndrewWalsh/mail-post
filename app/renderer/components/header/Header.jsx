@@ -65,11 +65,17 @@ export default class Header extends Component {
     const { notifications, activeId } = this.state;
     return (
       <StyledWrapper>
-        {activeId ? notifications.find(n => n.id === activeId).text : 'Nothing to show'}
+        {activeId ? notifications.find(n => n.id === activeId).text + notifications.find(n => n.id === activeId).progress : 'Nothing to show'}
 
-        <Badge badgeContent={notifications.length} color="secondary">
-          <NotificationIcon />
-        </Badge>
+        {
+          notifications.length
+            ? (
+              <Badge badgeContent={notifications.length} color="secondary">
+                <NotificationIcon />
+              </Badge>
+            )
+            : <NotificationIcon />
+        }
       </StyledWrapper>
     );
   }

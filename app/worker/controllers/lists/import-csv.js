@@ -8,6 +8,7 @@ import { compose, dissoc, keys } from 'ramda';
 
 import { logListNameInvalidOnCsvImport } from '../../../lib/logging';
 import createList from './create-list';
+import { NOTIFICATION_TYPE_UPDATE } from '../../../lib/shared-constants';
 
 const db = require('../../../main/models');
 
@@ -36,15 +37,20 @@ const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => (arr) =>
   return arr;
 };
 
-const getEmailBuffer = (maxSize = 5000) => {
+const getEmailBuffer = (maxSize = 1) => {
   let arr = [];
   return (val, flush = false) => {
-    if (arr.length >= maxSize) arr = [];
-    if (flush && arr.length) return arr;
-    if (val) arr.push(val);
-    if (arr.length >= maxSize) {
-      return arr;
+    // Arr contains maxSize items
+    const bufferFull = arr.length >= maxSize;
+    // Command to flush remaining items received
+    const shouldFlush = flush && arr.length;
+    if (bufferFull || shouldFlush) {
+      const newArr = arr.slice();
+      arr = [];
+      return newArr;
     }
+
+    if (val) arr.push(val);
     return null;
   };
 };
@@ -53,13 +59,12 @@ const formatDataForUpsert = (data) => {
   const values = {};
   const emailKey = data.email ? 'email' : 'Email';
   values.email = data[emailKey];
-  const templateData = dissoc(emailKey, data); // Returns object without emailKey
+  const templateData = dissoc(emailKey, data);
   if (keys(templateData).length) values.template_data = JSON.stringify(templateData);
   return values;
 };
 
-export default (csvPath, name) => new Promise(async (resolve) => {
-  // Name must not be an empty string, this is validated client-side
+export default (csvPath, name, totalEmails, notification) => new Promise(async (resolve) => {
   if (!name) return;
   let list;
   try {
@@ -77,27 +82,35 @@ export default (csvPath, name) => new Promise(async (resolve) => {
     buffer,
   );
 
-  let totalSubscribers = 0;
+  let currentEmailCount = 0;
   const readStream = fs.createReadStream(csvPath);
+  const writeCsvParser = csvParser({ strict: true });
   readStream
-    .pipe(csvParser({ strict: true }))
+    .pipe(writeCsvParser)
     .on('data', async (data) => {
-      totalSubscribers += 1;
+      currentEmailCount += 1;
       const transaction = save(formatDataForUpsert(data));
       if (transaction) {
+        readStream.unpipe(writeCsvParser);
         readStream.pause();
         await transaction;
+        if (currentEmailCount % 1000 === 0) {
+          const percent = Math.floor(currentEmailCount / totalEmails * 100);
+          notification(percent)(NOTIFICATION_TYPE_UPDATE);
+        }
+        readStream.pipe(writeCsvParser);
         readStream.resume();
       }
     })
     .on('end', async () => {
+      notification(100)(NOTIFICATION_TYPE_UPDATE);
       // Flush remaining emails
       await save(null, true);
       // Mark all lists and list subscribers as 'finalised'
       await db.sequelize.transaction(transaction => Promise.all([
         list.update({
           finalised: true,
-          total_subscribers: totalSubscribers,
+          total_subscribers: totalEmails,
         }, { transaction }),
         db.sequelize.query(
           `UPDATE Subscribers SET finalised=1 WHERE EXISTS (SELECT * FROM ListSubscribers WHERE (ListSubscribers.subscriberId = Subscribers.id) AND (ListSubscribers.listId = ${list.get({ plain: true }).id}))`,
