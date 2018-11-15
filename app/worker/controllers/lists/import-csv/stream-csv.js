@@ -3,7 +3,7 @@ const pauseHandler = (buffer, minBufferSize, readStream) => {
   else if (readStream.isPaused()) readStream.resume();
 };
 
-export default (readStream, writeStream, minBufferSize = 1) => {
+export default (readStream, writeStream, minBufferSize) => {
   // No. emails to hold in memory
   // Will be of at least length minBufer, but max length is not guaranteed
   const buffer = [];
@@ -32,7 +32,7 @@ export default (readStream, writeStream, minBufferSize = 1) => {
       pauseHandler(buffer, minBufferSize, readStream);
       return resolve(splice());
     }
-    return splice();
+    return resolve(splice());
   });
 
   return {

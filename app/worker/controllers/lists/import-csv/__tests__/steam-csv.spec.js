@@ -13,13 +13,13 @@ const emails = tail(
     .filter(Boolean),
 );
 
-const requestIncrement = async (stream, timesToGet, linesToGet) => {
+const requestIncrement = async (stream, timesToGet) => {
   const arr = [];
   for (let i = 0; i < timesToGet; i += 1) {
-    const result = await stream.getLines(linesToGet); // eslint-disable-line no-await-in-loop
-    arr.push(result);
+    const result = await stream.getLines(); // eslint-disable-line no-await-in-loop
+    result.forEach(x => arr.push(x.email));
   }
-  return arr.map(x => head(x).email);
+  return arr;
 };
 
 describe('stream-csv', () => {
@@ -32,17 +32,24 @@ describe('stream-csv', () => {
 
   it('returns specified number of emails', async () => {
     const bufferSize = 3;
+    const timesToGet = 1;
+
     const stream = streamCsv(readStream, writeStream, bufferSize);
-    const result = await stream.getLines(bufferSize);
-    expect(result).toEqual([{ email: 'spalmar0@state.tx.us' }, { email: 'lartz1@webmd.com' }, { email: 'clazarus2@webmd.com' }]);
+    const results = await requestIncrement(stream, timesToGet);
+    const expected = emails.slice(0, bufferSize);
+
+    expect(results).toEqual(expected);
   });
 
   it('returns emails in requested increment', async () => {
     const bufferSize = 1;
-    const emailsToRequest = 3;
+    const timesToGet = 3;
+
     const stream = streamCsv(readStream, writeStream, bufferSize);
-    const results = await requestIncrement(stream, emailsToRequest, bufferSize);
-    expect(results).toEqual(emails.slice(0, emailsToRequest));
+    const results = await requestIncrement(stream, timesToGet);
+    const expected = emails.slice(0, timesToGet);
+
+    expect(results).toEqual(expected);
   });
 
   xit('returns all emails in requested increment', async () => {
