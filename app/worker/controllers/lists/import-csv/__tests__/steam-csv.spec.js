@@ -75,4 +75,14 @@ describe('stream-csv', () => {
 
     expect(results).toEqual(expected);
   });
+
+  it('getTotal returns no.emails that have been parsed', async () => {
+    const bufferSize = 10;
+    const timesToGet = numberEmailsInCsv;
+
+    const stream = streamCsv(readStream, writeStream, bufferSize);
+    await requestIncrement(stream, timesToGet);
+
+    expect(stream.getTotal()).toEqual(numberEmailsInCsv);
+  });
 });
