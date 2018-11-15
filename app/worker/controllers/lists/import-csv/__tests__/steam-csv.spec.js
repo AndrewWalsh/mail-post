@@ -1,7 +1,7 @@
 import fs from 'fs';
 import csvParser from 'csv-parser';
 import path from 'path';
-import { head, tail } from 'ramda';
+import { tail } from 'ramda';
 
 import streamCsv from '../stream-csv';
 
@@ -12,6 +12,8 @@ const emails = tail(
     .split('\n')
     .filter(Boolean),
 );
+
+const numberEmailsInCsv = emails.length;
 
 const requestIncrement = async (stream, timesToGet) => {
   const arr = [];
@@ -52,11 +54,14 @@ describe('stream-csv', () => {
     expect(results).toEqual(expected);
   });
 
-  xit('returns all emails in requested increment', async () => {
-    const bufferSize = 1;
-    const emailsToRequest = 10;
+  it('returns all emails in requested increment', async () => {
+    const bufferSize = 2;
+    const timesToGet = numberEmailsInCsv / bufferSize;
+
     const stream = streamCsv(readStream, writeStream, bufferSize);
-    const results = await requestIncrement(stream, emailsToRequest, bufferSize);
-    expect(results).toEqual(emails.slice(0, emailsToRequest));
+    const results = await requestIncrement(stream, timesToGet);
+    const expected = emails.slice(0, numberEmailsInCsv);
+
+    expect(results).toEqual(expected);
   });
 });

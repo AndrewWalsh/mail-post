@@ -17,7 +17,7 @@ export default (readStream, writeStream, minBufferSize) => {
       pauseHandler(buffer, minBufferSize, readStream);
     })
     .on('error', () => {})
-    .on('end', () => { ended = true; });
+    .on('end', () => { ended = true; console.log('ended'); });
 
   const splice = () => {
     if (buffer.length > minBufferSize) return buffer.splice(0, minBufferSize);
@@ -29,8 +29,9 @@ export default (readStream, writeStream, minBufferSize) => {
     if (!ended && buffer.length < minBufferSize) return setTimeout(() => resolver(resolve), 100);
     if (ended) return resolve(splice());
     if (readStream.isPaused()) {
+      const spliced = splice();
       pauseHandler(buffer, minBufferSize, readStream);
-      return resolve(splice());
+      return resolve(spliced);
     }
     return resolve(splice());
   });
