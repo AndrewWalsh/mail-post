@@ -45,3 +45,4 @@ npm-debug.log.*
 
 # Dbs
 *.sqlite3
+*.sqlite3-journal

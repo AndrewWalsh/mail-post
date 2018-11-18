@@ -95,4 +95,10 @@ describe('stream-csv', () => {
 
     expect(stream.hasEnded()).toBe(true);
   });
+
+  it('prop minBufferSize is argument minBufferSize', async () => {
+    const bufferSize = 10;
+    const stream = streamCsv(readStream, writeStream, bufferSize);
+    expect(stream.minBufferSize).toBe(bufferSize);
+  });
 });

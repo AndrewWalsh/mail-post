@@ -17,7 +17,7 @@ export default (readStream, writeStream, minBufferSize) => {
       buffer.push(data);
       pauseHandler(buffer, minBufferSize, readStream);
     })
-    .on('error', () => {})
+    .on('error', (e) => { throw new Error(e); })
     .on('end', () => { ended = true; });
 
   const splice = () => {
@@ -43,5 +43,6 @@ export default (readStream, writeStream, minBufferSize) => {
     getLines,
     getTotal,
     hasEnded,
+    minBufferSize,
   };
 };
