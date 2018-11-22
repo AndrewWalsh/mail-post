@@ -19,6 +19,11 @@ export default (port, schema) => {
 
   const httpServer = createServer(app);
 
+  // Default timeout is 2min, which does not apply to our use case
+  // This increases it to an arbitrarily large number
+  // This lets us import large files without handling the response via websockets
+  httpServer.setTimeout(10 * 60 * 10000000);
+
   const ws = new SubscriptionServer(
     {
       schema,
