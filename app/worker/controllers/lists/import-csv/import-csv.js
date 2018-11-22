@@ -34,14 +34,15 @@ const formatDataForUpsert = (data) => {
 
 export default (db, createList, logListNameInvalidOnCsvImport) =>
   (stream, name) =>
-    new Promise(async (resolve) => {
+    new Promise(async (resolve, reject) => {
       if (!name) return;
       let list;
       try {
         list = await createList(name);
       } catch (e) {
         logListNameInvalidOnCsvImport(e);
-        throw new Error(e);
+        reject(e);
+        return;
       }
 
       const save = upsertUnderTransaction(db.Subscriber, db.sequelize, list);
