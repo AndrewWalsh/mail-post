@@ -13,7 +13,7 @@ export const pubsubNotification = id => text => progress => type => (
           type,
           text,
         },
-        progress ? { progress } : null,
+        typeof progress === 'number' ? { progress } : null,
       ),
     },
   ));

@@ -1,6 +1,6 @@
 import { dissoc, keys } from 'ramda';
 
-// import { NOTIFICATION_TYPE_UPDATE } from '../../../../lib/shared-constants';
+import { NOTIFICATION_TYPE_UPDATE } from '../../../../lib/shared-constants';
 
 const upsertUnderTransaction = (Model, sequelize, belongsToInstance) => arr =>
   sequelize.transaction(() => Promise.all([
@@ -33,7 +33,7 @@ const formatDataForUpsert = (data) => {
 };
 
 export default (db, createList, logListNameInvalidOnCsvImport) =>
-  (stream, name) =>
+  (stream, name, totalEmails, notification) =>
     new Promise(async (resolve, reject) => {
       if (!name) return;
       let list;
@@ -53,13 +53,13 @@ export default (db, createList, logListNameInvalidOnCsvImport) =>
       while (emails.length) {
         count += emails.length;
         await save(emails.map(formatDataForUpsert));
-        // const percent = Math.floor(currentEmailCount / totalEmails * 100);
-        // notification(percent)(NOTIFICATION_TYPE_UPDATE);
+        const percent = Math.floor(count / totalEmails * 100);
         emails = await stream.getLines();
+        notification(percent)(NOTIFICATION_TYPE_UPDATE);
       }
       /* eslint-enable no-await-in-loop */
 
-      // notification(100)(NOTIFICATION_TYPE_UPDATE);
+      notification(100)(NOTIFICATION_TYPE_UPDATE);
       await db.sequelize.transaction(transaction => Promise.all([
         list.update({
           finalised: true,
