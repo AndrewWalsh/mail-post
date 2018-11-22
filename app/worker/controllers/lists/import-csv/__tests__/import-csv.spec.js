@@ -8,9 +8,16 @@ const dbMock = new DbMock();
 const SubscriberMock = require('../../../../../main/models/subscriber')(dbMock, dbMock.Sequelize);
 const ListMock = require('../../../../../main/models/subscriber')(dbMock, dbMock.Sequelize);
 
-// SubscriberMock.addLists = jest.fn();
-
 SubscriberMock.Instance.prototype.addLists = jest.fn();
+
+const mockGetLines = (jest, runTimes, mockEmails) => {
+  let timesRun = 0;
+  return (...args) => {
+    timesRun += 1;
+    const finished = timesRun > runTimes;
+    return jest.fn().mockResolvedValue(finished ? [] : mockEmails)(...args);
+  };
+};
 
 describe('import-csv', () => {
   const name = 'some-list-name';
@@ -57,15 +64,8 @@ describe('import-csv', () => {
       { email: 'hello2@email.com' },
     ];
     const runTimes = 3;
-    const getLines = () => {
-      let timesRun = 0;
-      return (...args) => {
-        timesRun += 1;
-        const finished = timesRun > runTimes;
-        return jest.fn().mockResolvedValue(finished ? [] : mockEmails)(...args);
-      };
-    };
-    stream = { getLines: getLines() };
+    const getLines = mockGetLines(jest, runTimes, mockEmails);
+    stream = { getLines };
     const args = [stream, name, 0, notification];
     const sut = importCsv(db, createList, logListNameInvalidOnCsvImport)(...args);
     expect(sut).resolves.toBe();
@@ -76,15 +76,8 @@ describe('import-csv', () => {
       { email: 'hello@email.com' },
     ];
     const runTimes = 1;
-    const getLines = () => {
-      let timesRun = 0;
-      return (...args) => {
-        timesRun += 1;
-        const finished = timesRun > runTimes;
-        return jest.fn().mockResolvedValue(finished ? [] : mockEmails)(...args);
-      };
-    };
-    stream = { getLines: getLines() };
+    const getLines = mockGetLines(jest, runTimes, mockEmails);
+    stream = { getLines };
     const scopedNotificationMock = jest.fn();
     const scopedNotification = a => b => scopedNotificationMock(a, b);
     const args = [stream, name, 2, scopedNotification];
