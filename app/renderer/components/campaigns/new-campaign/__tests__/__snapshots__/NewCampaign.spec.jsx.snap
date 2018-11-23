@@ -1,7 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewCampaign matches snapshot 1`] = `
-<Fragment>
-  <NewCampaign />
-</Fragment>
+<form>
+  <WithStyles(NewCampaignForm)
+    component={[Function]}
+    label="Campaign Name"
+    name="FORM_NEW_CAMPAIGN_NAME"
+    placeholder="A name that identifies this campaign"
+  />
+  <WithStyles(NewCampaignForm)
+    component={[Function]}
+    label="Subject"
+    name="FORM_NEW_CAMPAIGN_SUBJECT"
+    placeholder="Subject of the email"
+  />
+  <WithStyles(NewCampaignForm)
+    component={[Function]}
+    label="Body"
+    name="FORM_NEW_CAMPAIGN_BODY"
+    placeholder="Body of the email"
+  />
+  <WithStyles(NewCampaignForm)
+    component={[Function]}
+    label="List"
+    name="FORM_NEW_CAMPAIGN_LISTID"
+    placeholder="Which list to send this campaign to"
+  />
+</form>
 `;

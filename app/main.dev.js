@@ -1,5 +1,5 @@
 /* eslint global-require: 0 */
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 
 import MenuBuilder from './main/menu';
 import { setupDb, cleanDb, getAppPath } from './main/utils';
@@ -12,8 +12,7 @@ import {
   logSetupDbFailed,
   logCleanDbFailed,
 } from './lib/logging';
-
-require('electron-unhandled')();
+import { WORKER_LOADED } from './lib/shared-constants';
 
 let mainWindow = null;
 
@@ -49,7 +48,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-
 app.on('ready', async () => {
   if (NODE_ENV === 'development' || DEBUG_PROD === 'true') {
     await installExtensions();
@@ -61,13 +59,17 @@ app.on('ready', async () => {
     height: 728,
   });
 
-  mainWindow.loadURL(`file://${getAppPath()}/renderer/renderer.html`);
+  // Load worker before renderer
+  (async () => {
+    require('./main/worker');
+    await new Promise(resolve => ipcMain.once(WORKER_LOADED, resolve));
+    mainWindow.loadURL(`file://${getAppPath()}/renderer/renderer.html`);
+  })();
 
   mainWindow.webContents.on('did-finish-load', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    require('./main/worker');
     // Run migrations
     try {
       await setupDb();

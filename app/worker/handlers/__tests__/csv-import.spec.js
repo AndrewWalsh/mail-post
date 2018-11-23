@@ -20,8 +20,8 @@ describe('csv-import', () => {
 
   it('when csvIsValid resolves importCsv is called', async () => {
     csvIsValid.mockResolvedValue();
-    await csvImport(csvPath, name);
-    expect(importCsv).toHaveBeenCalledWith(csvPath, name);
+    const totalEmails = await csvImport(csvPath, name);
+    expect(importCsv).toHaveBeenCalledWith(csvPath, name, totalEmails, expect.any(Function));
   });
 
   it('when csvIsValid rejects, its error is thrown', async () => {

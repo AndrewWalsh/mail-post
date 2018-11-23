@@ -7,8 +7,6 @@ import App from './App';
 import { store, history } from './store';
 import { GlobalStyles } from './utils';
 
-require('electron-unhandled')();
-
 render(
   <AppContainer>
     <div>

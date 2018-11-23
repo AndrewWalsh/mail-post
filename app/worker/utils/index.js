@@ -1,1 +1,2 @@
-export { default as debug } from './debug'; // eslint-disable-line import/prefer-default-export
+export { default as debug } from './debug';
+export { default as pubsub } from './pubsub';

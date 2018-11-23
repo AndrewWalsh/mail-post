@@ -10,6 +10,8 @@
     "global-require": "off",
     "function-paren-newline": "off",
     "react/destructuring-assignment": "off",
-    "import/named": "off"
+    "import/named": "off",
+    "implicit-arrow-linebreak": "off",
+    "import/prefer-default-export": "off"
   }
 }

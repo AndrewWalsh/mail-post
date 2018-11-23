@@ -1,1 +1,1 @@
-export { default } from './NewCampaign';
+export { default } from './NewCampaignContainer';

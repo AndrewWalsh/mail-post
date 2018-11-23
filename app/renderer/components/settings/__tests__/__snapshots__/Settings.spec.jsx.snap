@@ -1,7 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Settings matches snapshot 1`] = `
-<Fragment>
-  Settings
-</Fragment>
+<Settings__StyledForm>
+  <Settings__StyledFieldWrapper>
+    <SettingsField
+      fullWidth={true}
+      onChange={[Function]}
+      placeholder="Amazon SES key"
+    />
+    <SettingsField
+      fullWidth={true}
+      onChange={[Function]}
+      placeholder="Amazon secret SES key"
+    />
+    <SettingsField
+      fullWidth={true}
+      onChange={[Function]}
+      placeholder="Amazon region"
+    />
+    <SettingsField
+      fullWidth={true}
+      onChange={[Function]}
+      placeholder="Amazon white label url"
+    />
+    <SettingsField
+      fullWidth={true}
+      onChange={[Function]}
+      placeholder="Amazon email"
+    />
+  </Settings__StyledFieldWrapper>
+</Settings__StyledForm>
 `;

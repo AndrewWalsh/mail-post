@@ -11,3 +11,15 @@ export const QUERY_GET_LISTS = gql`
     }
   }
 `;
+
+export const QUERY_GET_SETTINGS = gql`
+  query GetSettings {
+    settings {
+      amazonSESkey
+      amazonSESSecretKey
+      amazonRegion
+      amazonWhiteLabelUrl
+      amazonEmail
+    }
+  }
+`;
