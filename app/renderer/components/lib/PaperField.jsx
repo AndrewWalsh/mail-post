@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-
-import NewCampaignFormName from './NewCampaignFormName';
+import { Field } from 'redux-form';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -13,14 +12,17 @@ const styles = theme => ({
   }),
 });
 
-const NewCampaign = ({ classes }) => (
+const NewCampaignForm = ({
+  classes,
+  ...rest
+}) => (
   <Paper className={classes.root}>
-    <NewCampaignFormName />
+    <Field {...rest} fullWidth />
   </Paper>
 );
 
-NewCampaign.propTypes = {
+NewCampaignForm.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default withStyles(styles)(NewCampaign);
+export default withStyles(styles)(NewCampaignForm);

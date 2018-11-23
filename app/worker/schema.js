@@ -110,9 +110,7 @@ const resolvers = {
         throw new UserInputError(e);
       }
     },
-    updateSettings: async (_, args) => {
-      return updateOrCreateSettings(args);
-    },
+    updateSettings: async (_, args) => updateOrCreateSettings(args),
   },
 };
 

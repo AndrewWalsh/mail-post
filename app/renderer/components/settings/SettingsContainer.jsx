@@ -69,11 +69,11 @@ SettingsContainer.propTypes = {
 };
 
 SettingsContainer.defaultProps = {
-  amazonSESkeyName: 'amazonSESkey',
-  amazonSESSecretKeyName: 'amazonSESSecretKey',
-  amazonRegionName: 'amazonRegion',
-  amazonWhiteLabelUrlName: 'amazonWhiteLabelUrl',
-  amazonEmailName: 'amazonEmail',
+  amazonSESkeyName: nameOfAmazonSESkeyValue,
+  amazonSESSecretKeyName: nameOfAmazonSESSecretKeyValue,
+  amazonRegionName: nameOfAmazonRegionValue,
+  amazonWhiteLabelUrlName: nameOfAmazonWhiteLabelUrlValue,
+  amazonEmailName: nameOfAmazonEmailValue,
 };
 
 const selectForm = formValueSelector(FORM_SETTINGS);
