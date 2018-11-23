@@ -1,14 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Setting = sequelize.define('Setting', {
-    amazonSESkey: DataTypes.STRING,
-    amazonSESSecretKey: DataTypes.STRING,
-    amazonRegion: DataTypes.STRING,
-    amazonWhiteLabelUrl: DataTypes.STRING,
-    amazonEmail: DataTypes.STRING
+    amazonSESkey: { type: DataTypes.STRING, defaultValue: '' },
+    amazonSESSecretKey: { type: DataTypes.STRING, defaultValue: '' },
+    amazonRegion: { type: DataTypes.STRING, defaultValue: '' },
+    amazonWhiteLabelUrl: { type: DataTypes.STRING, defaultValue: '' },
+    amazonEmail: { type: DataTypes.STRING, defaultValue: '' },
   }, {});
   Setting.associate = function(models) {
-    List.belongsTo(models.User);
+    Setting.belongsTo(models.User);
   };
   return Setting;
 };

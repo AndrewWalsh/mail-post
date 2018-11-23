@@ -27,3 +27,12 @@ export const generateDeleteLists = ids => ({
     store.writeQuery({ query: QUERY_GET_LISTS, data });
   },
 });
+
+export const generateUpdateSettings = variables => ({
+  variables,
+  // update: (store, { data: { settings } }) => {
+  //   // const data = store.readQuery({ query: QUERY_GET_LISTS });
+  //   // data.lists.push(settings);
+  //   // store.writeQuery({ query: QUERY_GET_LISTS, data });
+  // },
+});

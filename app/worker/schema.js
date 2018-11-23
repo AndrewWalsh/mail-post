@@ -5,11 +5,25 @@ import { head } from 'ramda';
 import {
   getLists,
   deleteLists,
+  updateOrCreateSettings,
+  getSettings,
 } from './controllers';
 import { csvImport } from './handlers';
 import { pubsub } from './utils';
 
 import { PUBSUB_NOTIFICATION } from './constants';
+
+export const QUERY_GET_SETTINGS = gql`
+  query GetSettings {
+    settings {
+      amazonSESkey
+      amazonSESSecretKey
+      amazonRegion
+      amazonWhiteLabelUrl
+      amazonEmail
+    }
+  }
+`;
 
 const typeDefs = gql`
   type Subscription {
@@ -18,11 +32,19 @@ const typeDefs = gql`
 
   type Query {
     lists: [List]
+    settings: Settings
   }
 
   type Mutation {
     importCsv (csvPath: String!, name: String!): List
     deleteLists (ids: [ID]!): [List]
+    updateSettings(
+      amazonSESkey: String
+      amazonSESSecretKey: String
+      amazonRegion: String
+      amazonWhiteLabelUrl: String
+      amazonEmail: String
+    ): Settings
   }
 
   type Notification {
@@ -37,6 +59,14 @@ const typeDefs = gql`
     name: String
     total_subscribers: Int
     createdAt: String
+  }
+
+  type Settings {
+    amazonSESkey: String
+    amazonSESSecretKey: String
+    amazonRegion: String
+    amazonWhiteLabelUrl: String
+    amazonEmail: String
   }
 `;
 
@@ -60,6 +90,7 @@ const resolvers = {
   },
   Query: {
     lists: () => getListsFormatted(),
+    settings: () => getSettings(),
   },
   Mutation: {
     importCsv: async (_, { csvPath, name }) => {
@@ -78,6 +109,9 @@ const resolvers = {
       } catch (e) {
         throw new UserInputError(e);
       }
+    },
+    updateSettings: async (_, args) => {
+      return updateOrCreateSettings(args);
     },
   },
 };

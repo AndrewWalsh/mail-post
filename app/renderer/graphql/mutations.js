@@ -19,3 +19,27 @@ export const MUTATION_DELETE_LISTS = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_SETTINGS = gql`
+  mutation MUTATION_UPDATE_SETTINGS(
+    $amazonSESkey: String,
+    $amazonSESSecretKey: String,
+    $amazonRegion: String,
+    $amazonWhiteLabelUrl: String,
+    $amazonEmail: String,
+  ) {
+    updateSettings(
+      amazonSESkey: $amazonSESkey,
+      amazonSESSecretKey: $amazonSESSecretKey,
+      amazonRegion: $amazonRegion,
+      amazonWhiteLabelUrl: $amazonWhiteLabelUrl,
+      amazonEmail: $amazonEmail,
+    ) {
+      amazonSESkey
+      amazonSESSecretKey
+      amazonRegion
+      amazonWhiteLabelUrl
+      amazonEmail
+    }
+  }
+`;
