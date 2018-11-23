@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'ramda';
-import { graphql, Mutation } from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 import { FORM_SETTINGS } from '../../constants';
-import {
-  MUTATION_UPDATE_SETTINGS,
-  QUERY_GET_SETTINGS,
-} from '../../graphql';
+import { QUERY_GET_SETTINGS } from '../../graphql';
 
 import Settings from './Settings';
 
@@ -20,6 +17,9 @@ const nameOfAmazonWhiteLabelUrlValue = 'amazonWhiteLabelUrl';
 const nameOfAmazonEmailValue = 'amazonEmail';
 
 const SettingsContainer = ({
+  MUTATION_UPDATE_SETTINGS,
+  disabled,
+
   amazonSESkeyName,
   amazonSESSecretKeyName,
   amazonRegionName,
@@ -33,29 +33,28 @@ const SettingsContainer = ({
   amazonEmailValue,
   ...rest
 }) => (
-  <Mutation mutation={MUTATION_UPDATE_SETTINGS}>
-    {(MUTATION_UPDATE_SETTINGS_PROP, { loading }) => (
-      <Settings
-        MUTATION_UPDATE_SETTINGS={MUTATION_UPDATE_SETTINGS_PROP}
-        disabled={loading}
-        amazonSESkeyName={amazonSESkeyName}
-        amazonSESSecretKeyName={amazonSESSecretKeyName}
-        amazonRegionName={amazonRegionName}
-        amazonWhiteLabelUrlName={amazonWhiteLabelUrlName}
-        amazonEmailName={amazonEmailName}
+  <Settings
+    MUTATION_UPDATE_SETTINGS={MUTATION_UPDATE_SETTINGS}
+    disabled={disabled}
+    amazonSESkeyName={amazonSESkeyName}
+    amazonSESSecretKeyName={amazonSESSecretKeyName}
+    amazonRegionName={amazonRegionName}
+    amazonWhiteLabelUrlName={amazonWhiteLabelUrlName}
+    amazonEmailName={amazonEmailName}
 
-        amazonSESkeyValue={amazonSESkeyValue}
-        amazonSESSecretKeyValue={amazonSESSecretKeyValue}
-        amazonRegionValue={amazonRegionValue}
-        amazonWhiteLabelUrlValue={amazonWhiteLabelUrlValue}
-        amazonEmailValue={amazonEmailValue}
-        {...rest}
-      />
-    )}
-  </Mutation>
+    amazonSESkeyValue={amazonSESkeyValue}
+    amazonSESSecretKeyValue={amazonSESSecretKeyValue}
+    amazonRegionValue={amazonRegionValue}
+    amazonWhiteLabelUrlValue={amazonWhiteLabelUrlValue}
+    amazonEmailValue={amazonEmailValue}
+    {...rest}
+  />
 );
 
 SettingsContainer.propTypes = {
+  MUTATION_UPDATE_SETTINGS: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+
   amazonSESkeyName: PropTypes.string,
   amazonSESSecretKeyName: PropTypes.string,
   amazonRegionName: PropTypes.string,

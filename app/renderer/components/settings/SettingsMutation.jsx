@@ -7,10 +7,9 @@ import SettingsContainer from './SettingsContainer';
 
 const SettingsMutation = () => (
   <Mutation mutation={MUTATION_UPDATE_SETTINGS}>
-    {(MUTATION_UPDATE_SETTINGS_PROP, { loading }) => (
+    {MUTATION_UPDATE_SETTINGS_PROP => (
       <SettingsContainer
-        MUTATION_UPDATE_SETTINGS_PROP={MUTATION_UPDATE_SETTINGS_PROP}
-        disabled={loading}
+        MUTATION_UPDATE_SETTINGS={MUTATION_UPDATE_SETTINGS_PROP}
       />
     )}
   </Mutation>

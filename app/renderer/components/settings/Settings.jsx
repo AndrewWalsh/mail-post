@@ -59,6 +59,38 @@ export default class Settings extends Component {
             onChange={this.handleSubmit}
             fullWidth
           />
+
+          <SettingsField
+            name={amazonSESSecretKeyName}
+            disabled={disabled}
+            placeholder="Amazon secret SES key"
+            onChange={this.handleSubmit}
+            fullWidth
+          />
+
+          <SettingsField
+            name={amazonRegionName}
+            disabled={disabled}
+            placeholder="Amazon region"
+            onChange={this.handleSubmit}
+            fullWidth
+          />
+
+          <SettingsField
+            name={amazonWhiteLabelUrlName}
+            disabled={disabled}
+            placeholder="Amazon white label url"
+            onChange={this.handleSubmit}
+            fullWidth
+          />
+
+          <SettingsField
+            name={amazonEmailName}
+            disabled={disabled}
+            placeholder="Amazon email"
+            onChange={this.handleSubmit}
+            fullWidth
+          />
         </StyledFieldWrapper>
       </StyledForm>
     );
@@ -66,11 +98,18 @@ export default class Settings extends Component {
 }
 
 Settings.propTypes = {
-  amazonSESkeyNameValue: PropTypes.string.isRequired,
-  amazonSESSecretKeyNameValue: PropTypes.string.isRequired,
-  amazonRegionNameValue: PropTypes.string.isRequired,
-  amazonWhiteLabelUrlNameValue: PropTypes.string.isRequired,
-  amazonEmailNameValue: PropTypes.string.isRequired,
+  amazonSESkeyName: PropTypes.string.isRequired,
+  amazonSESSecretKeyName: PropTypes.string.isRequired,
+  amazonRegionName: PropTypes.string.isRequired,
+  amazonWhiteLabelUrlName: PropTypes.string.isRequired,
+  amazonEmailName: PropTypes.string.isRequired,
+
+  amazonSESkeyValue: PropTypes.string.isRequired,
+  amazonSESSecretKeyValue: PropTypes.string.isRequired,
+  amazonRegionValue: PropTypes.string.isRequired,
+  amazonWhiteLabelUrlValue: PropTypes.string.isRequired,
+  amazonEmailValue: PropTypes.string.isRequired,
+
   MUTATION_UPDATE_SETTINGS: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
