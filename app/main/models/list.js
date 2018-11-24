@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   List.associate = function(models) {
     List.belongsToMany(models.Subscriber, { through: 'ListSubscribers' });
     List.belongsTo(models.User);
+    List.hasMany(models.Campaign);
   };
   return List;
 };

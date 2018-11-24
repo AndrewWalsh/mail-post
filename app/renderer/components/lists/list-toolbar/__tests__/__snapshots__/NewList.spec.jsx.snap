@@ -12,7 +12,7 @@ exports[`NewList matches snapshot 1`] = `
       name="nameOfList"
     />
   </NewList__StyledFieldWrapper>
-  <NewList
+  <NewListButton
     disabled={false}
   />
 </NewList__StyledForm>
