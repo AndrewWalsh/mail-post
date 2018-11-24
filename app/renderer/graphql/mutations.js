@@ -43,3 +43,21 @@ export const MUTATION_UPDATE_SETTINGS = gql`
     }
   }
 `;
+
+export const MUTATION_CREATE_CAMPAIGN = gql`
+  mutation MUTATION_CREATE_CAMPAIGN(
+    $name: String!,
+    $subject: String!,
+    $body: String!,
+    $listId: String!,
+  ) {
+    createCampaign(
+      name: $name,
+      subject: $subject,
+      body: $body,
+      listId: $listId,
+    ) {
+      id
+    }
+  }
+`;

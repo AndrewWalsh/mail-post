@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Campaign = sequelize.define('Campaign', {
-    campaignName: DataTypes.STRING,
+    name: DataTypes.STRING,
     subject: DataTypes.STRING,
     body: DataTypes.STRING,
     plaintext: DataTypes.BOOLEAN,

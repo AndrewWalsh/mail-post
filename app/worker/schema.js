@@ -7,6 +7,7 @@ import {
   deleteLists,
   updateOrCreateSettings,
   getSettings,
+  createCampaign,
 } from './controllers';
 import { csvImport } from './handlers';
 import { pubsub } from './utils';
@@ -38,6 +39,7 @@ const typeDefs = gql`
   type Mutation {
     importCsv (csvPath: String!, name: String!): List
     deleteLists (ids: [ID]!): [List]
+
     updateSettings(
       amazonSESkey: String
       amazonSESSecretKey: String
@@ -45,6 +47,13 @@ const typeDefs = gql`
       amazonWhiteLabelUrl: String
       amazonEmail: String
     ): Settings
+
+    createCampaign(
+      name: String!,
+      subject: String!,
+      body: String!,
+      listId: String!,
+    ): Campaign
   }
 
   type Notification {
@@ -67,6 +76,14 @@ const typeDefs = gql`
     amazonRegion: String
     amazonWhiteLabelUrl: String
     amazonEmail: String
+  }
+
+  type Campaign {
+    id: ID!
+    name: String!
+    subject: String!
+    body: String!
+    listId: String!
   }
 `;
 
@@ -110,7 +127,8 @@ const resolvers = {
         throw new UserInputError(e);
       }
     },
-    updateSettings: async (_, args) => updateOrCreateSettings(args),
+    updateSettings: (_, args) => updateOrCreateSettings(args),
+    createCampaign: (_, args) => createCampaign(args),
   },
 };
 

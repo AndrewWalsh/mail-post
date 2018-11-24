@@ -4,7 +4,7 @@ export const FORM_NEW_CAMPAIGN = 'FORM_NEW_CAMPAIGN';
 export const FORM_SETTINGS = 'FORM_SETTINGS';
 
 // Form field names
-export const FORM_NEW_CAMPAIGN_NAME = 'FORM_NEW_CAMPAIGN_NAME';
-export const FORM_NEW_CAMPAIGN_SUBJECT = 'FORM_NEW_CAMPAIGN_SUBJECT';
-export const FORM_NEW_CAMPAIGN_BODY = 'FORM_NEW_CAMPAIGN_BODY';
-export const FORM_NEW_CAMPAIGN_LISTID = 'FORM_NEW_CAMPAIGN_LISTID';
+export const FORM_NEW_CAMPAIGN_NAME = 'name';
+export const FORM_NEW_CAMPAIGN_SUBJECT = 'subject';
+export const FORM_NEW_CAMPAIGN_BODY = 'body';
+export const FORM_NEW_CAMPAIGN_LISTID = 'listId';

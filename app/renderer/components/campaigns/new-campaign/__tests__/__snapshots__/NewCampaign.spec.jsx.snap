@@ -1,30 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewCampaign matches snapshot 1`] = `
-<form>
-  <WithStyles(NewCampaignForm)
+<form
+  onSubmit={[Function]}
+>
+  <WithStyles(PaperField)
     component={[Function]}
+    fullWidth={true}
     label="Campaign Name"
-    name="FORM_NEW_CAMPAIGN_NAME"
+    name="name"
     placeholder="A name that identifies this campaign"
   />
-  <WithStyles(NewCampaignForm)
+  <WithStyles(PaperField)
     component={[Function]}
+    fullWidth={true}
     label="Subject"
-    name="FORM_NEW_CAMPAIGN_SUBJECT"
+    name="subject"
     placeholder="Subject of the email"
   />
-  <WithStyles(NewCampaignForm)
-    component={[Function]}
+  <WithStyles(PaperField)
+    component="textarea"
     label="Body"
-    name="FORM_NEW_CAMPAIGN_BODY"
+    name="body"
     placeholder="Body of the email"
+    style={
+      Object {
+        "height": "25vh",
+        "width": "100%",
+      }
+    }
   />
-  <WithStyles(NewCampaignForm)
+  <WithStyles(PaperField)
     component={[Function]}
+    fullWidth={true}
     label="List"
-    name="FORM_NEW_CAMPAIGN_LISTID"
+    name="listId"
     placeholder="Which list to send this campaign to"
   />
+  <NewCampaignButton />
 </form>
 `;

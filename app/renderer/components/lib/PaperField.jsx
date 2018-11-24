@@ -12,17 +12,25 @@ const styles = theme => ({
   }),
 });
 
-const NewCampaignForm = ({
+const PaperField = ({
   classes,
+  children,
   ...rest
 }) => (
   <Paper className={classes.root}>
-    <Field {...rest} fullWidth />
+    <Field {...rest}>
+      {children}
+    </Field>
   </Paper>
 );
 
-NewCampaignForm.propTypes = {
+PaperField.propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.node,
 };
 
-export default withStyles(styles)(NewCampaignForm);
+PaperField.defaultProps = {
+  children: null,
+};
+
+export default withStyles(styles)(PaperField);
