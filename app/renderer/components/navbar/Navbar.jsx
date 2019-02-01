@@ -14,6 +14,7 @@ import {
   ROUTE_DASHBOARD,
   ROUTE_CAMPAIGNS,
   ROUTE_NEW_CAMPAIGN,
+  ROUTE_MY_CAMPAIGNS,
   ROUTE_SETTINGS,
   ROUTE_LISTS,
 } from '../../constants';
@@ -61,6 +62,10 @@ const Navbar = () => (
         <NavbarLink
           to={ROUTE_NEW_CAMPAIGN}
           text="New Campaign"
+        />
+        <NavbarLink
+          to={ROUTE_MY_CAMPAIGNS}
+          text="My Campaigns"
         />
       </NavbarLink>
       <Divider />

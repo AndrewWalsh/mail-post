@@ -1,9 +1,10 @@
-/* eslint-disable camelcase */
 import { gql, makeExecutableSchema, UserInputError } from 'apollo-server-express';
 import { head } from 'ramda';
 
 import {
+  getCampaigns,
   getLists,
+  deleteCampaigns,
   deleteLists,
   updateOrCreateSettings,
   getSettings,
@@ -34,11 +35,13 @@ const typeDefs = gql`
   type Query {
     lists: [List]
     settings: Settings
+    campaigns: [Campaign]
   }
 
   type Mutation {
     importCsv (csvPath: String!, name: String!): List
     deleteLists (ids: [ID]!): [List]
+    deleteCampaigns (ids: [ID]!): [List]
 
     updateSettings(
       amazonSESkey: String
@@ -87,18 +90,6 @@ const typeDefs = gql`
   }
 `;
 
-const getListsFormatted = listName => getLists(listName).then(lists => lists.map(({
-  total_subscribers,
-  name,
-  id,
-  createdAt,
-}) => ({
-  total_subscribers,
-  name,
-  id,
-  createdAt,
-})));
-
 const resolvers = {
   Subscription: {
     notification: {
@@ -106,14 +97,15 @@ const resolvers = {
     },
   },
   Query: {
-    lists: () => getListsFormatted(),
+    lists: () => getLists(),
     settings: () => getSettings(),
+    campaigns: () => getCampaigns(),
   },
   Mutation: {
     importCsv: async (_, { csvPath, name }) => {
       try {
         await csvImport(csvPath, name);
-        const list = await getListsFormatted(name);
+        const list = await getLists(name);
         return head(list);
       } catch (e) {
         throw new UserInputError(e);
@@ -122,6 +114,14 @@ const resolvers = {
     deleteLists: async (_, { ids }) => {
       try {
         const deleted = await deleteLists(ids);
+        return deleted.map(id => ({ id }));
+      } catch (e) {
+        throw new UserInputError(e);
+      }
+    },
+    deleteCampaigns: async (_, { ids }) => {
+      try {
+        const deleted = await deleteCampaigns(ids);
         return deleted.map(id => ({ id }));
       } catch (e) {
         throw new UserInputError(e);

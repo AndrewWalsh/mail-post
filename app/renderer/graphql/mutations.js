@@ -20,6 +20,14 @@ export const MUTATION_DELETE_LISTS = gql`
   }
 `;
 
+export const MUTATION_DELETE_CAMPAIGNS = gql`
+  mutation MUTATION_DELETE_CAMPAIGNS($ids: [ID]!) {
+    deleteCampaigns(ids: $ids) {
+      id
+    }
+  }
+`;
+
 export const MUTATION_UPDATE_SETTINGS = gql`
   mutation MUTATION_UPDATE_SETTINGS(
     $amazonSESkey: String,

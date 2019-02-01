@@ -12,6 +12,18 @@ export const QUERY_GET_LISTS = gql`
   }
 `;
 
+export const QUERY_GET_CAMPAIGNS = gql`
+  query GetAllCampaigns {
+    campaigns {
+      id
+      name
+      subject
+      body
+      listId
+    }
+  }
+`;
+
 export const QUERY_GET_SETTINGS = gql`
   query GetSettings {
     settings {

@@ -3,9 +3,6 @@ const db = require('../../../main/models');
 
 export default (name = null) => {
   const options = {
-    where: {
-      finalised: true,
-    },
     raw: true,
   };
 
@@ -13,17 +10,27 @@ export default (name = null) => {
     options.where.name = name;
   }
 
-  return db.List.findAll(options).then((instances) => {
+  return db.Campaign.findAll(options).then((instances) => {
     if (!instances || !instances.length) return [];
     return instances;
-  }).then(lists => lists.map(({
-    total_subscribers,
+  }).then(campaigns => campaigns.map(({
     name: nameShadow,
+    subject,
+    body,
+    plaintext,
+    slug,
+    unsubscribe,
+    listId,
     id,
     createdAt,
   }) => ({
-    total_subscribers,
     name: nameShadow,
+    subject,
+    body,
+    plaintext,
+    slug,
+    unsubscribe,
+    listId,
     id,
     createdAt,
   })));

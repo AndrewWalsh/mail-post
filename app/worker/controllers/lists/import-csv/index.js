@@ -14,7 +14,7 @@ const importCsvApplied = importCsv(db, createList, logListNameInvalidOnCsvImport
 export default (csvPath, name, totalEmails, notification) => {
   const readStream = fs.createReadStream(csvPath);
   const writeStream = csvParser({ strict: true });
-  const minBufferSize = 1000;
+  const minBufferSize = 100;
 
   const stream = streamCsv(readStream, writeStream, minBufferSize);
 

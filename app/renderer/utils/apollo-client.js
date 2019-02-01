@@ -22,6 +22,7 @@ const onErrorFn = (({ graphQLErrors }) => {
 
 const defaults = {
   lists: [],
+  campaigns: [],
 };
 
 const cache = new InMemoryCache();

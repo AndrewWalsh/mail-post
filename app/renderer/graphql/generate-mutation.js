@@ -1,4 +1,4 @@
-import { QUERY_GET_LISTS } from './queries';
+import { QUERY_GET_LISTS, QUERY_GET_CAMPAIGNS } from './queries';
 
 export const generateImportCsv = (csvPath, name) => ({
   variables: {
@@ -25,6 +25,22 @@ export const generateDeleteLists = ids => ({
     const withoutIds = data.lists.filter(({ id }) => !contains(id));
     data.lists = withoutIds;
     store.writeQuery({ query: QUERY_GET_LISTS, data });
+  },
+});
+
+export const generateDeleteCampaigns = ids => ({
+  variables: {
+    ids,
+  },
+  optimisticResponse: {
+    deleteCampaigns: ids.map(id => ({ id, __typename: 'List' })),
+  },
+  update: (store, { data: { deleteCampaigns: campaignIds } }) => {
+    const data = store.readQuery({ query: QUERY_GET_CAMPAIGNS });
+    const contains = val => campaignIds.some(({ id }) => id === val);
+    const withoutIds = data.campaigns.filter(({ id }) => !contains(id));
+    data.campaigns = withoutIds;
+    store.writeQuery({ query: QUERY_GET_CAMPAIGNS, data });
   },
 });
 
