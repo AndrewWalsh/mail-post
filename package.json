@@ -205,6 +205,7 @@
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-router-prop-types": "^1.0.4",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^4.0.1",
     "redux-form": "^7.4.2",

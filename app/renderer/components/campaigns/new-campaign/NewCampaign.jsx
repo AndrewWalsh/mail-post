@@ -87,7 +87,7 @@ const NewCampaignForm = ({
 );
 
 NewCampaignForm.propTypes = {
-  lists: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  lists: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   invalid: PropTypes.bool.isRequired,
   disabled: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,

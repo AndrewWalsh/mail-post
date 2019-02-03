@@ -7,7 +7,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import moment from 'moment';
 
 import sort from './sort-data';
 import TableHeader from './TableHeader';
@@ -106,6 +105,7 @@ class EnhancedTable extends Component {
     const {
       columnData,
       title,
+      children,
     } = this.props;
     return (
       <Paper>
@@ -141,9 +141,7 @@ class EnhancedTable extends Component {
                     <TableCell padding="checkbox">
                       <Checkbox checked={isSelected} />
                     </TableCell>
-                    <TableCell padding="none">{n.name}</TableCell>
-                    <TableCell numeric>{n.total_subscribers}</TableCell>
-                    <TableCell numeric>{moment(n.createdAt).add(24, 'hours').format('LLL')}</TableCell>
+                    {children(n)}
                   </TableRow>
                 );
               })}
@@ -180,6 +178,7 @@ EnhancedTable.propTypes = {
     label: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   title: PropTypes.string,
+  children: PropTypes.func.isRequired,
 };
 
 EnhancedTable.defaultProps = {

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 
 const StyledLink = styled(RouterLink)`
+    display: inherit;
+    position: inherit;
     text-decoration: none;
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;

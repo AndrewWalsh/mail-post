@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
+import TableCell from '@material-ui/core/TableCell';
+import moment from 'moment';
+
+import Link from '../../lib/Link';
 
 import {
   MUTATION_DELETE_CAMPAIGNS,
@@ -40,7 +44,16 @@ const MyCampaignsTableContainer = ({ data, ...rest }) => (
         columnData={columnData}
         title="Campaigns"
         {...rest}
-      />
+      >
+        {n => (
+          <Fragment>
+            <TableCell padding="none">
+              <Link to={`/campaign/${n.name}`}>{n.name}</Link>
+            </TableCell>
+            <TableCell numeric>{moment(n.createdAt).add(24, 'hours').format('LLL')}</TableCell>
+          </Fragment>
+        )}
+      </Table>
     )}
   </Mutation>
 );

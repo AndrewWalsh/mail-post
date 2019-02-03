@@ -87,6 +87,7 @@ const typeDefs = gql`
     subject: String!
     body: String!
     listId: String!
+    createdAt: String
   }
 `;
 

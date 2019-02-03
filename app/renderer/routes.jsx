@@ -5,6 +5,7 @@ import {
   ROUTE_CAMPAIGNS,
   ROUTE_NEW_CAMPAIGN,
   ROUTE_MY_CAMPAIGNS,
+  ROUTE_SEND_CAMPAIGN,
   ROUTE_SETTINGS,
   ROUTE_LISTS,
 } from './constants';
@@ -13,6 +14,7 @@ import Dashboard from './components/dashboard';
 import Campaigns from './components/campaigns';
 import NewCampaign from './components/campaigns/new-campaign';
 import MyCampaigns from './components/campaigns/my-campaigns';
+import SendCampaign from './components/campaigns/send-campaign';
 import Settings from './components/settings';
 import Lists from './components/lists';
 import { PageHoc } from './components/lib/hoc';
@@ -23,6 +25,7 @@ export default () => (
     <Route path={ROUTE_CAMPAIGNS} component={PageHoc(Campaigns)} />
     <Route path={ROUTE_NEW_CAMPAIGN} component={PageHoc(NewCampaign)} />
     <Route path={ROUTE_MY_CAMPAIGNS} component={PageHoc(MyCampaigns)} />
+    <Route path={`${ROUTE_SEND_CAMPAIGN}/:campaignName`} component={PageHoc(SendCampaign)} />
     <Route path={ROUTE_SETTINGS} component={PageHoc(Settings)} />
     <Route path={ROUTE_LISTS} component={PageHoc(Lists)} />
     {/* Default route is the Dashboard */}

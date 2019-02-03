@@ -5,9 +5,9 @@ const StyledPageHOC = styled.section`
   padding: 1em;
 `;
 
-const PageHoc = Component => () => (
+const PageHoc = Component => props => (
   <StyledPageHOC>
-    <Component />
+    <Component {...props} />
   </StyledPageHOC>
 );
 

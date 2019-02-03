@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'ramda';
 import { graphql, Mutation } from 'react-apollo';
+import TableCell from '@material-ui/core/TableCell';
+import moment from 'moment';
 
 import {
   MUTATION_DELETE_LISTS,
@@ -46,7 +48,15 @@ const ListTableContainer = ({ data, ...rest }) => (
         columnData={columnData}
         title="Lists"
         {...rest}
-      />
+      >
+        {n => (
+          <Fragment>
+            <TableCell padding="none">{n.name}</TableCell>
+            <TableCell numeric>{n.total_subscribers}</TableCell>
+            <TableCell numeric>{moment(n.createdAt).add(24, 'hours').format('LLL')}</TableCell>
+          </Fragment>
+        )}
+      </Table>
     )}
   </Mutation>
 );
